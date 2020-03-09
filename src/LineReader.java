@@ -1,21 +1,49 @@
-import java.util.Scanner;
+import SourseReader.SourceReader;
+import SourseReader.SourceReaderFile;
+import SourseReader.SourceReaderTerminal;
 
-abstract public class LineReader {
-	protected Scanner scanner;
+import java.io.FileNotFoundException;
+
+public class LineReader {
+	private SourceReader sourceReaderTerminal;
+	private SourceReader sourceReaderActive;
 	
-	public String readLine(String prefix) {
-		System.out.print(prefix);
-		
-		String lineReaded = this.scanner.nextLine();
-		
-		String postfix = this.getPostfix(lineReaded);
-		
-		System.out.print(postfix);
-		
-		return lineReaded;
+	public LineReader() {
+		sourceReaderTerminal = new SourceReaderTerminal(System.in);
+		sourceReaderActive = sourceReaderTerminal;
 	}
 	
-	abstract boolean hasSomethingToRead();
+	public boolean hasSomethingToRead() {
+		return this.sourceReaderActive.hasSomethingToRead();
+	}
 	
-	abstract String getPostfix(String lineReaded);
+	public void setSourceReader(String path) throws FileNotFoundException {
+		this.sourceReaderActive = new SourceReaderFile(path);
+	}
+	
+	public String readLine(String prefix, boolean repeatOnException) {
+		String lineRead = "";
+		boolean needToRead = true;
+		
+		while (needToRead) {
+			
+			if (! this.sourceReaderActive.hasSomethingToRead())
+				this.sourceReaderActive = sourceReaderTerminal;
+			
+			System.out.print(prefix);
+			try {
+				lineRead = this.sourceReaderActive.getLineReadPrintPostfix();
+				
+				needToRead = false;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				
+				lineRead = "";
+				if (! repeatOnException)
+					needToRead = false;
+			}
+		}
+		
+		return lineRead;
+	}
 }

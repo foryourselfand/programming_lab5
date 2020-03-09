@@ -16,11 +16,12 @@ public class Main {
 				.addCommand(new CommandShow())
 				.addCommand(new CommandHistory())
 		;
-
-//		LineReader lineReader = new LineReaderTerminal(System.in);
-		LineReader lineReader = new LineReaderFile("/Users/foryourselfand/Documents/Java/itmo/programming_lab5/src/script");
+		
+		LineReader lineReader = new LineReader();
+//		lineReader.setSourceReader("/Users/foryourselfand/Documents/Java/itmo/programming_lab5/src/script");
+		
 		while (lineReader.hasSomethingToRead()) {
-			String lineRead = lineReader.readLine(">>> ");
+			String lineRead = lineReader.readLine(">>> ", true);
 			System.out.println(lineRead);
 		}
 	}
