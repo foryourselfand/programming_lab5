@@ -1,38 +1,29 @@
 import SourseReader.SourceReader;
-import SourseReader.SourceReaderFile;
-import SourseReader.SourceReaderTerminal;
-
-import java.io.FileNotFoundException;
+import SourseReader.SourceReaderFactory;
 
 public class LineReader {
-	private SourceReader sourceReaderTerminal;
-	private SourceReader sourceReaderActive;
+	private SourceReader sourceReader;
+	private boolean repeatOnException;
+	
+	public LineReader(SourceReader sourceReader, boolean repeatOnException) {
+		this.sourceReader = sourceReader;
+		this.repeatOnException = repeatOnException;
+	}
 	
 	public LineReader() {
-		sourceReaderTerminal = new SourceReaderTerminal(System.in);
-		sourceReaderActive = sourceReaderTerminal;
+		this.sourceReader = SourceReaderFactory.getSourceReaderTerminal();
+		this.repeatOnException = false;
 	}
 	
-	public boolean hasSomethingToRead() {
-		return this.sourceReaderActive.hasSomethingToRead();
-	}
-	
-	public void setSourceReader(String path) throws FileNotFoundException {
-		this.sourceReaderActive = new SourceReaderFile(path);
-	}
-	
-	public String readLine(String prefix, boolean repeatOnException) {
+	public String readLine(String prefix) {
 		String lineRead = "";
 		boolean needToRead = true;
 		
 		while (needToRead) {
 			
-			if (! this.sourceReaderActive.hasSomethingToRead())
-				this.sourceReaderActive = sourceReaderTerminal;
-			
 			System.out.print(prefix);
 			try {
-				lineRead = this.sourceReaderActive.getLineReadPrintPostfix();
+				lineRead = this.sourceReader.getLineReadPrintPostfix();
 				
 				needToRead = false;
 			} catch (Exception e) {
@@ -45,5 +36,19 @@ public class LineReader {
 		}
 		
 		return lineRead;
+	}
+	
+	public boolean hasSomethingToRead() {
+		if (! this.sourceReader.hasSomethingToRead())
+			this.sourceReader = SourceReaderFactory.getSourceReaderTerminal();
+		return this.sourceReader.hasSomethingToRead();
+	}
+	
+	public void setSourceReader(SourceReader sourceReader) {
+		this.sourceReader = sourceReader;
+	}
+	
+	public void setRepeatOnException(boolean repeatOnException) {
+		this.repeatOnException = repeatOnException;
 	}
 }

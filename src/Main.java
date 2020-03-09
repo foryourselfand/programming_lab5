@@ -2,6 +2,7 @@ import Commands.CommandHelp;
 import Commands.CommandHistory;
 import Commands.CommandShow;
 import Commands.CommandsHolder;
+import SourseReader.SourceReaderFactory;
 
 import java.io.FileNotFoundException;
 
@@ -18,10 +19,10 @@ public class Main {
 		;
 		
 		LineReader lineReader = new LineReader();
-//		lineReader.setSourceReader("/Users/foryourselfand/Documents/Java/itmo/programming_lab5/src/script");
+		lineReader.setSourceReader(SourceReaderFactory.getSourceReaderFile("/Users/foryourselfand/Documents/Java/itmo/programming_lab5/src/script"));
 		
 		while (lineReader.hasSomethingToRead()) {
-			String lineRead = lineReader.readLine(">>> ", true);
+			String lineRead = lineReader.readLine(">>> ");
 			System.out.println(lineRead);
 		}
 	}
