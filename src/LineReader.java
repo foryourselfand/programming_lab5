@@ -19,7 +19,7 @@ public class LineReader {
 		String lineRead = "";
 		boolean needToRead = true;
 		
-		while (needToRead) {
+		while (needToRead && this.hasSomethingToRead()) {
 			
 			System.out.print(prefix);
 			try {
