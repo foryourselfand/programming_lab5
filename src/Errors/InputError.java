@@ -1,4 +1,4 @@
-package Exceptions;
+package Errors;
 
 public class InputError extends Error {
 	public InputError(String message) {
