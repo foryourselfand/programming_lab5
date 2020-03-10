@@ -1,15 +1,13 @@
 import Expectables.Expectable;
 import Expectables.ExpectablesBorder.ExpectedGreater;
-import Expectables.ExpectablesType.ExpectedDouble;
 import Expectables.ExpectablesType.ExpectedInteger;
-import Expectables.ExpectablesType.ExpectedLong;
+import Expectables.ExpectablesType.ExpectedType;
 
 public class Testing {
 	public static void main(String[] args) {
-//		String value = "9223372036854775807";
-		String value = "5.5";
+		String value = "9223372036854775807";
 		
-		Expectable expectedType = new ExpectedDouble();
+		Expectable expectedType = new ExpectedType(Long.class);
 		Expectable expectedBoarder = new ExpectedGreater(50);
 		try {
 			expectedType.checkValueValidnes(value);
