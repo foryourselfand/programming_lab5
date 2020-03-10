@@ -1,15 +1,8 @@
 package Expectables.ExpectablesType;
 
-import Errors.InputError;
-import Expectables.Expectable;
-
-public class ExpectedDouble implements Expectable {
+public class ExpectedDouble extends ExpectableType {
 	@Override
-	public void checkValueValidnes(String valueRaw) {
-		try {
-			double valueDouble = Double.parseDouble(valueRaw);
-		} catch (NumberFormatException exception) {
-			throw new InputError("Ожидалось double");
-		}
+	public Class getNumberClass() {
+		return Double.class;
 	}
 }

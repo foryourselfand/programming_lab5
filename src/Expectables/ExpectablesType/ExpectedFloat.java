@@ -1,15 +1,8 @@
 package Expectables.ExpectablesType;
 
-import Errors.InputError;
-import Expectables.Expectable;
-
-public class ExpectedFloat implements Expectable {
+public class ExpectedFloat extends ExpectableType {
 	@Override
-	public void checkValueValidnes(String valueRaw) {
-		try {
-			float valueFloat = Float.parseFloat(valueRaw);
-		} catch (NumberFormatException exception) {
-			throw new InputError("Ожилалось float");
-		}
+	public Class getNumberClass() {
+		return Float.class;
 	}
 }
