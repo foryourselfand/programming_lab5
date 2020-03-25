@@ -1,11 +1,15 @@
 package Commands;
 
-import Commands.Command;
+import Utils.Context;
 
 public class CommandHistory extends Command {
-	@Override
-	public void execute() {
+	public CommandHistory(Context context) {
+		super(context);
+	}
 	
+	@Override
+	public void execute(String[] commandArguments) {
+		super.execute(commandArguments);
 	}
 	
 	@Override

@@ -1,11 +1,15 @@
 package Commands;
 
-import Commands.Command;
+import Utils.Context;
 
 public class CommandShow extends Command {
-	@Override
-	public void execute() {
+	public CommandShow(Context context) {
+		super(context);
+	}
 	
+	@Override
+	public void execute(String[] commandArguments) {
+		super.execute(commandArguments);
 	}
 	
 	@Override

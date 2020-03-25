@@ -1,17 +1,19 @@
 package Commands;
 
+import Utils.Context;
+
 import java.util.List;
 
 public class CommandHelp extends Command {
-	private CommandsHolder commandHolder;
 	
-	public CommandHelp(CommandsHolder commandsHolder) {
-		this.commandHolder = commandsHolder;
+	public CommandHelp(Context context) {
+		super(context);
 	}
 	
 	@Override
-	public void execute() {
-		List<Command> commands = this.commandHolder.getCommands();
+	public void execute(String[] commandArguments) {
+		super.execute(commandArguments);
+		List<Command> commands = this.context.commandsHolder.getCommands();
 		
 		for (Command command : commands) {
 			System.out.println(command.getNameOfCommand());

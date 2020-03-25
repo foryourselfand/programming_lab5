@@ -15,7 +15,7 @@ public abstract class ExpectableType implements Expectable {
 			valueOf.invoke(new Object(), valueRaw);
 			
 		} catch (InvocationTargetException | NumberFormatException e) {
-			throw new InputError("Ожидалось " + numberClass.getSimpleName());
+			throw new InputError("Ожидалось " + numberClass.getSimpleName() + ".");
 		} catch (NoSuchMethodException | IllegalAccessException e) {
 			e.printStackTrace();
 		}

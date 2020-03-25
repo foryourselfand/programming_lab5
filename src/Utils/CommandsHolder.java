@@ -1,4 +1,7 @@
-package Commands;
+package Utils;
+
+import Commands.Command;
+import Errors.NoSuchCommandError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +13,6 @@ public class CommandsHolder {
 	
 	public CommandsHolder() {
 		commands = new HashMap<>();
-		
-		ArrayList<Command> valueList = new ArrayList(commands.values());
 	}
 	
 	public CommandsHolder addCommand(Command command) {
@@ -20,6 +21,8 @@ public class CommandsHolder {
 	}
 	
 	public Command getCommandByName(String name) {
+		if (! this.commands.containsKey(name))
+			throw new NoSuchCommandError(name);
 		return this.commands.get(name);
 	}
 	
