@@ -13,6 +13,9 @@ public class CommandsExecutor {
 	}
 	
 	public void executeCommandByName(String line) {
+		if (line.equals(""))
+			return;
+		
 		String[] lineSplit = this.getLineSplit(line);
 		
 		String commandName = this.getCommandName(lineSplit);
@@ -33,7 +36,7 @@ public class CommandsExecutor {
 	}
 	
 	private String getCommandName(String[] lineSplit) {
-		return lineSplit[0];
+		return lineSplit[0].toLowerCase();
 	}
 	
 	private String[] getCommandArguments(String[] lineSplit) {

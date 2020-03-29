@@ -4,6 +4,7 @@ import Expectables.Argument;
 import Expectables.ExpectablesFile.ExpectableFileExist;
 import Expectables.ExpectablesFile.ExpectableFileIsRegularFile;
 import Expectables.ExpectablesFile.ExpectableFileReadable;
+import Expectables.ExpectablesFile.ExpectableFileWritable;
 import Utils.Context;
 
 import java.io.File;
@@ -43,7 +44,8 @@ public class CommandExecuteScript extends Command {
 				"file_name",
 				new ExpectableFileExist(),
 				new ExpectableFileIsRegularFile(),
-				new ExpectableFileReadable()));
+				new ExpectableFileReadable(),
+				new ExpectableFileWritable()));
 	}
 	
 	@Override
