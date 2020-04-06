@@ -1,43 +1,49 @@
 package Utils;
 
+import Errors.InputError;
+import Expectables.Argument;
+import Input.Variable;
 import SourseReader.SourceReader;
 import SourseReader.SourceReaderFactory;
 
 public class LineReader {
 	private SourceReader sourceReader;
-	private boolean repeatOnException;
 	
-	public LineReader(SourceReader sourceReader, boolean repeatOnException) {
+	public LineReader(SourceReader sourceReader) {
 		this.sourceReader = sourceReader;
-		this.repeatOnException = repeatOnException;
 	}
 	
-	public LineReader() {
-		this.sourceReader = SourceReaderFactory.getSourceReaderTerminal();
-		this.repeatOnException = false;
-	}
-	
-	public String readLine(String prefix) {
-		String lineRead = "";
-		boolean needToRead = true;
-		
-		while (needToRead && this.hasSomethingToRead()) {
+	public String readLine(SourceReader sourceReader, String prefix, Argument argument) {
+		while (this.hasSomethingToRead()) {
 			
 			System.out.print(prefix);
+			
 			try {
-				lineRead = this.sourceReader.getLineReadPrintPostfix();
+				String lineRead = sourceReader.getLineReadPrintPostfix();
+				argument.checkArgument(lineRead);
 				
-				needToRead = false;
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				
-				lineRead = "";
-				if (! repeatOnException)
-					needToRead = false;
+				return lineRead;
+			} catch (InputError inputError) {
+				if (! this.sourceReader.repeatOnException())
+					throw inputError;
+				System.out.println(inputError.getMessage());
 			}
 		}
 		
-		return lineRead;
+		return "";
+	}
+	
+	
+	public String readLine(String prefix, Argument argument) {
+		return readLine(this.sourceReader, prefix, argument);
+	}
+	
+	public String readLine(SourceReader sourceReader, Variable variable) {
+		return this.readLine(sourceReader, variable.getVariableNameWithPrefix(), Variable.variableToArgument.get(variable));
+	}
+	
+	public String readLine(Variable variable) {
+		return readLine(this.sourceReader, variable);
 	}
 	
 	public boolean hasSomethingToRead() {
@@ -50,7 +56,4 @@ public class LineReader {
 		this.sourceReader = sourceReader;
 	}
 	
-	public void setRepeatOnException(boolean repeatOnException) {
-		this.repeatOnException = repeatOnException;
-	}
 }

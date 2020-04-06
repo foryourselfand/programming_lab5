@@ -1,4 +1,6 @@
 import Commands.*;
+import Expectables.Argument;
+import SourseReader.SourceReaderFactory;
 import Utils.CommandsExecutor;
 import Utils.CommandsHolder;
 import Utils.Context;
@@ -22,14 +24,11 @@ public class Main {
 				.addCommand(new CommandHistory(context))
 		;
 		
-		LineReader lineReader = new LineReader();
-//		lineReader.setSourceReader(SourceReaderFactory.getSourceReaderFile("/Users/foryourselfand/Documents/java/itmo/programming_lab5_test/res/script"));
+		LineReader lineReader = new LineReader(SourceReaderFactory.getSourceReaderTerminal());
 		
 		while (lineReader.hasSomethingToRead()) {
-			String lineRead = lineReader.readLine(">>> ");
+			String lineRead = lineReader.readLine(">>> ", new Argument("commandName"));
 			commandsExecutor.executeCommandByName(lineRead);
-//			System.out.println(lineRead);
-			
 		}
 	}
 }

@@ -1,9 +1,17 @@
+import Errors.InputError;
+import Input.Flat;
+import SourseReader.SourceReader;
+import SourseReader.SourceReaderFactory;
+import SourseReader.SourceReaderString;
 import com.opencsv.CSVReader;
 
 import java.io.FileReader;
 import java.util.*;
 
 public class Testing {
+//	static String flatName = "flatName";
+	
+	
 	public static void readDataLineByLine(String file) {
 		Set<String> headerRequired = new HashSet<>(Arrays.asList("flatName", "x", "y", "area", "numberOfRooms", "height", "isNew", "transport", "houseName", "year", "numberOfFloors", "numberOfLifts"));
 		
@@ -34,31 +42,31 @@ public class Testing {
 			
 			for (String fieldActual : headerActual)
 				fieldToIndex.put(fieldActual, headerRead.indexOf(fieldActual));
-
-
-//			for (String[] row : allData) {
-//				for (String cell : row) {
-//					System.out.print(cell + "\t");
-//				}
-//				System.out.println();
-//			}
+			
+			for (int index = 1; index < allData.size(); index++) {
+				String[] row = allData.get(index);
+				
+				Flat flat = new Flat();
+				
+				try {
+					flat.setNumberOfRooms(new SourceReaderString(row[fieldToIndex.get("numberOfRooms")]));
+					
+				} catch (InputError inputError) {
+					System.out.println(inputError.getMessage());
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		Flat flat = new Flat();
+		SourceReader sourceReaderTerminal = SourceReaderFactory.getSourceReaderTerminal();
+		sourceReaderTerminal.setRepeatOnException(true);
+		
+		flat.setNumberOfRooms(sourceReaderTerminal);
 	}
 	
 	public static void main(String[] args) {
-//		String value = "9223372036854775807";
-//
-//		Expectable expectedType = new ExpectedType(Long.class);
-//		Expectable expectedBoarder = new ExpectedGreater(50);
-//		try {
-//			expectedType.checkValueValidnes(value);
-//			expectedBoarder.checkValueValidnes(value);
-//		} catch (Error e) {
-//			System.out.println(e.getMessage());
-//		}
-		
 		readDataLineByLine("/Users/foryourselfand/Documents/java/itmo/programming_lab5/res/example.csv");
 	}
 }

@@ -1,7 +1,8 @@
 package Expectables;
 
-import Errors.InputError;
 import Errors.ArgumentErrors.WrongArgumentError;
+import Errors.InputError;
+import Input.Variable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +14,10 @@ public class Argument {
 	public Argument(String name, Expectable... expectables) {
 		this.name = name;
 		this.expectables = Arrays.asList(expectables);
+	}
+	
+	public Argument(Variable variable, Expectable... expectables) {
+		this(variable.getVariableName(), expectables);
 	}
 	
 	public void checkArgument(String argument) {

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 abstract public class SourceReader {
 	protected Scanner scanner;
+	private boolean repeatOnException;
 	
 	abstract public boolean hasSomethingToRead();
 	
@@ -16,5 +17,13 @@ abstract public class SourceReader {
 		System.out.print(postfix);
 		
 		return lineRead;
+	}
+	
+	public boolean repeatOnException() {
+		return repeatOnException;
+	}
+	
+	public void setRepeatOnException(boolean repeatOnException) {
+		this.repeatOnException = repeatOnException;
 	}
 }
