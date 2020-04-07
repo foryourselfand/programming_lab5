@@ -19,4 +19,12 @@ public class Coordinates {
 	public void setY(Double y) {
 		this.y = y;
 	}
+	
+	@Override
+	public String toString() {
+		return "Coordinates{" +
+				"x=" + x +
+				", y=" + y +
+				'}';
+	}
 }

@@ -1,10 +1,9 @@
 package Utils;
 
-import Errors.WrongHeaderError;
-import Errors.WrongHeaderFieldsBothError;
-import Errors.WrongHeaderFieldsSingleError;
-import Errors.WrongLineElementsLengthError;
+import Errors.*;
 import Input.Flat;
+import Input.Variable;
+import SourseReader.SourceReaderString;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
@@ -13,9 +12,22 @@ import java.io.IOException;
 import java.util.*;
 
 public class CSVLoader {
-	private static String[] headerRequiredArray = {"flatName", "x", "y", "area", "numberOfRooms", "height", "isNew", "transport", "houseName", "year", "numberOfFloors", "numberOfLifts"};
-	private static Set<String> headerRequiredSet = new HashSet<>(Arrays.asList(headerRequiredArray));
-	private static int headerRequiredLength = headerRequiredArray.length;
+	private static List<String> headerRequiredList = new ArrayList<>();
+	private static Set<String> headerRequiredSet = new HashSet<>(headerRequiredList);
+	private static int headerRequiredLength = headerRequiredList.size();
+	
+	static {
+		for (Variable variable : Variable.values())
+			headerRequiredList.add(variable.getVariableName());
+	}
+	
+	private String[] line;
+	
+	private HashMap<String, Integer> fieldToIndex = new HashMap<>();
+	
+	public SourceReaderString createSourceReader(Variable variable) {
+		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
+	}
 	
 	private void getCollectionFromCSVFile(String filePath) throws IOException, CsvException {
 		List<String[]> lines = getLines(filePath);
@@ -26,13 +38,39 @@ public class CSVLoader {
 		
 		checkHeader(headerActualSet);
 		
-		HashMap<String, Integer> fieldToIndex = getFieldToIndex(headerActualSet, headerActualList);
+		fieldToIndex = getFieldToIndex(headerActualSet, headerActualList);
 		
 		LinkedHashSet<Flat> collection = new LinkedHashSet<>();
 		
-		for (String[] line: lines) {
+		for (int index = 1; index < lines.size(); index++) {
+			line = lines.get(index);
 			checkForLineElementsLength(line);
 			
+			try {
+				Flat flat = new Flat();
+				
+				flat.setId(createSourceReader(Variable.ID));
+				flat.setFlatName(createSourceReader(Variable.FLAT_NAME));
+				flat.createCoordinates();
+				flat.setX(createSourceReader(Variable.X));
+				flat.setY(createSourceReader(Variable.Y));
+				flat.setCreationDate(createSourceReader(Variable.CREATION_DATE));
+				flat.setArea(createSourceReader(Variable.AREA));
+				flat.setNumberOfRooms(createSourceReader(Variable.NUMBER_OF_ROOMS));
+				flat.setHeight(createSourceReader(Variable.HEIGHT));
+				flat.setIsNew(createSourceReader(Variable.IS_NEW));
+				flat.setTransport(createSourceReader(Variable.TRANSPORT));
+				flat.createHouse();
+				flat.setHouseName(createSourceReader(Variable.HOUSE_NAME));
+				flat.setYear(createSourceReader(Variable.YEAR));
+				flat.setNumberOfFloors(createSourceReader(Variable.NUMBER_OF_FLOORS));
+				flat.setNumberOfLifts(createSourceReader(Variable.NUMBER_OF_LIFTS));
+				
+				System.out.println(flat);
+				collection.add(flat);
+			} catch (InputError inputError) {
+				System.out.println(inputError.getMessage());
+			}
 		}
 	}
 	

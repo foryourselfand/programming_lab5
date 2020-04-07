@@ -4,6 +4,8 @@ import SourseReader.SourceReader;
 import SourseReader.SourceReaderFactory;
 import Utils.LineReader;
 
+import java.time.LocalDate;
+
 public class Flat {
 	private Long id; // Поле не может быть null, значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
 	private String flatName; //Поле не может быть null, Строка не может быть пустой
@@ -41,7 +43,63 @@ public class Flat {
 		this.coordinates.setY(Double.parseDouble(lineReader.readLine(sourceReader, Variable.Y)));
 	}
 	
+	public void setCreationDate(SourceReader sourceReader) {
+		this.creationDate = LocalDate.parse(lineReader.readLine(sourceReader, Variable.CREATION_DATE));
+	}
+	
+	public void setArea(SourceReader sourceReader) {
+		this.area = Integer.parseInt(lineReader.readLine(sourceReader, Variable.AREA));
+	}
+	
 	public void setNumberOfRooms(SourceReader sourceReader) {
 		this.numberOfRooms = Integer.parseInt(lineReader.readLine(sourceReader, Variable.NUMBER_OF_ROOMS));
+	}
+	
+	public void setHeight(SourceReader sourceReader) {
+		this.height = Integer.parseInt(lineReader.readLine(sourceReader, Variable.HEIGHT));
+	}
+	
+	public void setIsNew(SourceReader sourceReader) {
+		this.isNew = Boolean.parseBoolean(lineReader.readLine(sourceReader, Variable.IS_NEW));
+	}
+	
+	public void setTransport(SourceReader sourceReader) {
+		this.transport = Transport.valueOf(lineReader.readLine(sourceReader, Variable.TRANSPORT));
+	}
+	
+	public void createHouse() {
+		this.house = new House();
+	}
+	
+	public void setHouseName(SourceReader sourceReader) {
+		this.house.setHouseName(lineReader.readLine(sourceReader, Variable.HOUSE_NAME));
+	}
+	
+	public void setYear(SourceReader sourceReader) {
+		this.house.setYear(Integer.valueOf(lineReader.readLine(sourceReader, Variable.YEAR)));
+	}
+	
+	public void setNumberOfFloors(SourceReader sourceReader) {
+		this.house.setNumberOfFloors(Long.parseLong(lineReader.readLine(sourceReader, Variable.NUMBER_OF_FLOORS)));
+	}
+	
+	public void setNumberOfLifts(SourceReader sourceReader) {
+		this.house.setNumberOfLifts(Long.parseLong(lineReader.readLine(sourceReader, Variable.NUMBER_OF_LIFTS)));
+	}
+	
+	@Override
+	public String toString() {
+		return "Flat{" +
+				"id=" + id +
+				", flatName='" + flatName + '\'' +
+				", coordinates=" + coordinates +
+				", creationDate=" + creationDate +
+				", area=" + area +
+				", numberOfRooms=" + numberOfRooms +
+				", height=" + height +
+				", isNew=" + isNew +
+				", transport=" + transport +
+				", house=" + house +
+				'}';
 	}
 }

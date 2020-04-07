@@ -1,12 +1,9 @@
 package Input;
 
-import Expectables.Argument;
-import Expectables.Expectable;
+import Expectables.*;
 import Expectables.ExpectablesBorder.ExpectedGreater;
 import Expectables.ExpectablesBorder.ExpectedLess;
 import Expectables.ExpectablesType.*;
-import Expectables.ExpectedNotNull;
-import Expectables.ExpectedStringLengthNotEmpty;
 
 import java.util.HashMap;
 
@@ -19,7 +16,6 @@ public enum Variable {
 	HEIGHT("height"),
 	IS_NEW("isNew"),
 	TRANSPORT("transport"),
-	HOUSE("house"),
 	X("x"),
 	Y("y"),
 	HOUSE_NAME("houseName"),
@@ -34,12 +30,12 @@ public enum Variable {
 		putArgumentToVariable(FLAT_NAME, new ExpectedNotNull(), new ExpectedStringLengthNotEmpty());
 		putArgumentToVariable(X, new ExpectedFloat(), new ExpectedGreater(- 292));
 		putArgumentToVariable(Y, new ExpectedDouble(), new ExpectedGreater(- 747), new ExpectedNotNull());
-		putArgumentToVariable(CREATION_DATE, new ExpectedNotNull());
+		putArgumentToVariable(CREATION_DATE, new ExpectedLocalDate(), new ExpectedNotNull());
 		putArgumentToVariable(AREA, new ExpectedInteger(), new ExpectedGreater(0));
 		putArgumentToVariable(NUMBER_OF_ROOMS, new ExpectedInteger(), new ExpectedLess(11), new ExpectedGreater(0));
 		putArgumentToVariable(HEIGHT, new ExpectedInteger(), new ExpectedGreater(0));
 		putArgumentToVariable(IS_NEW, new ExpectedBoolean(), new ExpectedNotNull());
-		putArgumentToVariable(TRANSPORT, new ExpectedNotNull());
+		putArgumentToVariable(TRANSPORT, new ExpectedTransport(), new ExpectedNotNull());
 		putArgumentToVariable(HOUSE_NAME, new ExpectedNotNull());
 		putArgumentToVariable(YEAR, new ExpectedInteger(), new ExpectedGreater(0));
 		putArgumentToVariable(NUMBER_OF_FLOORS, new ExpectedLong(), new ExpectedNotNull(), new ExpectedGreater(0));
