@@ -12,24 +12,27 @@ import java.io.IOException;
 import java.util.*;
 
 public class CSVLoader {
-	private static List<String> headerRequiredList = new ArrayList<>();
-	private static Set<String> headerRequiredSet = new HashSet<>(headerRequiredList);
-	private static int headerRequiredLength = headerRequiredList.size();
+	private static List<String> headerRequiredList;
+	private static Set<String> headerRequiredSet;
+	private static int headerRequiredLength;
 	
 	static {
+		headerRequiredList = new ArrayList<>();
 		for (Variable variable : Variable.values())
 			headerRequiredList.add(variable.getVariableName());
+		headerRequiredSet = new HashSet<>(headerRequiredList);
+		headerRequiredLength = headerRequiredList.size();
 	}
 	
 	private String[] line;
 	
 	private HashMap<String, Integer> fieldToIndex = new HashMap<>();
 	
-	public SourceReaderString createSourceReader(Variable variable) {
+	private SourceReaderString createSourceReader(Variable variable) {
 		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
 	}
 	
-	private void getCollectionFromCSVFile(String filePath) throws IOException, CsvException {
+	public void createCollectionFromCSVFile(String filePath) throws IOException, CsvException {
 		List<String[]> lines = getLines(filePath);
 		
 		String[] headerActualArray = lines.get(0);
@@ -66,12 +69,14 @@ public class CSVLoader {
 				flat.setNumberOfFloors(createSourceReader(Variable.NUMBER_OF_FLOORS));
 				flat.setNumberOfLifts(createSourceReader(Variable.NUMBER_OF_LIFTS));
 				
-				System.out.println(flat);
 				collection.add(flat);
 			} catch (InputError inputError) {
 				System.out.println(inputError.getMessage());
 			}
 		}
+		
+		for (Flat flat : collection)
+			System.out.println(flat.toString());
 	}
 	
 	private List<String[]> getLines(String filePath) throws IOException, CsvException {
@@ -99,11 +104,11 @@ public class CSVLoader {
 		Set<String> extraFieldsSet = getExtraFields(headerActualSet);
 		int extraFieldsSize = extraFieldsSet.size();
 		
-		if (missingFieldsSize == 0 && extraFieldsSize == 0)
+		if (missingFieldsSize != 0 && extraFieldsSize != 0)
 			throw new WrongHeaderFieldsBothError(missingFieldsSet, extraFieldsSet);
-		else if (missingFieldsSize == 0)
+		else if (missingFieldsSize != 0)
 			throw new WrongHeaderFieldsSingleError(WrongHeaderError.MESSAGE_MISSING, missingFieldsSet);
-		else if (extraFieldsSize == 0)
+		else if (extraFieldsSize != 0)
 			throw new WrongHeaderFieldsSingleError(WrongHeaderError.MESSAGE_EXTRA, extraFieldsSet);
 	}
 	
