@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class IdGenerator {
-	private static Set<Long> ids = new HashSet<Long>();
+	private static Set<Long> ids = new HashSet<>();
 	
 	public static Long generateId() {
 		long randomizedId;

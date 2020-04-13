@@ -1,9 +1,10 @@
 package Utils;
 
-import Errors.*;
+import Errors.InputErrorFull;
 import Errors.WrongHeader.WrongHeaderError;
 import Errors.WrongHeader.WrongHeaderFieldsBothError;
 import Errors.WrongHeader.WrongHeaderFieldsSingleError;
+import Errors.WrongLineElementsLengthError;
 import Input.Flat;
 import Input.Variable;
 import SourseReader.SourceReaderString;
@@ -15,21 +16,14 @@ import java.io.IOException;
 import java.util.*;
 
 public class CSVLoader {
-	private static List<String> headerRequiredList;
-	private static Set<String> headerRequiredSet;
-	private static int headerRequiredLength;
-	
-	static {
-		headerRequiredList = new ArrayList<>();
-		for (Variable variable : Variable.values())
-			headerRequiredList.add(variable.getVariableName());
-		headerRequiredSet = new HashSet<>(headerRequiredList);
-		headerRequiredLength = headerRequiredList.size();
-	}
+	private Header headerRequired;
 	
 	private String[] line;
-	
 	private HashMap<String, Integer> fieldToIndex = new HashMap<>();
+	
+	public CSVLoader() {
+		headerRequired = new Header(Variable.values());
+	}
 	
 	private SourceReaderString createSourceReader(Variable variable) {
 		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
@@ -38,13 +32,11 @@ public class CSVLoader {
 	public void createCollectionFromCSVFile(String filePath) throws IOException, CsvException {
 		List<String[]> lines = getLines(filePath);
 		
-		String[] headerActualArray = lines.get(0);
-		List<String> headerActualList = Arrays.asList(headerActualArray);
-		Set<String> headerActualSet = new HashSet<>(headerActualList);
+		Header headerActual = new Header(lines.get(0));
 		
-		checkHeader(headerActualSet);
+		checkHeader(headerActual.getSet());
 		
-		fieldToIndex = getFieldToIndex(headerActualSet, headerActualList);
+		fieldToIndex = getFieldToIndex(headerActual.getSet(), headerActual.getList());
 		
 		LinkedHashSet<Flat> collection = new LinkedHashSet<>();
 		
@@ -92,14 +84,14 @@ public class CSVLoader {
 	}
 	
 	private Set<String> getMissingFields(Set<String> headerActual) {
-		Set<String> missingFields = new HashSet<>(headerRequiredSet);
+		Set<String> missingFields = new HashSet<>(headerRequired.getSet());
 		missingFields.removeAll(headerActual);
 		return missingFields;
 	}
 	
 	private Set<String> getExtraFields(Set<String> headerActual) {
 		Set<String> extraFields = new HashSet<>(headerActual);
-		extraFields.removeAll(headerRequiredSet);
+		extraFields.removeAll(headerRequired.getSet());
 		return extraFields;
 	}
 	
@@ -127,7 +119,7 @@ public class CSVLoader {
 	
 	private void checkForLineElementsLength(String[] line) {
 		int headerActualLength = line.length;
-		if (headerRequiredLength != headerActualLength)
-			throw new WrongLineElementsLengthError(line, headerRequiredLength, headerActualLength);
+		if (headerRequired.getLength() != headerActualLength)
+			throw new WrongLineElementsLengthError(line, headerRequired.getLength(), headerActualLength);
 	}
 }

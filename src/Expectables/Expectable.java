@@ -1,6 +1,5 @@
 package Expectables;
 
-import Errors.InputErrorFull;
 import Errors.InputErrorShort;
 
 public interface Expectable {
