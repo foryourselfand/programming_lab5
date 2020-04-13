@@ -57,7 +57,8 @@ public enum Variable {
 		return this.variableName;
 	}
 	
-	public String getVariableNameWithPrefix() {
-		return String.format("Введите %s: ", this.variableName);
+	public String getVariableNameWithPrefix(Argument argument) {
+		String message = argument.getExpectablesMessage();
+		return String.format("\n%s\nВведите %s: ", message, this.variableName);
 	}
 }

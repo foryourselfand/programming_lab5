@@ -10,10 +10,9 @@ public class TestingFromFile {
 		try {
 			loader.createCollectionFromCSVFile("/Users/foryourselfand/Documents/java/itmo/programming_lab5/res/example.csv");
 			
-		} catch (InputError inputError){
+		} catch (InputError inputError) {
 			System.out.println(inputError.getMessage());
-		}
-		catch (IOException | CsvException e) {
+		} catch (IOException | CsvException e) {
 			e.printStackTrace();
 		}
 	}

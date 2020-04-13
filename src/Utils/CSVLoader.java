@@ -54,15 +54,18 @@ public class CSVLoader {
 				
 				flat.setId(createSourceReader(Variable.ID));
 				flat.setFlatName(createSourceReader(Variable.FLAT_NAME));
+				
 				flat.createCoordinates();
 				flat.setX(createSourceReader(Variable.X));
 				flat.setY(createSourceReader(Variable.Y));
+				
 				flat.setCreationDate(createSourceReader(Variable.CREATION_DATE));
 				flat.setArea(createSourceReader(Variable.AREA));
 				flat.setNumberOfRooms(createSourceReader(Variable.NUMBER_OF_ROOMS));
 				flat.setHeight(createSourceReader(Variable.HEIGHT));
 				flat.setIsNew(createSourceReader(Variable.IS_NEW));
 				flat.setTransport(createSourceReader(Variable.TRANSPORT));
+				
 				flat.createHouse();
 				flat.setHouseName(createSourceReader(Variable.HOUSE_NAME));
 				flat.setYear(createSourceReader(Variable.YEAR));

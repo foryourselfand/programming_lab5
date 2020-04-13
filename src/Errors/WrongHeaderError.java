@@ -1,7 +1,5 @@
 package Errors;
 
-import java.util.Set;
-
 public class WrongHeaderError extends InputError {
 	public static String MESSAGE_MISSING = "Недостающие элементы: ";
 	public static String MESSAGE_EXTRA = "Лишние элементы: ";

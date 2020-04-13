@@ -1,6 +1,5 @@
 package Expectables.ExpectablesType;
 
-import Errors.InputError;
 import Expectables.Expectable;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,11 +14,16 @@ public abstract class ExpectableType implements Expectable {
 			valueOf.invoke(new Object(), valueRaw);
 			
 		} catch (InvocationTargetException | NumberFormatException e) {
-			throw new InputError("Ожидалось " + numberClass.getSimpleName() + ".");
+			throw createInputError();
 		} catch (NoSuchMethodException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	abstract public Class getNumberClass();
+	
+	@Override
+	public String getErrorMessage() {
+		return "Должно быть " + getNumberClass().getSimpleName();
+	}
 }

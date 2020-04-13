@@ -34,6 +34,15 @@ public class Argument {
 		return name;
 	}
 	
+	public String getExpectablesMessage() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Expectable expectable : this.expectables) {
+			stringBuilder.append(expectable.getErrorMessage());
+			stringBuilder.append(". ");
+		}
+		return stringBuilder.toString();
+	}
+	
 	public List<Expectable> getExpectables() {
 		return expectables;
 	}

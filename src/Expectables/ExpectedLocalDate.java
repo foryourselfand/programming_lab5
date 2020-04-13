@@ -1,8 +1,5 @@
 package Expectables;
 
-import Errors.WrongLocalDateError;
-import Expectables.Expectable;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,8 +9,13 @@ public class ExpectedLocalDate implements Expectable {
 	public void checkValueValidnes(String valueRaw) {
 		try {
 			LocalDate.parse(valueRaw, DateTimeFormatter.ISO_DATE);
-		} catch (DateTimeParseException exception){
-			throw new WrongLocalDateError();
+		} catch (DateTimeParseException exception) {
+			throw createInputError();
 		}
+	}
+	
+	@Override
+	public String getErrorMessage() {
+		return "Дата должна быть в формате ISO (YYYY-MM-DD)";
 	}
 }

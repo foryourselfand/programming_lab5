@@ -1,6 +1,6 @@
 package Expectables.ExpectablesFile;
 
-import Errors.FileErrors.FileNotReadableError;
+import Errors.InputError;
 import Expectables.Expectable;
 
 import java.nio.file.Files;
@@ -10,7 +10,12 @@ public class ExpectableFileReadable implements Expectable {
 	@Override
 	public void checkValueValidnes(String valueRaw) {
 		if (! Files.isReadable(Paths.get(valueRaw))) {
-			throw new FileNotReadableError(valueRaw);
+			throw createInputError();
 		}
+	}
+	
+	@Override
+	public String getErrorMessage() {
+		return "Файл должен быть доступен для чтения";
 	}
 }

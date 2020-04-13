@@ -39,7 +39,8 @@ public class LineReader {
 	}
 	
 	public String readLine(SourceReader sourceReader, Variable variable) {
-		return this.readLine(sourceReader, variable.getVariableNameWithPrefix(), Variable.variableToArgument.get(variable));
+		Argument argument = Variable.variableToArgument.get(variable);
+		return this.readLine(sourceReader, variable.getVariableNameWithPrefix(argument), argument);
 	}
 	
 	public String readLine(Variable variable) {

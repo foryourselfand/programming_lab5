@@ -1,7 +1,8 @@
 package Expectables;
 
-import Errors.WrongTransportError;
 import Input.Transport;
+
+import java.util.Arrays;
 
 public class ExpectedTransport implements Expectable {
 	@Override
@@ -9,7 +10,13 @@ public class ExpectedTransport implements Expectable {
 		try {
 			Transport.valueOf(valueRaw);
 		} catch (IllegalArgumentException exception) {
-			throw new WrongTransportError();
+			throw createInputError();
 		}
 	}
+	
+	@Override
+	public String getErrorMessage() {
+		return "Должно быть одно из значений Transport: " + Arrays.toString(Transport.values());
+	}
+	
 }
