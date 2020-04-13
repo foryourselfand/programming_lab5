@@ -4,13 +4,18 @@ import Errors.InputErrorFull;
 import Expectables.Argument;
 import Input.Variable;
 import SourseReader.SourceReader;
-import SourseReader.SourceReaderFactory;
+import SourseReader.SourceReaderTerminal;
+
+import java.util.Stack;
 
 public class LineReader {
-	private SourceReader sourceReader;
+	private SourceReader sourceReaderActive;
+	private Stack<SourceReader> sourceReaderStack;
 	
-	public LineReader(SourceReader sourceReader) {
-		this.sourceReader = sourceReader;
+	public LineReader() {
+		this.sourceReaderStack = new Stack<>();
+		
+		this.addSourceReader(new SourceReaderTerminal(System.in));
 	}
 	
 	public String readLine(SourceReader sourceReader, String prefix, Argument argument) {
@@ -24,7 +29,7 @@ public class LineReader {
 				
 				return lineRead;
 			} catch (InputErrorFull inputErrorFull) {
-				if (! this.sourceReader.repeatOnException())
+				if (! this.sourceReaderActive.repeatOnException())
 					throw inputErrorFull;
 				System.out.println(inputErrorFull.getMessage());
 			}
@@ -35,7 +40,7 @@ public class LineReader {
 	
 	
 	public String readLine(String prefix, Argument argument) {
-		return readLine(this.sourceReader, prefix, argument);
+		return readLine(this.sourceReaderActive, prefix, argument);
 	}
 	
 	public String readLine(SourceReader sourceReader, Variable variable) {
@@ -44,17 +49,22 @@ public class LineReader {
 	}
 	
 	public String readLine(Variable variable) {
-		return readLine(this.sourceReader, variable);
+		return readLine(this.sourceReaderActive, variable);
 	}
 	
 	public boolean hasSomethingToRead() {
-		if (! this.sourceReader.hasSomethingToRead())
-			this.sourceReader = SourceReaderFactory.getSourceReaderTerminal();
-		return this.sourceReader.hasSomethingToRead();
+		while (! this.sourceReaderActive.hasSomethingToRead()) {
+			this.sourceReaderStack.pop();
+			this.sourceReaderActive = sourceReaderStack.peek();
+		}
+		
+		return true;
 	}
 	
-	public void setSourceReader(SourceReader sourceReader) {
-		this.sourceReader = sourceReader;
+	
+	public void addSourceReader(SourceReader sourceReaderToAdd) {
+		this.sourceReaderStack.add(sourceReaderToAdd);
+		this.sourceReaderActive = sourceReaderStack.peek();
 	}
 	
 }

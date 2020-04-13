@@ -3,7 +3,6 @@ package Input;
 import Generators.CreationDateGenerator;
 import Generators.IdGenerator;
 import SourseReader.SourceReader;
-import SourseReader.SourceReaderFactory;
 import Utils.LineReader;
 
 import java.time.LocalDate;
@@ -22,7 +21,7 @@ public class Flat {
 	private LineReader lineReader;
 	
 	public Flat() {
-		lineReader = new LineReader(SourceReaderFactory.getSourceReaderTerminal());
+		lineReader = new LineReader();
 	}
 	
 	public void setId(SourceReader sourceReader) {

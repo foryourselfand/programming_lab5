@@ -1,20 +1,22 @@
 import Commands.*;
 import Expectables.Argument;
-import SourseReader.SourceReaderFactory;
 import Utils.CommandsExecutor;
 import Utils.CommandsHolder;
 import Utils.Context;
 import Utils.LineReader;
 
-import java.io.FileNotFoundException;
-
 public class Main {
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		CommandsHolder commandsHolder = new CommandsHolder();
 		
 		CommandsExecutor commandsExecutor = new CommandsExecutor(commandsHolder);
 		
-		Context context = new Context(commandsHolder);
+		LineReader lineReader = new LineReader();
+		
+		Context context = new Context();
+		context.setCommandsHolder(commandsHolder);
+		context.setCommandsExecutor(commandsExecutor);
+		context.setLineReader(lineReader);
 		
 		commandsHolder
 				.addCommand(new CommandHelp(context))
@@ -24,12 +26,12 @@ public class Main {
 				.addCommand(new CommandHistory(context))
 		;
 		
-		LineReader lineReader = new LineReader(SourceReaderFactory.getSourceReaderTerminal());
 		
-		while (lineReader.hasSomethingToRead()) {
-			String lineRead = lineReader.readLine(">>> ", new Argument("commandName"));
+		while (context.lineReader.hasSomethingToRead()) {
+			String lineRead = context.lineReader.readLine(">>> ", new Argument("commandName"));
 			commandsExecutor.executeCommandByName(lineRead);
 		}
 	}
 }
-                        
+
+// execute_script /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/script_1
