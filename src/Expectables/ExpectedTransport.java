@@ -16,7 +16,9 @@ public class ExpectedTransport implements Expectable {
 	
 	@Override
 	public String getErrorMessage() {
-		return "Должно быть одно из значений Transport: " + Arrays.toString(Transport.values());
+		String transportValuesFull = Arrays.toString(Transport.values());
+		String transportValuesShort = transportValuesFull.substring(1, transportValuesFull.length() - 1);
+		return "Должно быть одно из значений: " + transportValuesShort;
 	}
 	
 }

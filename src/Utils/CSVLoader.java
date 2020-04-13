@@ -1,6 +1,9 @@
 package Utils;
 
 import Errors.*;
+import Errors.WrongHeader.WrongHeaderError;
+import Errors.WrongHeader.WrongHeaderFieldsBothError;
+import Errors.WrongHeader.WrongHeaderFieldsSingleError;
 import Input.Flat;
 import Input.Variable;
 import SourseReader.SourceReaderString;
@@ -73,8 +76,8 @@ public class CSVLoader {
 				flat.setNumberOfLifts(createSourceReader(Variable.NUMBER_OF_LIFTS));
 				
 				collection.add(flat);
-			} catch (InputError inputError) {
-				System.out.println(inputError.getMessage());
+			} catch (InputErrorFull inputErrorFull) {
+				System.out.println(inputErrorFull.getMessage());
 			}
 		}
 		

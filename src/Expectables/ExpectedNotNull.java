@@ -1,7 +1,5 @@
 package Expectables;
 
-import Errors.InputError;
-
 public class ExpectedNotNull implements Expectable {
 	@Override
 	public void checkValueValidnes(String valueRaw) {

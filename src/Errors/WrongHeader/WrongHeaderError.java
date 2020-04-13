@@ -1,6 +1,8 @@
-package Errors;
+package Errors.WrongHeader;
 
-public class WrongHeaderError extends InputError {
+import Errors.InputErrorFull;
+
+public class WrongHeaderError extends InputErrorFull {
 	public static String MESSAGE_MISSING = "Недостающие элементы: ";
 	public static String MESSAGE_EXTRA = "Лишние элементы: ";
 	

@@ -1,7 +1,7 @@
 package Utils;
 
 import Commands.Command;
-import Errors.InputError;
+import Errors.InputErrorFull;
 
 import java.util.Arrays;
 
@@ -24,7 +24,7 @@ public class CommandsExecutor {
 		try {
 			Command commandToExecute = commandsHolder.getCommandByName(commandName);
 			commandToExecute.execute(commandArguments);
-		} catch (InputError error) {
+		} catch (InputErrorFull error) {
 			System.out.println(error.getMessage());
 		}
 	}

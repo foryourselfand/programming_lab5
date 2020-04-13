@@ -1,6 +1,5 @@
 package Expectables.ExpectablesFile;
 
-import Errors.InputError;
 import Expectables.Expectable;
 
 import java.nio.file.Files;

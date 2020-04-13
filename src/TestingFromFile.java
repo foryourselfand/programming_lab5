@@ -1,4 +1,4 @@
-import Errors.InputError;
+import Errors.InputErrorFull;
 import Utils.CSVLoader;
 import com.opencsv.exceptions.CsvException;
 
@@ -10,8 +10,8 @@ public class TestingFromFile {
 		try {
 			loader.createCollectionFromCSVFile("/Users/foryourselfand/Documents/java/itmo/programming_lab5/res/example.csv");
 			
-		} catch (InputError inputError) {
-			System.out.println(inputError.getMessage());
+		} catch (InputErrorFull inputErrorFull) {
+			System.out.println(inputErrorFull.getMessage());
 		} catch (IOException | CsvException e) {
 			e.printStackTrace();
 		}

@@ -1,5 +1,7 @@
 package Input;
 
+import Generators.CreationDateGenerator;
+import Generators.IdGenerator;
 import SourseReader.SourceReader;
 import SourseReader.SourceReaderFactory;
 import Utils.LineReader;
@@ -24,7 +26,11 @@ public class Flat {
 	}
 	
 	public void setId(SourceReader sourceReader) {
-		this.id = Long.valueOf(lineReader.readLine(sourceReader, Variable.NUMBER_OF_ROOMS));
+		this.id = Long.valueOf(lineReader.readLine(sourceReader, Variable.ID));
+	}
+	
+	public void generateId() {
+		this.id = IdGenerator.generateId();
 	}
 	
 	public void setFlatName(SourceReader sourceReader) {
@@ -45,6 +51,10 @@ public class Flat {
 	
 	public void setCreationDate(SourceReader sourceReader) {
 		this.creationDate = LocalDate.parse(lineReader.readLine(sourceReader, Variable.CREATION_DATE));
+	}
+	
+	public void generateCreationDate() {
+		this.creationDate = CreationDateGenerator.generateCreationDate();
 	}
 	
 	public void setArea(SourceReader sourceReader) {

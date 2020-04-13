@@ -1,4 +1,4 @@
-package Errors;
+package Errors.WrongHeader;
 
 import java.util.Set;
 

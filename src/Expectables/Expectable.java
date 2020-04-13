@@ -1,13 +1,14 @@
 package Expectables;
 
-import Errors.InputError;
+import Errors.InputErrorFull;
+import Errors.InputErrorShort;
 
 public interface Expectable {
 	void checkValueValidnes(String valueRaw);
 	
 	String getErrorMessage();
 	
-	default InputError createInputError() {
-		return new InputError(getErrorMessage());
+	default InputErrorShort createInputError() {
+		return new InputErrorShort(getErrorMessage());
 	}
 }

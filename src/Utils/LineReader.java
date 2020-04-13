@@ -1,6 +1,6 @@
 package Utils;
 
-import Errors.InputError;
+import Errors.InputErrorFull;
 import Expectables.Argument;
 import Input.Variable;
 import SourseReader.SourceReader;
@@ -23,10 +23,10 @@ public class LineReader {
 				argument.checkArgument(lineRead);
 				
 				return lineRead;
-			} catch (InputError inputError) {
+			} catch (InputErrorFull inputErrorFull) {
 				if (! this.sourceReader.repeatOnException())
-					throw inputError;
-				System.out.println(inputError.getMessage());
+					throw inputErrorFull;
+				System.out.println(inputErrorFull.getMessage());
 			}
 		}
 		

@@ -1,9 +1,9 @@
 package Errors.ArgumentErrors;
 
-import Errors.InputError;
+import Errors.InputErrorFull;
 
-public class WrongArgumentLengthError extends InputError {
+public class WrongArgumentLengthError extends InputErrorFull {
 	public WrongArgumentLengthError(int argumentsLengthExpected, int argumentsLengthActual) {
-		super("Неверная длина аргументов. ожидалось: " + argumentsLengthExpected + "; получено: " + argumentsLengthActual);
+		super("Неверная длина аргументов. Ожидалось: " + argumentsLengthExpected + "; Получено: " + argumentsLengthActual);
 	}
 }

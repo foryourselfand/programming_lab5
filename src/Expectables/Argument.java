@@ -1,7 +1,7 @@
 package Expectables;
 
 import Errors.ArgumentErrors.WrongArgumentError;
-import Errors.InputError;
+import Errors.InputErrorShort;
 import Input.Variable;
 
 import java.util.Arrays;
@@ -24,23 +24,26 @@ public class Argument {
 		for (Expectable expectable : this.expectables) {
 			try {
 				expectable.checkValueValidnes(argument);
-			} catch (InputError inputError) {
+			} catch (InputErrorShort inputError) {
 				throw new WrongArgumentError(this.getName(), inputError.getMessage());
 			}
 		}
-	}
-	
-	public String getName() {
-		return name;
 	}
 	
 	public String getExpectablesMessage() {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Expectable expectable : this.expectables) {
 			stringBuilder.append(expectable.getErrorMessage());
-			stringBuilder.append(". ");
+			stringBuilder.append("; ");
 		}
+		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		
 		return stringBuilder.toString();
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public List<Expectable> getExpectables() {
