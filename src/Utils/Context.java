@@ -1,24 +1,30 @@
 package Utils;
 
+import Commands.*;
+
 public class Context {
 	public CommandsHolder commandsHolder;
 	public CommandsExecutor commandsExecutor;
 	public LineReader lineReader;
 	public CollectionManager collectionManager;
 	
-	public void setCommandsHolder(CommandsHolder commandsHolder) {
-		this.commandsHolder = commandsHolder;
+	public Context() {
+		this.collectionManager = new CollectionManager();
+		this.lineReader = new LineReader();
+		this.commandsHolder = new CommandsHolder();
+		this.commandsExecutor = new CommandsExecutor(commandsHolder);
+		
+		setUpCommands();
 	}
 	
-	public void setCommandsExecutor(CommandsExecutor commandsExecutor) {
-		this.commandsExecutor = commandsExecutor;
-	}
-	
-	public void setLineReader(LineReader lineReader) {
-		this.lineReader = lineReader;
-	}
-	
-	public void setCollectionManager(CollectionManager collectionManager) {
-		this.collectionManager = collectionManager;
+	public void setUpCommands() {
+		this.commandsHolder
+				.addCommand(new CommandLoad(this))
+				.addCommand(new CommandHelp(this))
+				.addCommand(new CommandShow(this))
+				.addCommand(new CommandRemoveById(this))
+				.addCommand(new CommandExecuteScript(this))
+				.addCommand(new CommandHistory(this))
+		;
 	}
 }
