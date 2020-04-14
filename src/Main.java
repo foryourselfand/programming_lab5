@@ -1,24 +1,22 @@
 import Commands.*;
 import Expectables.Argument;
-import Utils.CommandsExecutor;
-import Utils.CommandsHolder;
-import Utils.Context;
-import Utils.LineReader;
+import Utils.*;
 
 public class Main {
 	public static void main(String[] args) {
+		CollectionManager collectionManager = new CollectionManager();
+		LineReader lineReader = new LineReader();
 		CommandsHolder commandsHolder = new CommandsHolder();
-		
 		CommandsExecutor commandsExecutor = new CommandsExecutor(commandsHolder);
 		
-		LineReader lineReader = new LineReader();
-		
 		Context context = new Context();
+		context.setLineReader(lineReader);
 		context.setCommandsHolder(commandsHolder);
 		context.setCommandsExecutor(commandsExecutor);
-		context.setLineReader(lineReader);
+		context.setCollectionManager(collectionManager);
 		
 		commandsHolder
+				.addCommand(new CommandLoad(context))
 				.addCommand(new CommandHelp(context))
 				.addCommand(new CommandShow(context))
 				.addCommand(new CommandRemoveById(context))

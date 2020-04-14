@@ -29,7 +29,9 @@ public class CSVLoader {
 		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
 	}
 	
-	public void createCollectionFromCSVFile(String filePath) throws IOException, CsvException {
+	public LinkedHashSet<Flat> getCollectionFromCSVFile(String filePath) throws IOException, CsvException {
+		LinkedHashSet<Flat> collection = new LinkedHashSet<>();
+		
 		List<String[]> lines = getLines(filePath);
 		
 		Header headerActual = new Header(lines.get(0));
@@ -37,8 +39,6 @@ public class CSVLoader {
 		checkHeader(headerActual.getSet());
 		
 		fieldToIndex = getFieldToIndex(headerActual.getSet(), headerActual.getList());
-		
-		LinkedHashSet<Flat> collection = new LinkedHashSet<>();
 		
 		for (int index = 1; index < lines.size(); index++) {
 			line = lines.get(index);
@@ -73,8 +73,7 @@ public class CSVLoader {
 			}
 		}
 		
-		for (Flat flat : collection)
-			System.out.println(flat.toString());
+		return collection;
 	}
 	
 	private List<String[]> getLines(String filePath) throws IOException, CsvException {

@@ -9,5 +9,8 @@ public class CollectionManager {
 	
 	public void initializeCollection(LinkedHashSet<Flat> collection) {
 		this.collection = collection;
+		System.out.println("Коллекция инициализированна");
+		for (Flat flat : collection)
+			System.out.println(flat);
 	}
 }
