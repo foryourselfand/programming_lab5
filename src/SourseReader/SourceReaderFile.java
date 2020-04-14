@@ -22,7 +22,8 @@ public class SourceReaderFile extends SourceReader {
 		return lineRead + "\n";
 	}
 	
-	public String getPath() {
+	@Override
+	public String getSource() {
 		return path;
 	}
 }

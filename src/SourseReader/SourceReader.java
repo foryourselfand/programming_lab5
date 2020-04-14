@@ -26,4 +26,6 @@ abstract public class SourceReader {
 	public void setRepeatOnException(boolean repeatOnException) {
 		this.repeatOnException = repeatOnException;
 	}
+	
+	public abstract String getSource();
 }

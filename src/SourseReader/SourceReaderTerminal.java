@@ -17,4 +17,9 @@ public class SourceReaderTerminal extends SourceReader {
 	public String getPostfix(String lineRead) {
 		return "";
 	}
+	
+	@Override
+	public String getSource() {
+		return "Терминал";
+	}
 }
