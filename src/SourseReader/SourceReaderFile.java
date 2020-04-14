@@ -5,7 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class SourceReaderFile extends SourceReader {
+	private String path;
+	
 	public SourceReaderFile(String path) throws FileNotFoundException {
+		this.path = path;
 		this.scanner = new Scanner(new File(path));
 	}
 	
@@ -17,5 +20,9 @@ public class SourceReaderFile extends SourceReader {
 	@Override
 	public String getPostfix(String lineRead) {
 		return lineRead + "\n";
+	}
+	
+	public String getPath() {
+		return path;
 	}
 }
