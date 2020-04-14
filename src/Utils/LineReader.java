@@ -15,11 +15,16 @@ public class LineReader {
 	private Set<String> sourceReaderFilePaths;
 	private SourceReader sourceReaderActive;
 	private Stack<SourceReader> sourceReaderStack;
+	private boolean repeatOnException;
 	
 	public LineReader() {
 		this.sourceReaderFilePaths = new HashSet<>();
 		this.sourceReaderStack = new Stack<>();
 		this.addSourceReader(new SourceReaderTerminal(System.in));
+	}
+	
+	public SourceReader getSourceReaderActive() {
+		return sourceReaderActive;
 	}
 	
 	public String readLine(SourceReader sourceReader, String prefix, Argument argument) {
@@ -33,7 +38,7 @@ public class LineReader {
 				
 				return lineRead;
 			} catch (InputErrorFull inputErrorFull) {
-				if (! this.sourceReaderActive.repeatOnException())
+				if (! this.repeatOnException)
 					throw inputErrorFull;
 				System.out.println(inputErrorFull.getMessage());
 			}
@@ -42,6 +47,9 @@ public class LineReader {
 		return "";
 	}
 	
+	public void setRepeatOnException(boolean repeatOnException) {
+		this.repeatOnException = repeatOnException;
+	}
 	
 	public String readLine(String prefix, Argument argument) {
 		return readLine(this.sourceReaderActive, prefix, argument);

@@ -7,6 +7,7 @@ import Errors.WrongHeader.WrongHeaderFieldsSingleError;
 import Errors.WrongLineElementsLengthError;
 import Input.Flat;
 import Input.Variable;
+import SourseReader.SourceReader;
 import SourseReader.SourceReaderString;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;

@@ -44,7 +44,7 @@ public class CommandLoad extends Command {
 		
 		try {
 			collection = this.csvLoader.getCollectionFromCSVFile(commandArguments[0]);
-			context.collectionManager.initializeCollection(collection);
+			context.collectionManager.setCollection(collection);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (CsvException e) {

@@ -20,8 +20,12 @@ public class Flat {
 	private House house; //Поле не может быть null
 	private LineReader lineReader;
 	
-	public Flat() {
-		lineReader = new LineReader();
+	public Flat(){
+		this.lineReader = new LineReader();
+	}
+	
+	public void setLineReader(LineReader lineReader) {
+		this.lineReader = lineReader;
 	}
 	
 	public void setId(SourceReader sourceReader) {
