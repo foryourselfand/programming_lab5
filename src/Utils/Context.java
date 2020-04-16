@@ -19,6 +19,7 @@ public class Context {
 	
 	public void setUpCommands() {
 		this.commandsHolder
+				.addCommand(new CommandInfo(this))
 				.addCommand(new CommandAdd(this))
 				.addCommand(new CommandLoad(this))
 				.addCommand(new CommandHelp(this))

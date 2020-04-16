@@ -12,8 +12,6 @@ public class CollectionManager {
 	public CollectionManager() {
 		this.collection = new LinkedHashSet<>();
 		this.initializationDate = LocalDate.now();
-		System.out.println(getCollectionType());
-		System.out.println(getCollectionElementType());
 	}
 	
 	public void setCollection(LinkedHashSet<Flat> collection) {
@@ -49,7 +47,7 @@ public class CollectionManager {
 	}
 	
 	public LocalDate getInitializationDate() {
-		return initializationDate;
+		return this.initializationDate;
 	}
 	
 	public String getCollectionType() {
@@ -58,5 +56,9 @@ public class CollectionManager {
 	
 	public String getCollectionElementType() {
 		return Flat.class.getSimpleName();
+	}
+	
+	public int getCollectionSize() {
+		return this.collection.size();
 	}
 }
