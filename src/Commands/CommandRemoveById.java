@@ -13,7 +13,6 @@ public class CommandRemoveById extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		super.execute(commandArguments);
 		int id = Integer.parseInt(commandArguments[0]);
 		System.out.println("id: " + id);
 	}

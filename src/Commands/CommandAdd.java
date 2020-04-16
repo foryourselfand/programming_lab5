@@ -11,8 +11,6 @@ public class CommandAdd extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		super.execute(commandArguments);
-		
 		Flat flat = new Flat();
 		
 		this.context.lineReader.setRepeatOnException(true);

@@ -9,7 +9,6 @@ public class CommandShow extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		super.execute(commandArguments);
 	}
 	
 	@Override

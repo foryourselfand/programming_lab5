@@ -18,8 +18,6 @@ public class CommandExecuteScript extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		super.execute(commandArguments);
-		
 		try {
 			context.lineReader.addSourceReader(new SourceReaderFile(String.valueOf(commandArguments[0])));
 		} catch (FileNotFoundException e) {

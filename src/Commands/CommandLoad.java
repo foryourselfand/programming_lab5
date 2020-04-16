@@ -38,8 +38,6 @@ public class CommandLoad extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		super.execute(commandArguments);
-		
 		LinkedHashSet<Flat> collection;
 		
 		try {

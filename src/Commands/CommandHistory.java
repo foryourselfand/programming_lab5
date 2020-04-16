@@ -9,7 +9,6 @@ public class CommandHistory extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		super.execute(commandArguments);
 	}
 	
 	@Override

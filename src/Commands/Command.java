@@ -23,9 +23,12 @@ public abstract class Command {
 	
 	public abstract String getNameOfCommand();
 	
-	public void execute(String[] commandArguments) {
+	public void executeWithValidation(String[] commandArguments) {
 		this.validateArguments(commandArguments);
+		this.execute(commandArguments);
 	}
+	
+	public abstract void execute(String[] commandArguments);
 	
 	private void validateArguments(String[] commandArguments) {
 		int argumentsLengthExpected = this.argumentsLength;

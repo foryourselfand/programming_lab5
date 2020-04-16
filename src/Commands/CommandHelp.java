@@ -12,7 +12,6 @@ public class CommandHelp extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		super.execute(commandArguments);
 		List<Command> commands = this.context.commandsHolder.getCommands();
 		
 		for (Command command : commands) {

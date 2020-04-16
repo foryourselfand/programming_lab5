@@ -23,7 +23,7 @@ public class CommandsExecutor {
 		
 		try {
 			Command commandToExecute = commandsHolder.getCommandByName(commandName);
-			commandToExecute.execute(commandArguments);
+			commandToExecute.executeWithValidation(commandArguments);
 		} catch (InputErrorFull error) {
 			System.out.println(error.getMessage());
 		}
