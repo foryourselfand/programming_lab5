@@ -20,24 +20,12 @@ public class Flat {
 	private House house; //Поле не может быть null
 	private LineReader lineReader;
 	
-	public Flat(){
+	public Flat() {
 		this.lineReader = new LineReader();
-	}
-	
-	public void setLineReader(LineReader lineReader) {
-		this.lineReader = lineReader;
-	}
-	
-	public void setId(SourceReader sourceReader) {
-		this.id = Long.valueOf(lineReader.readLine(sourceReader, Variable.ID));
 	}
 	
 	public void generateId() {
 		this.id = IdGenerator.generateId();
-	}
-	
-	public void setFlatName(SourceReader sourceReader) {
-		this.flatName = lineReader.readLine(sourceReader, Variable.FLAT_NAME);
 	}
 	
 	public void createCoordinates() {
@@ -52,32 +40,12 @@ public class Flat {
 		this.coordinates.setY(Double.parseDouble(lineReader.readLine(sourceReader, Variable.Y)));
 	}
 	
-	public void setCreationDate(SourceReader sourceReader) {
-		this.creationDate = LocalDate.parse(lineReader.readLine(sourceReader, Variable.CREATION_DATE));
-	}
-	
 	public void generateCreationDate() {
 		this.creationDate = CreationDateGenerator.generateCreationDate();
 	}
 	
-	public void setArea(SourceReader sourceReader) {
-		this.area = Integer.parseInt(lineReader.readLine(sourceReader, Variable.AREA));
-	}
-	
-	public void setNumberOfRooms(SourceReader sourceReader) {
-		this.numberOfRooms = Integer.parseInt(lineReader.readLine(sourceReader, Variable.NUMBER_OF_ROOMS));
-	}
-	
-	public void setHeight(SourceReader sourceReader) {
-		this.height = Integer.parseInt(lineReader.readLine(sourceReader, Variable.HEIGHT));
-	}
-	
 	public void setIsNew(SourceReader sourceReader) {
 		this.isNew = Boolean.parseBoolean(lineReader.readLine(sourceReader, Variable.IS_NEW));
-	}
-	
-	public void setTransport(SourceReader sourceReader) {
-		this.transport = Transport.valueOf(lineReader.readLine(sourceReader, Variable.TRANSPORT));
 	}
 	
 	public void createHouse() {
@@ -98,6 +66,82 @@ public class Flat {
 	
 	public void setNumberOfLifts(SourceReader sourceReader) {
 		this.house.setNumberOfLifts(Long.parseLong(lineReader.readLine(sourceReader, Variable.NUMBER_OF_LIFTS)));
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(SourceReader sourceReader) {
+		this.id = Long.valueOf(lineReader.readLine(sourceReader, Variable.ID));
+	}
+	
+	public String getFlatName() {
+		return flatName;
+	}
+	
+	public void setFlatName(SourceReader sourceReader) {
+		this.flatName = lineReader.readLine(sourceReader, Variable.FLAT_NAME);
+	}
+	
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+	
+	public LocalDate getCreationDate() {
+		return creationDate;
+	}
+	
+	public void setCreationDate(SourceReader sourceReader) {
+		this.creationDate = LocalDate.parse(lineReader.readLine(sourceReader, Variable.CREATION_DATE));
+	}
+	
+	public int getArea() {
+		return area;
+	}
+	
+	public void setArea(SourceReader sourceReader) {
+		this.area = Integer.parseInt(lineReader.readLine(sourceReader, Variable.AREA));
+	}
+	
+	public int getNumberOfRooms() {
+		return numberOfRooms;
+	}
+	
+	public void setNumberOfRooms(SourceReader sourceReader) {
+		this.numberOfRooms = Integer.parseInt(lineReader.readLine(sourceReader, Variable.NUMBER_OF_ROOMS));
+	}
+	
+	public Integer getHeight() {
+		return height;
+	}
+	
+	public void setHeight(SourceReader sourceReader) {
+		this.height = Integer.parseInt(lineReader.readLine(sourceReader, Variable.HEIGHT));
+	}
+	
+	public Boolean getNew() {
+		return isNew;
+	}
+	
+	public Transport getTransport() {
+		return transport;
+	}
+	
+	public void setTransport(SourceReader sourceReader) {
+		this.transport = Transport.valueOf(lineReader.readLine(sourceReader, Variable.TRANSPORT));
+	}
+	
+	public House getHouse() {
+		return house;
+	}
+	
+	public LineReader getLineReader() {
+		return lineReader;
+	}
+	
+	public void setLineReader(LineReader lineReader) {
+		this.lineReader = lineReader;
 	}
 	
 	@Override
