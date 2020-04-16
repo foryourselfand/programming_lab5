@@ -1,8 +1,10 @@
 package Input;
 
 import Expectables.*;
+import Expectables.ExpectablesDate.ExpectedLocalDate;
 import Expectables.ExpectablesBorder.ExpectedGreater;
 import Expectables.ExpectablesBorder.ExpectedLess;
+import Expectables.ExpectablesDate.ExpectedNoLaterThanNow;
 import Expectables.ExpectablesType.*;
 
 import java.util.HashMap;
@@ -30,7 +32,7 @@ public enum Variable {
 		putArgumentToVariable(FLAT_NAME, new ExpectedNotNull(), new ExpectedStringLengthNotEmpty());
 		putArgumentToVariable(X, new ExpectedFloat(), new ExpectedGreater(- 292));
 		putArgumentToVariable(Y, new ExpectedDouble(), new ExpectedGreater(- 747), new ExpectedNotNull());
-		putArgumentToVariable(CREATION_DATE, new ExpectedLocalDate(), new ExpectedNotNull());
+		putArgumentToVariable(CREATION_DATE, new ExpectedLocalDate(), new ExpectedNoLaterThanNow(), new ExpectedNotNull());
 		putArgumentToVariable(AREA, new ExpectedInteger(), new ExpectedGreater(0));
 		putArgumentToVariable(NUMBER_OF_ROOMS, new ExpectedInteger(), new ExpectedLess(11), new ExpectedGreater(0));
 		putArgumentToVariable(HEIGHT, new ExpectedInteger(), new ExpectedGreater(0));
