@@ -5,7 +5,7 @@ import Expectables.Expectable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ExpectableFileIsRegularFile implements Expectable {
+public class ExpectableFileRegular implements Expectable {
 	@Override
 	public void checkValueValidnes(String valueRaw) {
 		if (! Files.isRegularFile(Paths.get(valueRaw))) {

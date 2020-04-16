@@ -2,7 +2,7 @@ package Commands;
 
 import Expectables.Argument;
 import Expectables.ExpectablesFile.ExpectableFileExist;
-import Expectables.ExpectablesFile.ExpectableFileIsRegularFile;
+import Expectables.ExpectablesFile.ExpectableFileRegular;
 import Expectables.ExpectablesFile.ExpectableFileReadable;
 import Expectables.ExpectablesFile.ExpectableFileWritable;
 import SourseReader.SourceReaderFile;
@@ -30,7 +30,7 @@ public class CommandExecuteScript extends Command {
 		arguments.add(new Argument(
 				"file_name",
 				new ExpectableFileExist(),
-				new ExpectableFileIsRegularFile(),
+				new ExpectableFileRegular(),
 				new ExpectableFileReadable(),
 				new ExpectableFileWritable()));
 	}

@@ -2,15 +2,14 @@ package Commands;
 
 import Expectables.Argument;
 import Expectables.ExpectablesFile.ExpectableFileExist;
-import Expectables.ExpectablesFile.ExpectableFileIsRegularFile;
 import Expectables.ExpectablesFile.ExpectableFileReadable;
-import Input.Flat;
+import Expectables.ExpectablesFile.ExpectableFileRegular;
+import Generators.IdGenerator;
 import Utils.CSVLoader;
 import Utils.Context;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.IOException;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public class CommandLoad extends Command {
@@ -26,7 +25,7 @@ public class CommandLoad extends Command {
 		arguments.add(new Argument(
 				"file_name",
 				new ExpectableFileExist(),
-				new ExpectableFileIsRegularFile(),
+				new ExpectableFileRegular(),
 				new ExpectableFileReadable()
 		));
 	}
@@ -38,11 +37,11 @@ public class CommandLoad extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		LinkedHashSet<Flat> collection;
-		
+		this.context.collectionManager.clearCollection();
+		IdGenerator.clear();
 		try {
-			collection = this.csvLoader.getCollectionFromCSVFile(commandArguments[0]);
-			context.collectionManager.setCollection(collection);
+			this.csvLoader.createCollectionFromFile(commandArguments[0], context.collectionManager);
+			this.context.collectionManager.changeInitializationDate();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (CsvException e) {

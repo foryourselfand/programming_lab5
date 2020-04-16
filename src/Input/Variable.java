@@ -1,9 +1,9 @@
 package Input;
 
 import Expectables.*;
-import Expectables.ExpectablesDate.ExpectedLocalDate;
 import Expectables.ExpectablesBorder.ExpectedGreater;
 import Expectables.ExpectablesBorder.ExpectedLess;
+import Expectables.ExpectablesDate.ExpectedLocalDate;
 import Expectables.ExpectablesDate.ExpectedNoLaterThanNow;
 import Expectables.ExpectablesType.*;
 
@@ -28,7 +28,7 @@ public enum Variable {
 	public static HashMap<Variable, Argument> variableToArgument = new HashMap<>();
 	
 	static {
-		putArgumentToVariable(ID, new ExpectedLong(), new ExpectedNotNull(), new ExpectedGreater(0));
+		putArgumentToVariable(ID, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0), new ExpectedUnique());
 		putArgumentToVariable(FLAT_NAME, new ExpectedNotNull(), new ExpectedStringLengthNotEmpty());
 		putArgumentToVariable(X, new ExpectedFloat(), new ExpectedGreater(- 292));
 		putArgumentToVariable(Y, new ExpectedDouble(), new ExpectedGreater(- 747), new ExpectedNotNull());

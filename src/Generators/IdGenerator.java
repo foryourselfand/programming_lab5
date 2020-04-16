@@ -18,7 +18,15 @@ public class IdGenerator {
 		return randomizedId;
 	}
 	
-	public static void reset() {
+	public static void clear() {
 		ids.clear();
+	}
+	
+	public static boolean containsId(long id) {
+		return ids.contains(id);
+	}
+	
+	public static void addId(long id) {
+		ids.add(id);
 	}
 }

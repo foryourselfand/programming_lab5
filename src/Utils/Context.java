@@ -2,7 +2,11 @@ package Utils;
 
 import Commands.*;
 
+import java.time.LocalDate;
+
 public class Context {
+	public static final LocalDate INITIALIZATION_DATE = LocalDate.now();
+	
 	public CommandsHolder commandsHolder;
 	public CommandsExecutor commandsExecutor;
 	public LineReader lineReader;

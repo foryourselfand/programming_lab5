@@ -1,5 +1,6 @@
 package Utils;
 
+import Generators.IdGenerator;
 import Input.Flat;
 
 import java.time.LocalDate;
@@ -11,43 +12,49 @@ public class CollectionManager {
 	
 	public CollectionManager() {
 		this.collection = new LinkedHashSet<>();
-		this.initializationDate = LocalDate.now();
+		this.initializationDate = Context.INITIALIZATION_DATE;
 	}
 	
-	public void setCollection(LinkedHashSet<Flat> collection) {
-		this.collection = collection;
-		this.changeInitializationDate(collection);
+	public void clearCollection() {
+		this.collection.clear();
 	}
 	
 	public void addFlatToCollection(Flat flat) {
 		this.collection.add(flat);
+		IdGenerator.addId(flat.getId());
+		System.out.println("В коллекцию добавлен элемент " + flat.toString());
+		System.out.println();
 	}
 	
-	public void printCollection() {
+	public void showCollection() {
+		if (this.collection.isEmpty()) {
+			System.out.println("Коллекция пустая");
+			return;
+		}
 		for (Flat flat : this.collection)
 			System.out.println(flat);
 	}
 	
-	private void changeInitializationDate(LinkedHashSet<Flat> collection) {
-		if (collection.size() != 0)
-			this.initializationDate = this.getInitializationDateMin(collection);
+	public void changeInitializationDate() {
+		if (! collection.isEmpty())
+			this.initializationDate = this.getInitializationDateMin();
 		else
-			this.initializationDate = LocalDate.now();
+			this.initializationDate = Context.INITIALIZATION_DATE;
 	}
 	
-	private LocalDate getInitializationDateMin(LinkedHashSet<Flat> collection) {
+	public LocalDate getInitializationDate() {
+		return initializationDate;
+	}
+	
+	private LocalDate getInitializationDateMin() {
 		LocalDate initializationLocalDate = LocalDate.MAX;
-		for (Flat flat : collection) {
+		for (Flat flat : this.collection) {
 			LocalDate flatLocalDate = flat.getCreationDate();
 			if (flatLocalDate.compareTo(initializationLocalDate) < 0) {
 				initializationLocalDate = flatLocalDate;
 			}
 		}
 		return initializationLocalDate;
-	}
-	
-	public LocalDate getInitializationDate() {
-		return this.initializationDate;
 	}
 	
 	public String getCollectionType() {

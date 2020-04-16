@@ -9,6 +9,7 @@ public class CommandShow extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
+		context.collectionManager.showCollection();
 	}
 	
 	@Override

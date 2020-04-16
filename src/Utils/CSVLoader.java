@@ -13,7 +13,10 @@ import com.opencsv.exceptions.CsvException;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CSVLoader {
 	private Header headerRequired;
@@ -29,9 +32,7 @@ public class CSVLoader {
 		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
 	}
 	
-	public LinkedHashSet<Flat> getCollectionFromCSVFile(String filePath) throws IOException, CsvException {
-		LinkedHashSet<Flat> collection = new LinkedHashSet<>();
-		
+	public void createCollectionFromFile(String filePath, CollectionManager collectionManager) throws IOException, CsvException {
 		List<String[]> lines = getLines(filePath);
 		
 		Header headerActual = new Header(lines.get(0));
@@ -67,13 +68,11 @@ public class CSVLoader {
 				flat.setNumberOfFloors(createSourceReader(Variable.NUMBER_OF_FLOORS));
 				flat.setNumberOfLifts(createSourceReader(Variable.NUMBER_OF_LIFTS));
 				
-				collection.add(flat);
+				collectionManager.addFlatToCollection(flat);
 			} catch (InputErrorFull inputErrorFull) {
 				System.out.println(inputErrorFull.getMessage());
 			}
 		}
-		
-		return collection;
 	}
 	
 	private List<String[]> getLines(String filePath) throws IOException, CsvException {
