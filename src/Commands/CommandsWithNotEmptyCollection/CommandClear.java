@@ -1,6 +1,5 @@
 package Commands.CommandsWithNotEmptyCollection;
 
-import Commands.CommandsWithNotEmptyCollection.CommandWithNotEmptyCollection;
 import Utils.Context;
 
 public class CommandClear extends CommandWithNotEmptyCollection {

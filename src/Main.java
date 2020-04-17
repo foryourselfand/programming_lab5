@@ -14,3 +14,4 @@ public class Main {
 
 // execute_script /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/script_1
 // load /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/example.csv
+// print_unique_house

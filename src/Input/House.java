@@ -1,5 +1,7 @@
 package Input;
 
+import java.util.Objects;
+
 public class House {
 	private String houseName; //Поле не может быть null
 	private Integer year; //Значение поля должно быть больше 0
@@ -46,5 +48,21 @@ public class House {
 				", numberOfFloors=" + numberOfFloors +
 				", numberOfLifts=" + numberOfLifts +
 				'}';
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (! (o instanceof House)) return false;
+		House house = (House) o;
+		return getHouseName().equals(house.getHouseName()) &&
+				Objects.equals(getYear(), house.getYear()) &&
+				Objects.equals(getNumberOfFloors(), house.getNumberOfFloors()) &&
+				Objects.equals(getNumberOfLifts(), house.getNumberOfLifts());
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(getHouseName(), getYear(), getNumberOfFloors(), getNumberOfLifts());
 	}
 }
