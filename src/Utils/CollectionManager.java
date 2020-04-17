@@ -15,6 +15,10 @@ public class CollectionManager {
 		this.initializationDate = Context.INITIALIZATION_DATE;
 	}
 	
+	public LinkedHashSet<Flat> getCollection() {
+		return collection;
+	}
+	
 	public void clearCollection() {
 		this.collection.clear();
 	}
