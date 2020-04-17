@@ -62,11 +62,11 @@ public abstract class Command {
 				this.getDescription();
 	}
 	
+	public abstract void execute(String[] commandArguments);
+	
 	public abstract String getName();
 	
 	public abstract String getDescription();
-	
-	public abstract void execute(String[] commandArguments);
 	
 	protected void addArgumentValidators(List<Argument> arguments) {
 	}
