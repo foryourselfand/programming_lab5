@@ -1,5 +1,6 @@
-package Commands;
+package Commands.CommandsWithNotEmptyCollection;
 
+import Commands.Command;
 import Errors.CollectionIsEmptyError;
 import Utils.Context;
 

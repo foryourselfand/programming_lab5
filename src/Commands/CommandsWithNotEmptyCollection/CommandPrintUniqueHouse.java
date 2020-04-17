@@ -1,8 +1,8 @@
-package Commands;
+package Commands.CommandsWithNotEmptyCollection;
 
 import Utils.Context;
 
-public class CommandPrintUniqueHouse extends Command {
+public class CommandPrintUniqueHouse extends CommandWithNotEmptyCollection {
 	public CommandPrintUniqueHouse(Context context) {
 		super(context);
 	}

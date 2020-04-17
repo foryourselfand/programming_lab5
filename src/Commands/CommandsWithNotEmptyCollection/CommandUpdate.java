@@ -1,8 +1,8 @@
-package Commands;
+package Commands.CommandsWithNotEmptyCollection;
 
 import Utils.Context;
 
-public class CommandUpdate extends Command {
+public class CommandUpdate extends CommandWithNotEmptyCollection {
 	public CommandUpdate(Context context) {
 		super(context);
 	}

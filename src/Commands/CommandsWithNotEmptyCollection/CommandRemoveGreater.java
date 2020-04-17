@@ -1,8 +1,8 @@
-package Commands;
+package Commands.CommandsWithNotEmptyCollection;
 
 import Utils.Context;
 
-public class CommandRemoveGreater extends Command {
+public class CommandRemoveGreater extends CommandWithNotEmptyCollection {
 	public CommandRemoveGreater(Context context) {
 		super(context);
 	}

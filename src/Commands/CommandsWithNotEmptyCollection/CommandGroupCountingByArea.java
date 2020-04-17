@@ -1,8 +1,8 @@
-package Commands;
+package Commands.CommandsWithNotEmptyCollection;
 
 import Utils.Context;
 
-public class CommandGroupCountingByArea extends Command {
+public class CommandGroupCountingByArea extends CommandWithNotEmptyCollection {
 	public CommandGroupCountingByArea(Context context) {
 		super(context);
 	}

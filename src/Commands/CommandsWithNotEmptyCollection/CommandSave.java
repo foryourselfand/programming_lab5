@@ -1,8 +1,8 @@
-package Commands;
+package Commands.CommandsWithNotEmptyCollection;
 
 import Utils.Context;
 
-public class CommandSave extends Command {
+public class CommandSave extends CommandWithNotEmptyCollection {
 	public CommandSave(Context context) {
 		super(context);
 	}
