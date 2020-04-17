@@ -44,7 +44,12 @@ public class CommandAdd extends Command {
 	}
 	
 	@Override
-	public String getNameOfCommand() {
+	public String getName() {
 		return "add";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "добавить новый элемент в коллекцию";
 	}
 }

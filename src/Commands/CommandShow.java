@@ -13,7 +13,12 @@ public class CommandShow extends Command {
 	}
 	
 	@Override
-	public String getNameOfCommand() {
+	public String getName() {
 		return "show";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
 	}
 }

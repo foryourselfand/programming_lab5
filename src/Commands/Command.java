@@ -21,14 +21,10 @@ public abstract class Command {
 		this.argumentsLength = this.arguments.size();
 	}
 	
-	public abstract String getNameOfCommand();
-	
 	public void executeWithValidation(String[] commandArguments) {
 		this.validateArguments(commandArguments);
 		this.execute(commandArguments);
 	}
-	
-	public abstract void execute(String[] commandArguments);
 	
 	private void validateArguments(String[] commandArguments) {
 		int argumentsLengthExpected = this.argumentsLength;
@@ -40,6 +36,37 @@ public abstract class Command {
 		for (int i = 0; i < argumentsLengthActual; i++)
 			this.arguments.get(i).checkArgument(commandArguments[i]);
 	}
+	
+	public String getNameWithArguments() {
+		StringBuilder stringBuilder = new StringBuilder();
+		
+		stringBuilder.append(getName());
+		
+		for (Argument argument : this.arguments) {
+			stringBuilder.append(" {");
+			stringBuilder.append(argument.getName());
+			stringBuilder.append(": ");
+			stringBuilder.append(argument.getExpectablesMessage());
+			stringBuilder.append("}");
+			stringBuilder.append("; ");
+		}
+		
+		if (! this.arguments.isEmpty())
+			stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+		return stringBuilder.toString();
+	}
+	
+	public String getFullInformation() {
+		return getNameWithArguments() +
+				": " +
+				this.getDescription();
+	}
+	
+	public abstract String getName();
+	
+	public abstract String getDescription();
+	
+	public abstract void execute(String[] commandArguments);
 	
 	protected void addArgumentValidators(List<Argument> arguments) {
 	}

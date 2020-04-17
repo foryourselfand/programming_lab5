@@ -36,8 +36,7 @@ public class Argument {
 			stringBuilder.append(expected.getErrorMessage());
 			stringBuilder.append("; ");
 		}
-		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-		stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
 		
 		return stringBuilder.toString();
 	}

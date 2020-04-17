@@ -12,7 +12,12 @@ public class CommandHistory extends Command {
 	}
 	
 	@Override
-	public String getNameOfCommand() {
+	public String getName() {
 		return "history";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "вывести последние 12 команд (без их аргументов)";
 	}
 }

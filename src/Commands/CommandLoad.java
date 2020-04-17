@@ -31,15 +31,20 @@ public class CommandLoad extends Command {
 	}
 	
 	@Override
-	public String getNameOfCommand() {
-		return "load";
-	}
-	
-	@Override
 	public void execute(String[] commandArguments) {
 		this.context.collectionManager.clearCollection();
 		IdGenerator.clear();
 		this.csvLoader.createCollectionFromFile(commandArguments[0], context.collectionManager);
 		this.context.collectionManager.changeInitializationDate();
+	}
+	
+	@Override
+	public String getName() {
+		return "load";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "загрузить коллекцию из файла";
 	}
 }

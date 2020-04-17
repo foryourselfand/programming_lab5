@@ -14,13 +14,17 @@ public class CommandHelp extends Command {
 	public void execute(String[] commandArguments) {
 		List<Command> commands = this.context.commandsHolder.getCommands();
 		
-		for (Command command : commands) {
-			System.out.println(command.getNameOfCommand());
-		}
+		for (Command command : commands)
+			System.out.println(command.getFullInformation());
 	}
 	
 	@Override
-	public String getNameOfCommand() {
+	public String getName() {
 		return "help";
+	}
+	
+	@Override
+	public String getDescription() {
+		return "вывести справку по доступным командам";
 	}
 }
