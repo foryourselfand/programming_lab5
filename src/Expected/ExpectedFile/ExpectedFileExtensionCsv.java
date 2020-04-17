@@ -2,6 +2,7 @@ package Expected.ExpectedFile;
 
 import Expected.Expected;
 
+
 public class ExpectedFileExtensionCsv implements Expected {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

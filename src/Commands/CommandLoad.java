@@ -8,9 +8,7 @@ import Expected.ExpectedFile.ExpectedFileRegular;
 import Generators.IdGenerator;
 import Utils.CSVLoader;
 import Utils.Context;
-import com.opencsv.exceptions.CsvException;
 
-import java.io.IOException;
 import java.util.List;
 
 public class CommandLoad extends Command {
@@ -41,13 +39,7 @@ public class CommandLoad extends Command {
 	public void execute(String[] commandArguments) {
 		this.context.collectionManager.clearCollection();
 		IdGenerator.clear();
-		try {
-			this.csvLoader.createCollectionFromFile(commandArguments[0], context.collectionManager);
-			this.context.collectionManager.changeInitializationDate();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (CsvException e) {
-			e.printStackTrace();
-		}
+		this.csvLoader.createCollectionFromFile(commandArguments[0], context.collectionManager);
+		this.context.collectionManager.changeInitializationDate();
 	}
 }

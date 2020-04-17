@@ -1,5 +1,8 @@
 package Utils;
 
+import Errors.IOErrors.CsvError;
+import Errors.IOErrors.FileNotExistError;
+import Errors.IOErrors.IOError;
 import Errors.InputErrors.InputErrorFull;
 import Errors.WrongHeaderErrors.WrongHeaderError;
 import Errors.WrongHeaderErrors.WrongHeaderFieldsBothError;
@@ -11,6 +14,7 @@ import SourseReaders.SourceReaderString;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,7 +36,7 @@ public class CSVLoader {
 		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
 	}
 	
-	public void createCollectionFromFile(String filePath, CollectionManager collectionManager) throws IOException, CsvException {
+	public void createCollectionFromFile(String filePath, CollectionManager collectionManager){
 		List<String[]> lines = getLines(filePath);
 		
 		Header headerActual = new Header(lines.get(0));
@@ -75,10 +79,19 @@ public class CSVLoader {
 		}
 	}
 	
-	private List<String[]> getLines(String filePath) throws IOException, CsvException {
-		FileReader fileReader = new FileReader(filePath);
-		CSVReader csvReader = new CSVReader(fileReader);
-		return csvReader.readAll();
+	private List<String[]> getLines(String filePath) {
+		try {
+			FileReader fileReader = new FileReader(filePath);
+			CSVReader csvReader = new CSVReader(fileReader);
+			
+			return csvReader.readAll();
+		} catch (FileNotFoundException e) {
+			throw new FileNotExistError();
+		} catch (IOException e) {
+			throw new IOError();
+		} catch (CsvException e) {
+			throw new CsvError();
+		}
 	}
 	
 	private Set<String> getMissingFields(Set<String> headerActual) {

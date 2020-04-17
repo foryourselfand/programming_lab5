@@ -1,7 +1,7 @@
 package Expected;
 
 import Errors.WrongArgumentErrors.WrongArgumentError;
-import Errors.InputErrors.InputErrorShort;
+import Errors.InputErrors.InputError;
 import Input.Variable;
 
 import java.util.Arrays;
@@ -24,7 +24,7 @@ public class Argument {
 		for (Expected expected : this.expecteds) {
 			try {
 				expected.checkValueCorrectness(argument);
-			} catch (InputErrorShort inputError) {
+			} catch (InputError inputError) {
 				throw new WrongArgumentError(this.getName(), inputError.getMessage());
 			}
 		}

@@ -1,5 +1,7 @@
 package SourseReaders;
 
+import Errors.IOErrors.FileNotExistError;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -7,9 +9,13 @@ import java.util.Scanner;
 public class SourceReaderFile extends SourceReader {
 	private String path;
 	
-	public SourceReaderFile(String path) throws FileNotFoundException {
+	public SourceReaderFile(String path) {
 		this.path = path;
-		this.scanner = new Scanner(new File(path));
+		try {
+			this.scanner = new Scanner(new File(path));
+		} catch (FileNotFoundException e) {
+			throw new FileNotExistError();
+		}
 	}
 	
 	@Override

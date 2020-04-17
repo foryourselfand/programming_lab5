@@ -1,13 +1,13 @@
 package Expected;
 
-import Errors.InputErrors.InputErrorShort;
+import Errors.InputErrors.InputError;
 
 public interface Expected {
 	void checkValueCorrectness(String valueRaw);
 	
 	String getErrorMessage();
 	
-	default InputErrorShort createInputError() {
-		return new InputErrorShort(getErrorMessage());
+	default InputError createInputError() {
+		return new InputError(getErrorMessage());
 	}
 }

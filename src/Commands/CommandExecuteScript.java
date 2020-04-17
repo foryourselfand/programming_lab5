@@ -2,13 +2,12 @@ package Commands;
 
 import Expected.Argument;
 import Expected.ExpectedFile.ExpectedFileExist;
-import Expected.ExpectedFile.ExpectedFileRegular;
 import Expected.ExpectedFile.ExpectedFileReadable;
+import Expected.ExpectedFile.ExpectedFileRegular;
 import Expected.ExpectedFile.ExpectedFileWritable;
 import SourseReaders.SourceReaderFile;
 import Utils.Context;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public class CommandExecuteScript extends Command {
@@ -18,11 +17,7 @@ public class CommandExecuteScript extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		try {
-			context.lineReader.addSourceReader(new SourceReaderFile(String.valueOf(commandArguments[0])));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		context.lineReader.addSourceReader(new SourceReaderFile(String.valueOf(commandArguments[0])));
 	}
 	
 	@Override

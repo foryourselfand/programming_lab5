@@ -37,9 +37,8 @@ public abstract class Command {
 		if (argumentsLengthExpected != argumentsLengthActual)
 			throw new WrongArgumentLengthError(argumentsLengthExpected, argumentsLengthActual);
 		
-		for (int i = 0; i < argumentsLengthActual; i++) {
+		for (int i = 0; i < argumentsLengthActual; i++)
 			this.arguments.get(i).checkArgument(commandArguments[i]);
-		}
 	}
 	
 	protected void addArgumentValidators(List<Argument> arguments) {
