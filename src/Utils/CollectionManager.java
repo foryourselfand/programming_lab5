@@ -31,10 +31,6 @@ public class CollectionManager {
 	}
 	
 	public void showCollection() {
-		if (this.collection.isEmpty()) {
-			System.out.println("Коллекция пустая");
-			return;
-		}
 		for (Flat flat : this.collection)
 			System.out.println(flat);
 	}
@@ -71,5 +67,9 @@ public class CollectionManager {
 	
 	public int getCollectionSize() {
 		return this.collection.size();
+	}
+	
+	public boolean getCollectionIsEmpty() {
+		return this.collection.isEmpty();
 	}
 }

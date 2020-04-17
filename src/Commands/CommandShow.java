@@ -2,7 +2,7 @@ package Commands;
 
 import Utils.Context;
 
-public class CommandShow extends Command {
+public class CommandShow extends CommandWithNotEmptyCollection {
 	public CommandShow(Context context) {
 		super(context);
 	}

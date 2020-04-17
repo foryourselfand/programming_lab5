@@ -1,9 +1,12 @@
 package Commands;
 
+import Expected.Argument;
 import Input.Flat;
 import Utils.Context;
 
-public class CommandAverageOfHeight extends Command {
+import java.util.List;
+
+public class CommandAverageOfHeight extends CommandWithNotEmptyCollection {
 	public CommandAverageOfHeight(Context context) {
 		super(context);
 	}

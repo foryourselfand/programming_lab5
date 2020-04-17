@@ -1,6 +1,7 @@
 package Commands;
 
 import Errors.WrongArgumentErrors.WrongArgumentLengthError;
+import Errors.WrongArgumentErrors.WrongArgumentLengthFullError;
 import Expected.Argument;
 import Utils.Context;
 
@@ -18,29 +19,37 @@ public abstract class Command {
 		arguments = new ArrayList<>();
 		addArgumentValidators(this.arguments);
 		
+		
 		this.argumentsLength = this.arguments.size();
 	}
 	
 	public void executeWithValidation(String[] commandArguments) {
 		this.validateArguments(commandArguments);
+		this.printDescriptionAndExecute(commandArguments);
+	}
+	
+	public void printDescriptionAndExecute(String[] commandArguments) {
+		System.out.println(getDescription());
 		this.execute(commandArguments);
 	}
 	
-	private void validateArguments(String[] commandArguments) {
+	protected void validateArguments(String[] commandArguments) {
 		int argumentsLengthExpected = this.argumentsLength;
 		int argumentsLengthActual = commandArguments.length;
 		
-		if (argumentsLengthExpected != argumentsLengthActual)
-			throw new WrongArgumentLengthError(this.getNameWithArguments(), argumentsLengthExpected, argumentsLengthActual);
+		if (argumentsLengthExpected != argumentsLengthActual) {
+			if (argumentsLengthExpected == 0)
+				throw new WrongArgumentLengthError(argumentsLengthExpected, argumentsLengthActual);
+			else
+				throw new WrongArgumentLengthFullError(argumentsLengthExpected, argumentsLengthActual, getArgumentsDescription());
+		}
 		
 		for (int i = 0; i < argumentsLengthActual; i++)
 			this.arguments.get(i).checkArgument(commandArguments[i]);
 	}
 	
-	public String getNameWithArguments() {
+	public String getArgumentsDescription() {
 		StringBuilder stringBuilder = new StringBuilder();
-		
-		stringBuilder.append(getName());
 		
 		for (Argument argument : this.arguments) {
 			stringBuilder.append(" {");
@@ -53,11 +62,17 @@ public abstract class Command {
 		
 		if (! this.arguments.isEmpty())
 			stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+		
 		return stringBuilder.toString();
 	}
 	
+	public String getNameWithArgumentsDescription() {
+		return getName() +
+				getArgumentsDescription();
+	}
+	
 	public String getFullInformation() {
-		return getNameWithArguments() +
+		return getNameWithArgumentsDescription() +
 				": " +
 				this.getDescription();
 	}
