@@ -3,7 +3,7 @@ package Errors.WrongArgumentErrors;
 import Errors.InputErrors.InputErrorFull;
 
 public class WrongArgumentLengthError extends InputErrorFull {
-	public WrongArgumentLengthError(int argumentsLengthExpected, int argumentsLengthActual) {
-		super("Неверная длина аргументов. Ожидалось: " + argumentsLengthExpected + "; Получено: " + argumentsLengthActual);
+	public WrongArgumentLengthError(String commandNameWithArguments, int argumentsLengthExpected, int argumentsLengthActual) {
+		super(commandNameWithArguments + "\nНеверная длина аргументов. Ожидалось: " + argumentsLengthExpected + "; Получено: " + argumentsLengthActual);
 	}
 }
