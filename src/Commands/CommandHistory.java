@@ -2,6 +2,8 @@ package Commands;
 
 import Utils.Context;
 
+import java.util.Iterator;
+
 public class CommandHistory extends Command {
 	public CommandHistory(Context context) {
 		super(context);
@@ -9,6 +11,9 @@ public class CommandHistory extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
+		Iterator<Command> commandHistory = this.context.commandsHolder.getCommandsHistory();
+		System.out.format("Последние %d комманд (без их аргументов):\n", Context.HISTORY_SIZE);
+		commandHistory.forEachRemaining(command->System.out.println(command.getName()));
 	}
 	
 	@Override

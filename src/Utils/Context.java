@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 public class Context {
 	public static final LocalDate INITIALIZATION_DATE = LocalDate.now();
+	public static final int HISTORY_SIZE = 12;
 	
 	public CommandsHolder commandsHolder;
 	public CommandsExecutor commandsExecutor;
