@@ -1,4 +1,4 @@
-add
+remove_by_id 3
 10
 10
 10
@@ -14,3 +14,4 @@ NONE
 10
 10
 10
+show

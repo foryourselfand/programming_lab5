@@ -23,10 +23,17 @@ public class CollectionManager {
 		this.collection.clear();
 	}
 	
-	public void addFlatToCollection(Flat flat) {
-		this.collection.add(flat);
-		IdGenerator.addId(flat.getId());
-		System.out.println("В коллекцию добавлен элемент " + flat.toString());
+	public void addFlatToCollection(Flat flatToAdd) {
+		this.collection.add(flatToAdd);
+		IdGenerator.addId(flatToAdd.getId());
+		System.out.println("В коллекцию добавлен элемент " + flatToAdd.toString());
+		System.out.println();
+	}
+	
+	public void removeFlatFromCollection(Flat flatToRemove){
+		this.collection.remove(flatToRemove);
+		IdGenerator.removeId(flatToRemove.getId());
+		System.out.println("Из коллекции удален элемент " + flatToRemove.toString());
 		System.out.println();
 	}
 	

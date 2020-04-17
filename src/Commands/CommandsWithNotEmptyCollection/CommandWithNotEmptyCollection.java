@@ -11,8 +11,8 @@ public abstract class CommandWithNotEmptyCollection extends Command {
 	
 	@Override
 	public void executeWithValidation(String[] commandArguments) {
-		this.validateArguments(commandArguments);
 		this.validateCollectionSize();
+		this.validateArguments(commandArguments);
 		
 		this.printDescriptionAndExecute(commandArguments);
 	}

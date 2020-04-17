@@ -14,4 +14,4 @@ public class Main {
 
 // execute_script /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/script_3
 // load /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/example.csv
-// group_counting_by_area
+// remove_by_id

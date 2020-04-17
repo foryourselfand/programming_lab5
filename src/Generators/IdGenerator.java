@@ -29,4 +29,8 @@ public class IdGenerator {
 	public static void addId(long id) {
 		ids.add(id);
 	}
+	
+	public static void removeId(Long id) {
+		ids.remove(id);
+	}
 }
