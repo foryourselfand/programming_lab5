@@ -2,6 +2,7 @@ package Commands;
 
 import Expected.Argument;
 import Expected.ExpectedFile.ExpectedFileExist;
+import Expected.ExpectedFile.ExpectedFileExtensionCsv;
 import Expected.ExpectedFile.ExpectedFileReadable;
 import Expected.ExpectedFile.ExpectedFileRegular;
 import Generators.IdGenerator;
@@ -26,7 +27,8 @@ public class CommandLoad extends Command {
 				"file_name",
 				new ExpectedFileExist(),
 				new ExpectedFileRegular(),
-				new ExpectedFileReadable()
+				new ExpectedFileReadable(),
+				new ExpectedFileExtensionCsv()
 		));
 	}
 	

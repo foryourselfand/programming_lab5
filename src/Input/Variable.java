@@ -31,16 +31,16 @@ public enum Variable {
 		putArgumentToVariable(ID, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0), new ExpectedUnique());
 		putArgumentToVariable(FLAT_NAME, new ExpectedNotNull(), new ExpectedStringLengthNotEmpty());
 		putArgumentToVariable(X, new ExpectedFloat(), new ExpectedGreater(- 292));
-		putArgumentToVariable(Y, new ExpectedDouble(), new ExpectedGreater(- 747), new ExpectedNotNull());
-		putArgumentToVariable(CREATION_DATE, new ExpectedLocalDate(), new ExpectedNoLaterThanNow(), new ExpectedNotNull());
+		putArgumentToVariable(Y, new ExpectedNotNull(), new ExpectedDouble(), new ExpectedGreater(- 747));
+		putArgumentToVariable(CREATION_DATE, new ExpectedNotNull(), new ExpectedLocalDate(), new ExpectedNoLaterThanNow());
 		putArgumentToVariable(AREA, new ExpectedInteger(), new ExpectedGreater(0));
 		putArgumentToVariable(NUMBER_OF_ROOMS, new ExpectedInteger(), new ExpectedLess(11), new ExpectedGreater(0));
 		putArgumentToVariable(HEIGHT, new ExpectedInteger(), new ExpectedGreater(0));
-		putArgumentToVariable(IS_NEW, new ExpectedBoolean(), new ExpectedNotNull());
-		putArgumentToVariable(TRANSPORT, new ExpectedTransport(), new ExpectedNotNull());
+		putArgumentToVariable(IS_NEW, new ExpectedNotNull(), new ExpectedBoolean());
+		putArgumentToVariable(TRANSPORT, new ExpectedNotNull(), new ExpectedTransport());
 		putArgumentToVariable(HOUSE_NAME, new ExpectedNotNull());
 		putArgumentToVariable(YEAR, new ExpectedInteger(), new ExpectedGreater(0));
-		putArgumentToVariable(NUMBER_OF_FLOORS, new ExpectedLong(), new ExpectedNotNull(), new ExpectedGreater(0));
+		putArgumentToVariable(NUMBER_OF_FLOORS, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0));
 		putArgumentToVariable(NUMBER_OF_LIFTS, new ExpectedLong(), new ExpectedGreater(0));
 	}
 	
