@@ -1,7 +1,7 @@
 package Commands;
 
-import Expectables.Argument;
-import Expectables.ExpectablesType.ExpectedInteger;
+import Expected.Argument;
+import Expected.ExpectedType.ExpectedInteger;
 import Utils.Context;
 
 import java.util.List;

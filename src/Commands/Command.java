@@ -1,7 +1,7 @@
 package Commands;
 
-import Errors.ArgumentErrors.WrongArgumentLengthError;
-import Expectables.Argument;
+import Errors.WrongArgumentErrors.WrongArgumentLengthError;
+import Expected.Argument;
 import Utils.Context;
 
 import java.util.ArrayList;

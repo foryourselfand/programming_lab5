@@ -1,5 +1,4 @@
-import Commands.*;
-import Expectables.Argument;
+import Expected.Argument;
 import Utils.*;
 
 public class Main {

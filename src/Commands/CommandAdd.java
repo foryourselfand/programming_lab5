@@ -1,7 +1,7 @@
 package Commands;
 
 import Input.Flat;
-import SourseReader.SourceReader;
+import SourseReaders.SourceReader;
 import Utils.Context;
 
 public class CommandAdd extends Command {

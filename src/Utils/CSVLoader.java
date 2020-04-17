@@ -1,13 +1,13 @@
 package Utils;
 
-import Errors.InputErrorFull;
-import Errors.WrongHeader.WrongHeaderError;
-import Errors.WrongHeader.WrongHeaderFieldsBothError;
-import Errors.WrongHeader.WrongHeaderFieldsSingleError;
+import Errors.InputErrors.InputErrorFull;
+import Errors.WrongHeaderErrors.WrongHeaderError;
+import Errors.WrongHeaderErrors.WrongHeaderFieldsBothError;
+import Errors.WrongHeaderErrors.WrongHeaderFieldsSingleError;
 import Errors.WrongLineElementsLengthError;
 import Input.Flat;
 import Input.Variable;
-import SourseReader.SourceReaderString;
+import SourseReaders.SourceReaderString;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 

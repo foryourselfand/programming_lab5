@@ -1,9 +1,9 @@
 package Commands;
 
-import Expectables.Argument;
-import Expectables.ExpectablesFile.ExpectableFileExist;
-import Expectables.ExpectablesFile.ExpectableFileReadable;
-import Expectables.ExpectablesFile.ExpectableFileRegular;
+import Expected.Argument;
+import Expected.ExpectedFile.ExpectedFileExist;
+import Expected.ExpectedFile.ExpectedFileReadable;
+import Expected.ExpectedFile.ExpectedFileRegular;
 import Generators.IdGenerator;
 import Utils.CSVLoader;
 import Utils.Context;
@@ -24,9 +24,9 @@ public class CommandLoad extends Command {
 	protected void addArgumentValidators(List<Argument> arguments) {
 		arguments.add(new Argument(
 				"file_name",
-				new ExpectableFileExist(),
-				new ExpectableFileRegular(),
-				new ExpectableFileReadable()
+				new ExpectedFileExist(),
+				new ExpectedFileRegular(),
+				new ExpectedFileReadable()
 		));
 	}
 	

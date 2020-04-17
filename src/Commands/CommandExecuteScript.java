@@ -1,11 +1,11 @@
 package Commands;
 
-import Expectables.Argument;
-import Expectables.ExpectablesFile.ExpectableFileExist;
-import Expectables.ExpectablesFile.ExpectableFileRegular;
-import Expectables.ExpectablesFile.ExpectableFileReadable;
-import Expectables.ExpectablesFile.ExpectableFileWritable;
-import SourseReader.SourceReaderFile;
+import Expected.Argument;
+import Expected.ExpectedFile.ExpectedFileExist;
+import Expected.ExpectedFile.ExpectedFileRegular;
+import Expected.ExpectedFile.ExpectedFileReadable;
+import Expected.ExpectedFile.ExpectedFileWritable;
+import SourseReaders.SourceReaderFile;
 import Utils.Context;
 
 import java.io.FileNotFoundException;
@@ -29,10 +29,10 @@ public class CommandExecuteScript extends Command {
 	protected void addArgumentValidators(List<Argument> arguments) {
 		arguments.add(new Argument(
 				"file_name",
-				new ExpectableFileExist(),
-				new ExpectableFileRegular(),
-				new ExpectableFileReadable(),
-				new ExpectableFileWritable()));
+				new ExpectedFileExist(),
+				new ExpectedFileRegular(),
+				new ExpectedFileReadable(),
+				new ExpectedFileWritable()));
 	}
 	
 	@Override

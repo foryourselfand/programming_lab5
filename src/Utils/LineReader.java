@@ -1,11 +1,11 @@
 package Utils;
 
-import Errors.InputErrorFull;
+import Errors.InputErrors.InputErrorFull;
 import Errors.ScriptAlreadyExecutedError;
-import Expectables.Argument;
+import Expected.Argument;
 import Input.Variable;
-import SourseReader.SourceReader;
-import SourseReader.SourceReaderTerminal;
+import SourseReaders.SourceReader;
+import SourseReaders.SourceReaderTerminal;
 
 import java.util.HashSet;
 import java.util.Set;

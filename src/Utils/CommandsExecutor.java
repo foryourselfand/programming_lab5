@@ -1,7 +1,7 @@
 package Utils;
 
 import Commands.Command;
-import Errors.InputErrorFull;
+import Errors.InputErrors.InputErrorFull;
 
 import java.util.Arrays;
 
@@ -31,8 +31,7 @@ public class CommandsExecutor {
 	
 	private String[] getLineSplit(String lineRaw) {
 		String lineTrim = lineRaw.trim();
-		String[] lineSplit = lineTrim.split("\\s+");
-		return lineSplit;
+		return lineTrim.split("\\s+");
 	}
 	
 	private String getCommandName(String[] lineSplit) {

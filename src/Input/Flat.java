@@ -2,7 +2,7 @@ package Input;
 
 import Generators.CreationDateGenerator;
 import Generators.IdGenerator;
-import SourseReader.SourceReader;
+import SourseReaders.SourceReader;
 import Utils.LineReader;
 
 import java.time.LocalDate;
