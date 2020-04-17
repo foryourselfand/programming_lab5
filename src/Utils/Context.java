@@ -13,12 +13,14 @@ public class Context {
 	public CommandsExecutor commandsExecutor;
 	public LineReader lineReader;
 	public CollectionManager collectionManager;
+	public FlatCreator flatCreator;
 	
 	public Context() {
 		this.collectionManager = new CollectionManager();
 		this.lineReader = new LineReader();
 		this.commandsHolder = new CommandsHolder();
 		this.commandsExecutor = new CommandsExecutor(commandsHolder);
+		this.flatCreator = new FlatCreator();
 		
 		setUpCommands();
 	}
