@@ -1,4 +1,3 @@
-help
-line_2
+line_1
 execute_script res/scripts/script_2
 line_3
