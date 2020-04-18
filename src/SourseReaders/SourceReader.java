@@ -10,7 +10,7 @@ abstract public class SourceReader {
 	abstract public String getPostfix(String lineRead);
 	
 	public String getLineReadPrintPostfix() {
-		String lineRead = this.scanner.nextLine();
+		String lineRead = scanner.nextLine();
 		
 		String postfix = this.getPostfix(lineRead);
 		System.out.print(postfix);

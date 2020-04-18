@@ -29,6 +29,8 @@ public class LineReader {
 	
 	public String readLine(SourceReader sourceReader, String prefix, Argument argument) {
 		while (this.hasSomethingToRead()) {
+			if (! sourceReader.hasSomethingToRead())
+				sourceReader = getSourceReaderActive();
 			
 			System.out.print(prefix);
 			

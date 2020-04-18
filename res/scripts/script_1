@@ -1,0 +1,4 @@
+help
+line_2
+execute_script res/scripts/script_2
+line_3

@@ -12,7 +12,7 @@ public class SourceReaderString extends SourceReader {
 	
 	@Override
 	public boolean hasSomethingToRead() {
-		return true;
+		return scanner.hasNextLine();
 	}
 	
 	@Override
