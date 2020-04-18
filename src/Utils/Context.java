@@ -14,6 +14,7 @@ public class Context {
 	public LineReader lineReader;
 	public CollectionManager collectionManager;
 	public FlatCreator flatCreator;
+	public FlatRemover flatRemover;
 	
 	public Context() {
 		this.collectionManager = new CollectionManager();
@@ -21,6 +22,7 @@ public class Context {
 		this.commandsHolder = new CommandsHolder();
 		this.commandsExecutor = new CommandsExecutor(commandsHolder);
 		this.flatCreator = new FlatCreator();
+		this.flatRemover = new FlatRemover(collectionManager);
 		
 		setUpCommands();
 	}
@@ -31,7 +33,7 @@ public class Context {
 				.addCommand(new CommandInfo(this))
 				.addCommand(new CommandShow(this))
 				.addCommand(new CommandAdd(this))
-				.addCommand(new CommandUpdate(this))
+				.addCommand(new CommandUpdateById(this))
 				.addCommand(new CommandRemoveById(this))
 				.addCommand(new CommandClear(this))
 				.addCommand(new CommandLoad(this))
