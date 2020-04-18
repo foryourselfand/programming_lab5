@@ -6,6 +6,7 @@ import Expected.ExpectedBorder.ExpectedLess;
 import Expected.ExpectedDate.ExpectedLocalDate;
 import Expected.ExpectedDate.ExpectedNoLaterThanNow;
 import Expected.ExpectedType.*;
+import Utils.Header;
 
 import java.util.HashMap;
 
@@ -26,6 +27,7 @@ public enum Variable {
 	NUMBER_OF_LIFTS("numberOfLifts");
 	
 	public static HashMap<Variable, Argument> variableToArgument = new HashMap<>();
+	public static Header headerRequired = new Header(Variable.values());
 	
 	static {
 		putArgumentToVariable(ID, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0), new ExpectedUnique());

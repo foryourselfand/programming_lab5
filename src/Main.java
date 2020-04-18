@@ -14,4 +14,5 @@ public class Main {
 
 // execute_script /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/script_3
 // load /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/example.csv
+// save /Users/foryourselfand/Documents/java/itmo/programming_lab5/res/output.csv
 // remove_by_id

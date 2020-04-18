@@ -34,6 +34,10 @@ public class Header {
 		return list;
 	}
 	
+	public String[] getArray() {
+		return list.toArray(new String[list.size()]);
+	}
+	
 	public Set<String> getSet() {
 		return set;
 	}

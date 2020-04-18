@@ -23,14 +23,8 @@ import java.util.List;
 import java.util.Set;
 
 public class CSVLoader {
-	private Header headerRequired;
-	
 	private String[] line;
 	private HashMap<String, Integer> fieldToIndex = new HashMap<>();
-	
-	public CSVLoader() {
-		headerRequired = new Header(Variable.values());
-	}
 	
 	private SourceReaderString createSourceReader(Variable variable) {
 		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
@@ -51,7 +45,6 @@ public class CSVLoader {
 			
 			try {
 				Flat flat = new Flat();
-				
 				
 				flat.setId(lineReader, createSourceReader(Variable.ID));
 				flat.setFlatName(lineReader, createSourceReader(Variable.FLAT_NAME));
@@ -96,14 +89,14 @@ public class CSVLoader {
 	}
 	
 	private Set<String> getMissingFields(Set<String> headerActual) {
-		Set<String> missingFields = new HashSet<>(headerRequired.getSet());
+		Set<String> missingFields = new HashSet<>(Variable.headerRequired.getSet());
 		missingFields.removeAll(headerActual);
 		return missingFields;
 	}
 	
 	private Set<String> getExtraFields(Set<String> headerActual) {
 		Set<String> extraFields = new HashSet<>(headerActual);
-		extraFields.removeAll(headerRequired.getSet());
+		extraFields.removeAll(Variable.headerRequired.getSet());
 		return extraFields;
 	}
 	
@@ -131,7 +124,7 @@ public class CSVLoader {
 	
 	private void checkForLineElementsLength(String[] line) {
 		int headerActualLength = line.length;
-		if (headerRequired.getLength() != headerActualLength)
-			throw new WrongLineElementsLengthError(line, headerRequired.getLength(), headerActualLength);
+		if (Variable.headerRequired.getLength() != headerActualLength)
+			throw new WrongLineElementsLengthError(line, Variable.headerRequired.getLength(), headerActualLength);
 	}
 }

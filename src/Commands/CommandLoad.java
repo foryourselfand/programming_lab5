@@ -23,10 +23,10 @@ public class CommandLoad extends Command {
 	protected void addArgumentValidators(List<Argument> arguments) {
 		arguments.add(new Argument(
 				"file_name",
+				new ExpectedFileExtensionCsv(),
 				new ExpectedFileExist(),
 				new ExpectedFileRegular(),
-				new ExpectedFileReadable(),
-				new ExpectedFileExtensionCsv()
+				new ExpectedFileReadable()
 		));
 	}
 	

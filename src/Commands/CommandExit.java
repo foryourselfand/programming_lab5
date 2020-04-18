@@ -9,7 +9,7 @@ public class CommandExit extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-	
+		System.exit(42);
 	}
 	
 	@Override
