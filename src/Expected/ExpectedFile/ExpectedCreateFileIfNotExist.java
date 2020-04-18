@@ -23,6 +23,6 @@ public class ExpectedCreateFileIfNotExist implements Expected {
 	
 	@Override
 	public String getErrorMessage() {
-		return null;
+		return "Если файла не существует, он будет создан";
 	}
 }

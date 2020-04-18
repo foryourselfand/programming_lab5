@@ -12,7 +12,7 @@ public class CommandsExecutor {
 		this.commandsHolder = commandsHolder;
 	}
 	
-	public void executeCommandByName(String line) {
+	public void executeCommand(String line) {
 		if (line.equals(""))
 			return;
 		

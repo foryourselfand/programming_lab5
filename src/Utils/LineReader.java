@@ -55,6 +55,10 @@ public class LineReader {
 		return readLine(this.sourceReaderActive, prefix, argument);
 	}
 	
+	public String readLine(String prefix) {
+		return readLine(this.sourceReaderActive, prefix, new Argument(""));
+	}
+	
 	public String readLine(SourceReader sourceReader, Variable variable) {
 		Argument argument = Variable.variableToArgument.get(variable);
 		return this.readLine(sourceReader, variable.getVariableNameWithPrefix(argument), argument);

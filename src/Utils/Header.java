@@ -26,7 +26,7 @@ public class Header {
 	}
 	
 	public void setSetAndLength(List<String> list) {
-		this.set = new HashSet<>(list);
+		this.set = new LinkedHashSet<>(list);
 		this.length = list.size();
 	}
 	
