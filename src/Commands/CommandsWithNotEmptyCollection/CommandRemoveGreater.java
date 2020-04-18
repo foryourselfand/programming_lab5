@@ -1,6 +1,10 @@
 package Commands.CommandsWithNotEmptyCollection;
 
+import Input.Flat;
 import Utils.Context;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommandRemoveGreater extends CommandWithNotEmptyCollection {
 	public CommandRemoveGreater(Context context) {
@@ -9,7 +13,28 @@ public class CommandRemoveGreater extends CommandWithNotEmptyCollection {
 	
 	@Override
 	public void execute(String[] commandArguments) {
+		Flat flatNew = getCreatedFlat();
+		List<Long> idsToRemove = getIdsOfFlatsGreaterThatFlat(flatNew);
+		removeFlatsGreaterThatFlat(idsToRemove);
+	}
 	
+	private Flat getCreatedFlat() {
+		Flat createdFlat = context.flatCreator.getCreatedFlatFromTerminal(context.lineReader);
+		System.out.println("Созданный элемент для сравнения " + createdFlat.toString());
+		return createdFlat;
+	}
+	
+	private List<Long> getIdsOfFlatsGreaterThatFlat(Flat flatNew) {
+		List<Long> idsToRemove = new ArrayList<>();
+		for (Flat flatCurrent : context.collectionManager.getCollection()) {
+			if (flatCurrent.compareTo(flatNew) > 0)
+				idsToRemove.add(flatCurrent.getId());
+		}
+		return idsToRemove;
+	}
+	
+	private void removeFlatsGreaterThatFlat(List<Long> idsToRemove) {
+		context.flatRemover.removeFlatsById(idsToRemove);
 	}
 	
 	@Override

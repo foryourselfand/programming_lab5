@@ -2,10 +2,7 @@ package Utils;
 
 import Input.Flat;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class FlatRemover {
 	private CollectionManager collectionManager;
@@ -14,14 +11,18 @@ public class FlatRemover {
 		this.collectionManager = collectionManager;
 	}
 	
-	public void removeFlatsById(Long... idsToRemove) {
+	public void removeFlatsById(List<Long> idsToRemove) {
 		Iterator<Flat> flatsToRemove = this.getFlatsToRemove(idsToRemove);
 		flatsToRemove.forEachRemaining(flat->this.collectionManager.removeFlatFromCollection(flat));
 	}
 	
-	public Iterator<Flat> getFlatsToRemove(Long... idsToRemoveArray) {
+	public void removeFlatsById(Long idToRemove) {
+		this.removeFlatsById(Collections.singletonList(idToRemove));
+	}
+	
+	private Iterator<Flat> getFlatsToRemove(List<Long> idsToRemove) {
 		Set<Flat> flatsToDelete = new HashSet<>();
-		Set<Long> idsToDeleteSet = new HashSet<>(Arrays.asList(idsToRemoveArray));
+		Set<Long> idsToDeleteSet = new HashSet<>(idsToRemove);
 		
 		for (Flat flat : this.collectionManager.getCollection()) {
 			long idCurrent = flat.getId();
