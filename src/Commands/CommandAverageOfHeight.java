@@ -14,7 +14,9 @@ public class CommandAverageOfHeight extends CommandWithNotEmptyCollection {
 		int heightTotal = 0;
 		
 		for (Flat flat : this.context.collectionManager.getCollection()) {
-			int heightCurrent = flat.getHeight();
+			Integer heightCurrent = flat.getHeight();
+			if (heightCurrent == null)
+				continue;
 			heightTotal += heightCurrent;
 		}
 		

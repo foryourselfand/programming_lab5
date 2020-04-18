@@ -42,7 +42,7 @@ public enum Variable {
 		putArgumentToVariable(TRANSPORT, new ExpectedNotNull(), new ExpectedTransport());
 		putArgumentToVariable(HOUSE_NAME, new ExpectedNotNull());
 		putArgumentToVariable(YEAR, new ExpectedInteger(), new ExpectedGreater(0));
-		putArgumentToVariable(NUMBER_OF_FLOORS, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0));
+		putArgumentToVariable(NUMBER_OF_FLOORS, new ExpectedLong(), new ExpectedGreater(0));
 		putArgumentToVariable(NUMBER_OF_LIFTS, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0));
 	}
 	
