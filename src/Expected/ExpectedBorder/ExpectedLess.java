@@ -9,7 +9,7 @@ public class ExpectedLess extends ExpectedBorder {
 	
 	@Override
 	protected void checkValueCorrectnessNumeric(BigDecimal value) {
-		if (value.compareTo(this.border) > 0)
+		if (value.compareTo(this.border) >= 0)
 			throw createInputError();
 	}
 	
