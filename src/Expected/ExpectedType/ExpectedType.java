@@ -8,6 +8,9 @@ import java.lang.reflect.Method;
 public abstract class ExpectedType implements Expected {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
+		if (valueRaw.equals(""))
+			return;
+		
 		Class numberClass = getNumberClass();
 		try {
 			Method valueOf = numberClass.getDeclaredMethod("valueOf", String.class);

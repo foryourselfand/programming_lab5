@@ -13,6 +13,9 @@ public abstract class ExpectedBorder implements Expected {
 	
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
+		if (valueRaw.equals(""))
+			return;
+		
 		BigDecimal valueNumeric = new BigDecimal(valueRaw);
 		this.checkValueCorrectnessNumeric(valueNumeric);
 	}

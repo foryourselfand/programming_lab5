@@ -5,6 +5,8 @@ import Generators.IdGenerator;
 import SourseReaders.SourceReader;
 import Utils.LineReader;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.Comparator;
 
@@ -25,6 +27,33 @@ public class Flat implements Comparable<Flat> {
 		this.lineReader = new LineReader();
 	}
 	
+	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable, String methodName, Class parameterType) {
+		String valueRaw = lineReader.readLine(sourceReader, variable);
+		
+		if (valueRaw.equals(""))
+			return null;
+		
+		try {
+			Method valueOf = type.getDeclaredMethod(methodName, parameterType);
+			return (T) valueOf.invoke(new Object(), valueRaw);
+		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable) {
+		return getParsedOrNull(sourceReader, type, variable, "valueOf", String.class);
+	}
+	
+	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable, Class parameterType) {
+		return getParsedOrNull(sourceReader, type, variable, "valueOf", parameterType);
+	}
+	
+	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable, String methodName) {
+		return getParsedOrNull(sourceReader, type, variable, methodName, String.class);
+	}
+	
 	public void generateId() {
 		this.id = IdGenerator.generateId();
 	}
@@ -34,11 +63,11 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setX(SourceReader sourceReader) {
-		this.coordinates.setX(Float.parseFloat(lineReader.readLine(sourceReader, Variable.X)));
+		this.coordinates.setX(getParsedOrNull(sourceReader, Float.class, Variable.X));
 	}
 	
 	public void setY(SourceReader sourceReader) {
-		this.coordinates.setY(Double.parseDouble(lineReader.readLine(sourceReader, Variable.Y)));
+		this.coordinates.setY(getParsedOrNull(sourceReader, Double.class, Variable.Y));
 	}
 	
 	public void generateCreationDate() {
@@ -46,7 +75,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setIsNew(SourceReader sourceReader) {
-		this.isNew = Boolean.parseBoolean(lineReader.readLine(sourceReader, Variable.IS_NEW));
+		this.isNew = getParsedOrNull(sourceReader, Boolean.class, Variable.IS_NEW);
 	}
 	
 	public void createHouse() {
@@ -54,19 +83,19 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setHouseName(SourceReader sourceReader) {
-		this.house.setHouseName(lineReader.readLine(sourceReader, Variable.HOUSE_NAME));
+		this.house.setHouseName(getParsedOrNull(sourceReader, String.class, Variable.HOUSE_NAME, Object.class));
 	}
 	
 	public void setYear(SourceReader sourceReader) {
-		this.house.setYear(Integer.valueOf(lineReader.readLine(sourceReader, Variable.YEAR)));
+		this.house.setYear(getParsedOrNull(sourceReader, Integer.class, Variable.YEAR));
 	}
 	
 	public void setNumberOfFloors(SourceReader sourceReader) {
-		this.house.setNumberOfFloors(Long.parseLong(lineReader.readLine(sourceReader, Variable.NUMBER_OF_FLOORS)));
+		this.house.setNumberOfFloors(getParsedOrNull(sourceReader, Long.class, Variable.NUMBER_OF_FLOORS));
 	}
 	
 	public void setNumberOfLifts(SourceReader sourceReader) {
-		this.house.setNumberOfLifts(Long.parseLong(lineReader.readLine(sourceReader, Variable.NUMBER_OF_LIFTS)));
+		this.house.setNumberOfLifts(getParsedOrNull(sourceReader, Long.class, Variable.NUMBER_OF_LIFTS));
 	}
 	
 	public Long getId() {
@@ -74,7 +103,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setId(SourceReader sourceReader) {
-		this.id = Long.valueOf(lineReader.readLine(sourceReader, Variable.ID));
+		this.id = getParsedOrNull(sourceReader, Long.class, Variable.ID);
 	}
 	
 	public String getFlatName() {
@@ -82,7 +111,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setFlatName(SourceReader sourceReader) {
-		this.flatName = lineReader.readLine(sourceReader, Variable.FLAT_NAME);
+		this.flatName = getParsedOrNull(sourceReader, String.class, Variable.FLAT_NAME, Object.class);
 	}
 	
 	public Coordinates getCoordinates() {
@@ -94,7 +123,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setCreationDate(SourceReader sourceReader) {
-		this.creationDate = LocalDate.parse(lineReader.readLine(sourceReader, Variable.CREATION_DATE));
+		this.creationDate = getParsedOrNull(sourceReader, LocalDate.class, Variable.CREATION_DATE, "parse");
 	}
 	
 	public int getArea() {
@@ -102,7 +131,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setArea(SourceReader sourceReader) {
-		this.area = Integer.parseInt(lineReader.readLine(sourceReader, Variable.AREA));
+		this.area = getParsedOrNull(sourceReader, Integer.class, Variable.AREA);
 	}
 	
 	public int getNumberOfRooms() {
@@ -110,7 +139,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setNumberOfRooms(SourceReader sourceReader) {
-		this.numberOfRooms = Integer.parseInt(lineReader.readLine(sourceReader, Variable.NUMBER_OF_ROOMS));
+		this.numberOfRooms = getParsedOrNull(sourceReader, Integer.class, Variable.NUMBER_OF_ROOMS);
 	}
 	
 	public Integer getHeight() {
@@ -118,7 +147,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setHeight(SourceReader sourceReader) {
-		this.height = Integer.parseInt(lineReader.readLine(sourceReader, Variable.HEIGHT));
+		this.height = getParsedOrNull(sourceReader, Integer.class, Variable.HEIGHT);
 	}
 	
 	public Boolean getNew() {
@@ -130,7 +159,7 @@ public class Flat implements Comparable<Flat> {
 	}
 	
 	public void setTransport(SourceReader sourceReader) {
-		this.transport = Transport.valueOf(lineReader.readLine(sourceReader, Variable.TRANSPORT));
+		this.transport = getParsedOrNull(sourceReader, Transport.class, Variable.TRANSPORT);
 	}
 	
 	public House getHouse() {
