@@ -4,9 +4,8 @@ import Generators.CreationDateGenerator;
 import Generators.IdGenerator;
 import SourseReaders.SourceReader;
 import Utils.LineReader;
+import Utils.ValueParser;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.Comparator;
 
@@ -21,38 +20,7 @@ public class Flat implements Comparable<Flat> {
 	private Boolean isNew; //Поле может быть null
 	private Transport transport; //Поле не может быть null
 	private House house; //Поле не может быть null
-	private LineReader lineReader;
 	
-	public Flat() {
-		this.lineReader = new LineReader();
-	}
-	
-	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable, String methodName, Class parameterType) {
-		String valueRaw = lineReader.readLine(sourceReader, variable);
-		
-		if (valueRaw.equals(""))
-			return null;
-		
-		try {
-			Method valueOf = type.getDeclaredMethod(methodName, parameterType);
-			return (T) valueOf.invoke(new Object(), valueRaw);
-		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable) {
-		return getParsedOrNull(sourceReader, type, variable, "valueOf", String.class);
-	}
-	
-	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable, Class parameterType) {
-		return getParsedOrNull(sourceReader, type, variable, "valueOf", parameterType);
-	}
-	
-	public <T> T getParsedOrNull(SourceReader sourceReader, Class<T> type, Variable variable, String methodName) {
-		return getParsedOrNull(sourceReader, type, variable, methodName, String.class);
-	}
 	
 	public void generateId() {
 		this.id = IdGenerator.generateId();
@@ -62,56 +30,56 @@ public class Flat implements Comparable<Flat> {
 		this.coordinates = new Coordinates();
 	}
 	
-	public void setX(SourceReader sourceReader) {
-		this.coordinates.setX(getParsedOrNull(sourceReader, Float.class, Variable.X));
+	public void setX(LineReader lineReader, SourceReader sourceReader) {
+		this.coordinates.setX(ValueParser.getParsedOrNull(lineReader, sourceReader, Float.class, Variable.X));
 	}
 	
-	public void setY(SourceReader sourceReader) {
-		this.coordinates.setY(getParsedOrNull(sourceReader, Double.class, Variable.Y));
+	public void setY(LineReader lineReader, SourceReader sourceReader) {
+		this.coordinates.setY(ValueParser.getParsedOrNull(lineReader, sourceReader, Double.class, Variable.Y));
 	}
 	
 	public void generateCreationDate() {
 		this.creationDate = CreationDateGenerator.generateCreationDate();
 	}
 	
-	public void setIsNew(SourceReader sourceReader) {
-		this.isNew = getParsedOrNull(sourceReader, Boolean.class, Variable.IS_NEW);
+	public void setIsNew(LineReader lineReader, SourceReader sourceReader) {
+		this.isNew = ValueParser.getParsedOrNull(lineReader, sourceReader, Boolean.class, Variable.IS_NEW);
 	}
 	
 	public void createHouse() {
 		this.house = new House();
 	}
 	
-	public void setHouseName(SourceReader sourceReader) {
-		this.house.setHouseName(getParsedOrNull(sourceReader, String.class, Variable.HOUSE_NAME, Object.class));
+	public void setHouseName(LineReader lineReader, SourceReader sourceReader) {
+		this.house.setHouseName(ValueParser.getParsedOrNull(lineReader, sourceReader, String.class, Variable.HOUSE_NAME, Object.class));
 	}
 	
-	public void setYear(SourceReader sourceReader) {
-		this.house.setYear(getParsedOrNull(sourceReader, Integer.class, Variable.YEAR));
+	public void setYear(LineReader lineReader, SourceReader sourceReader) {
+		this.house.setYear(ValueParser.getParsedOrNull(lineReader, sourceReader, Integer.class, Variable.YEAR));
 	}
 	
-	public void setNumberOfFloors(SourceReader sourceReader) {
-		this.house.setNumberOfFloors(getParsedOrNull(sourceReader, Long.class, Variable.NUMBER_OF_FLOORS));
+	public void setNumberOfFloors(LineReader lineReader, SourceReader sourceReader) {
+		this.house.setNumberOfFloors(ValueParser.getParsedOrNull(lineReader, sourceReader, Long.class, Variable.NUMBER_OF_FLOORS));
 	}
 	
-	public void setNumberOfLifts(SourceReader sourceReader) {
-		this.house.setNumberOfLifts(getParsedOrNull(sourceReader, Long.class, Variable.NUMBER_OF_LIFTS));
+	public void setNumberOfLifts(LineReader lineReader, SourceReader sourceReader) {
+		this.house.setNumberOfLifts(ValueParser.getParsedOrNull(lineReader, sourceReader, Long.class, Variable.NUMBER_OF_LIFTS));
 	}
 	
 	public Long getId() {
 		return id;
 	}
 	
-	public void setId(SourceReader sourceReader) {
-		this.id = getParsedOrNull(sourceReader, Long.class, Variable.ID);
+	public void setId(LineReader lineReader, SourceReader sourceReader) {
+		this.id = ValueParser.getParsedOrNull(lineReader, sourceReader, Long.class, Variable.ID);
 	}
 	
 	public String getFlatName() {
 		return flatName;
 	}
 	
-	public void setFlatName(SourceReader sourceReader) {
-		this.flatName = getParsedOrNull(sourceReader, String.class, Variable.FLAT_NAME, Object.class);
+	public void setFlatName(LineReader lineReader, SourceReader sourceReader) {
+		this.flatName = ValueParser.getParsedOrNull(lineReader, sourceReader, String.class, Variable.FLAT_NAME, Object.class);
 	}
 	
 	public Coordinates getCoordinates() {
@@ -122,32 +90,32 @@ public class Flat implements Comparable<Flat> {
 		return creationDate;
 	}
 	
-	public void setCreationDate(SourceReader sourceReader) {
-		this.creationDate = getParsedOrNull(sourceReader, LocalDate.class, Variable.CREATION_DATE, "parse");
+	public void setCreationDate(LineReader lineReader, SourceReader sourceReader) {
+		this.creationDate = ValueParser.getParsedOrNull(lineReader, sourceReader, LocalDate.class, Variable.CREATION_DATE, "parse", CharSequence.class);
 	}
 	
 	public int getArea() {
 		return area;
 	}
 	
-	public void setArea(SourceReader sourceReader) {
-		this.area = getParsedOrNull(sourceReader, Integer.class, Variable.AREA);
+	public void setArea(LineReader lineReader, SourceReader sourceReader) {
+		this.area = ValueParser.getParsedOrNull(lineReader, sourceReader, Integer.class, Variable.AREA);
 	}
 	
 	public int getNumberOfRooms() {
 		return numberOfRooms;
 	}
 	
-	public void setNumberOfRooms(SourceReader sourceReader) {
-		this.numberOfRooms = getParsedOrNull(sourceReader, Integer.class, Variable.NUMBER_OF_ROOMS);
+	public void setNumberOfRooms(LineReader lineReader, SourceReader sourceReader) {
+		this.numberOfRooms = ValueParser.getParsedOrNull(lineReader, sourceReader, Integer.class, Variable.NUMBER_OF_ROOMS);
 	}
 	
 	public Integer getHeight() {
 		return height;
 	}
 	
-	public void setHeight(SourceReader sourceReader) {
-		this.height = getParsedOrNull(sourceReader, Integer.class, Variable.HEIGHT);
+	public void setHeight(LineReader lineReader, SourceReader sourceReader) {
+		this.height = ValueParser.getParsedOrNull(lineReader, sourceReader, Integer.class, Variable.HEIGHT);
 	}
 	
 	public Boolean getNew() {
@@ -158,20 +126,12 @@ public class Flat implements Comparable<Flat> {
 		return transport;
 	}
 	
-	public void setTransport(SourceReader sourceReader) {
-		this.transport = getParsedOrNull(sourceReader, Transport.class, Variable.TRANSPORT);
+	public void setTransport(LineReader lineReader, SourceReader sourceReader) {
+		this.transport = ValueParser.getParsedOrNull(lineReader, sourceReader, Transport.class, Variable.TRANSPORT);
 	}
 	
 	public House getHouse() {
 		return house;
-	}
-	
-	public LineReader getLineReader() {
-		return lineReader;
-	}
-	
-	public void setLineReader(LineReader lineReader) {
-		this.lineReader = lineReader;
 	}
 	
 	@Override

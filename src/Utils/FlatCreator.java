@@ -10,27 +10,26 @@ public class FlatCreator {
 		Flat flat = new Flat();
 		
 		SourceReader sourceReader = lineReader.getSourceReaderActive();
-		flat.setLineReader(lineReader);
 		
 		flat.generateId();
-		flat.setFlatName(sourceReader);
+		flat.setFlatName(lineReader, sourceReader);
 		
 		flat.createCoordinates();
-		flat.setX(sourceReader);
-		flat.setY(sourceReader);
+		flat.setX(lineReader, sourceReader);
+		flat.setY(lineReader, sourceReader);
 		
 		flat.generateCreationDate();
-		flat.setArea(sourceReader);
-		flat.setNumberOfRooms(sourceReader);
-		flat.setHeight(sourceReader);
-		flat.setIsNew(sourceReader);
-		flat.setTransport(sourceReader);
+		flat.setArea(lineReader, sourceReader);
+		flat.setNumberOfRooms(lineReader, sourceReader);
+		flat.setHeight(lineReader, sourceReader);
+		flat.setIsNew(lineReader, sourceReader);
+		flat.setTransport(lineReader, sourceReader);
 		
 		flat.createHouse();
-		flat.setHouseName(sourceReader);
-		flat.setYear(sourceReader);
-		flat.setNumberOfFloors(sourceReader);
-		flat.setNumberOfLifts(sourceReader);
+		flat.setHouseName(lineReader, sourceReader);
+		flat.setYear(lineReader, sourceReader);
+		flat.setNumberOfFloors(lineReader, sourceReader);
+		flat.setNumberOfLifts(lineReader, sourceReader);
 		
 		lineReader.setRepeatOnException(false);
 		

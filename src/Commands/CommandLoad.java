@@ -34,7 +34,7 @@ public class CommandLoad extends Command {
 	public void execute(String[] commandArguments) {
 		this.context.collectionManager.clearCollection();
 		IdGenerator.clear();
-		this.csvLoader.createCollectionFromFile(commandArguments[0], context.collectionManager);
+		this.csvLoader.createCollectionFromFile(commandArguments[0], context.lineReader, context.collectionManager);
 		this.context.collectionManager.changeInitializationDate();
 	}
 	

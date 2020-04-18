@@ -36,7 +36,7 @@ public class CSVLoader {
 		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
 	}
 	
-	public void createCollectionFromFile(String filePath, CollectionManager collectionManager){
+	public void createCollectionFromFile(String filePath, LineReader lineReader, CollectionManager collectionManager) {
 		List<String[]> lines = getLines(filePath);
 		
 		Header headerActual = new Header(lines.get(0));
@@ -52,25 +52,26 @@ public class CSVLoader {
 			try {
 				Flat flat = new Flat();
 				
-				flat.setId(createSourceReader(Variable.ID));
-				flat.setFlatName(createSourceReader(Variable.FLAT_NAME));
+				
+				flat.setId(lineReader, createSourceReader(Variable.ID));
+				flat.setFlatName(lineReader, createSourceReader(Variable.FLAT_NAME));
 				
 				flat.createCoordinates();
-				flat.setX(createSourceReader(Variable.X));
-				flat.setY(createSourceReader(Variable.Y));
+				flat.setX(lineReader, createSourceReader(Variable.X));
+				flat.setY(lineReader, createSourceReader(Variable.Y));
 				
-				flat.setCreationDate(createSourceReader(Variable.CREATION_DATE));
-				flat.setArea(createSourceReader(Variable.AREA));
-				flat.setNumberOfRooms(createSourceReader(Variable.NUMBER_OF_ROOMS));
-				flat.setHeight(createSourceReader(Variable.HEIGHT));
-				flat.setIsNew(createSourceReader(Variable.IS_NEW));
-				flat.setTransport(createSourceReader(Variable.TRANSPORT));
+				flat.setCreationDate(lineReader, createSourceReader(Variable.CREATION_DATE));
+				flat.setArea(lineReader, createSourceReader(Variable.AREA));
+				flat.setNumberOfRooms(lineReader, createSourceReader(Variable.NUMBER_OF_ROOMS));
+				flat.setHeight(lineReader, createSourceReader(Variable.HEIGHT));
+				flat.setIsNew(lineReader, createSourceReader(Variable.IS_NEW));
+				flat.setTransport(lineReader, createSourceReader(Variable.TRANSPORT));
 				
 				flat.createHouse();
-				flat.setHouseName(createSourceReader(Variable.HOUSE_NAME));
-				flat.setYear(createSourceReader(Variable.YEAR));
-				flat.setNumberOfFloors(createSourceReader(Variable.NUMBER_OF_FLOORS));
-				flat.setNumberOfLifts(createSourceReader(Variable.NUMBER_OF_LIFTS));
+				flat.setHouseName(lineReader, createSourceReader(Variable.HOUSE_NAME));
+				flat.setYear(lineReader, createSourceReader(Variable.YEAR));
+				flat.setNumberOfFloors(lineReader, createSourceReader(Variable.NUMBER_OF_FLOORS));
+				flat.setNumberOfLifts(lineReader, createSourceReader(Variable.NUMBER_OF_LIFTS));
 				
 				collectionManager.addFlatToCollection(flat);
 			} catch (InputErrorFull inputErrorFull) {
