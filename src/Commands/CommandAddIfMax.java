@@ -11,8 +11,13 @@ public class CommandAddIfMax extends Command {
 	@Override
 	public void execute(String[] commandArguments) {
 		Flat flatNew = getFlatNew();
-		Flat flatMax = getFlatMax();
-		addFlatNewToCollectionIfGreaterThatFlatMax(flatNew, flatMax);
+		
+		if (context.collectionManager.getCollectionIsEmpty()) {
+			context.collectionManager.addFlatToCollection(flatNew);
+		} else {
+			Flat flatMax = getFlatMax();
+			addFlatNewToCollectionIfGreaterThatFlatMax(flatNew, flatMax);
+		}
 	}
 	
 	private Flat getFlatNew() {
