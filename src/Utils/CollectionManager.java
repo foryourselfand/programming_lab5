@@ -4,6 +4,7 @@ import Generators.IdGenerator;
 import Input.Flat;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 
 public class CollectionManager {
@@ -19,6 +20,10 @@ public class CollectionManager {
 		return collection;
 	}
 	
+	public Flat getFlatMax() {
+		return Collections.max(collection);
+	}
+	
 	public void clearCollection() {
 		this.collection.clear();
 	}
@@ -29,7 +34,7 @@ public class CollectionManager {
 		System.out.println("В коллекцию добавлен элемент " + flatToAdd.toString());
 	}
 	
-	public void removeFlatFromCollection(Flat flatToRemove){
+	public void removeFlatFromCollection(Flat flatToRemove) {
 		this.collection.remove(flatToRemove);
 		IdGenerator.removeId(flatToRemove.getId());
 		System.out.println("Из коллекции удален элемент " + flatToRemove.toString());

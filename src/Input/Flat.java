@@ -6,8 +6,9 @@ import SourseReaders.SourceReader;
 import Utils.LineReader;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
-public class Flat {
+public class Flat implements Comparable<Flat> {
 	private Long id; // Поле не может быть null, значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
 	private String flatName; //Поле не может быть null, Строка не может быть пустой
 	private Coordinates coordinates; //Поле не может быть null
@@ -158,5 +159,13 @@ public class Flat {
 				", transport=" + transport +
 				", house=" + house +
 				'}';
+	}
+	
+	@Override
+	public int compareTo(Flat flat) {
+		return Comparator
+				.comparingInt(Flat::getArea)
+				.thenComparingInt(Flat::getNumberOfRooms)
+				.compare(this, flat);
 	}
 }
