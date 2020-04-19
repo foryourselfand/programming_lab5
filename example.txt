@@ -1,9 +1,0 @@
-#!/bin/bash
-
-java18 -cp /home/s284261/labs/src/p3111/redgry/commons-lang3-3.9.jar:/home/s284261/labs/bin:/home/s284261/labs/src/p3111/redgry/lombok.jar:/home/s284261/labs/src/p3111/redgry/opencsv-5.1.jar:/home/s284261/labs/Main.jar p3111/redgry/Main
-java18 -cp /home/s284698/lab5/res/commons-lang3-3.1.jar:/home/s284698/lab5/res/opencsv-5.1.jar:/home/s284698/lab5/res/programming_lab5.jar Main
-java18 -cp res/commons-lang3-3.1.jar:res/opencsv-5.1.jar:res/programming_lab5.jar Main
-java18 -cp commons-lang3-3.1.jar:opencsv-5.1.jar:programming_lab5.jar Main
-java18 -cp jars/commons-lang3-3.1.jar:jars/opencsv-5.1.jar:jars/programming_lab5.jar Main
-
-/home/s284698/lab5/res/
