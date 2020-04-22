@@ -8,6 +8,7 @@ public class Context {
 	public static final LocalDate INITIALIZATION_DATE = LocalDate.now();
 	public static final int HISTORY_SIZE = 12;
 	
+	
 	public CommandsHolder commandsHolder;
 	public CommandsExecutor commandsExecutor;
 	public LineReader lineReader;
@@ -26,6 +27,20 @@ public class Context {
 		this.csvSaver = new CSVSaver();
 		
 		setUpCommands();
+	}
+	
+	public void tryToLoadTempFile() {
+		if (TempFileManager.isTempFileExist()) {
+			System.out.println("Найден временный файл");
+			
+			String choice;
+			do {
+				choice = this.lineReader.readLine("Восстановить коллекцию из временного файла? y / n: ").trim().toLowerCase();
+			} while (! choice.equals("y") && ! choice.equals("n"));
+			
+			if (choice.equals("y"))
+				this.commandsExecutor.executeCommand("load " + TempFileManager.getTempFilePath());
+		}
 	}
 	
 	public void setUpCommands() {

@@ -3,6 +3,7 @@ package Commands;
 import Expected.Argument;
 import Expected.ExpectedFile.*;
 import Utils.Context;
+import Utils.TempFileManager;
 
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class CommandSave extends CommandWithNotEmptyCollection {
 		
 		this.context.csvSaver.saveCollectionCSV(this.context.collectionManager.getCollection(), filePath);
 		System.out.println("Коллекция сохранена в файл");
+		
+		if (TempFileManager.isTempFileExist()) {
+			TempFileManager.deleteTempFile();
+			System.out.println("Временный файл удален, т.к. есть нормальная версия");
+		}
 	}
 	
 	

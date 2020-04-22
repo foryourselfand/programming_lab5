@@ -27,7 +27,7 @@ public class CSVSaver {
 	}
 	
 	public void saveCollectionCSV(LinkedHashSet<Flat> collection) {
-		this.saveCollectionCSV(collection, "res/collections/temp.csv");
+		this.saveCollectionCSV(collection, TempFileManager.getTempFilePath());
 	}
 	
 	
