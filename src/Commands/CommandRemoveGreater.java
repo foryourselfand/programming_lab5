@@ -1,4 +1,4 @@
-package Commands.CommandsWithNotEmptyCollection;
+package Commands;
 
 import Input.Flat;
 import Utils.Context;
@@ -6,7 +6,7 @@ import Utils.Context;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandRemoveGreater extends CommandWithNotEmptyCollection {
+public class CommandRemoveGreater extends CommandWithNotEmptyCollectionSaveAfterExecute {
 	public CommandRemoveGreater(Context context) {
 		super(context);
 	}

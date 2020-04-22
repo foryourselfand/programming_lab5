@@ -1,4 +1,4 @@
-package Commands.CommandsWithNotEmptyCollection;
+package Commands;
 
 import Commands.Command;
 import Errors.CollectionIsEmptyError;

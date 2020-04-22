@@ -1,59 +1,41 @@
-package Commands.CommandsWithNotEmptyCollection;
+package Utils;
 
 import Errors.IOErrors.IOError;
-import Expected.Argument;
-import Expected.ExpectedFile.*;
 import Input.Flat;
 import Input.Variable;
-import Utils.Context;
 import com.opencsv.CSVWriter;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
-public class CommandSave extends CommandWithNotEmptyCollection {
-	public CommandSave(Context context) {
-		super(context);
-	}
-	
-	@Override
-	protected void addArgumentValidators(List<Argument> arguments) {
-		arguments.add(new Argument(
-				"file_name",
-				new ExpectedFileExtensionCsv(),
-				new ExpectedCreateFileIfNotExist(),
-				new ExpectedFileExist(),
-				new ExpectedFileRegular(),
-				new ExpectedFileWritable()
-		));
-	}
-	
-	@Override
-	public void execute(String[] commandArguments) {
-		String filePath = commandArguments[0];
-		
+public class CSVSaver {
+	public void saveCollectionCSV(LinkedHashSet<Flat> collection, String filePath) {
 		try {
 			FileWriter fileWriter = new FileWriter(filePath);
 			CSVWriter csvWriter = new CSVWriter(fileWriter);
 			
-			List<String[]> data = getDataFromFlatCollection();
+			List<String[]> data = getDataFromFlatCollection(collection);
 			
 			csvWriter.writeAll(data);
 			csvWriter.close();
-			
-			System.out.println("Коллекция сохранена в файл");
 		} catch (IOException e) {
 			throw new IOError();
 		}
 	}
 	
-	private List<String[]> getDataFromFlatCollection() {
+	public void saveCollectionCSV(LinkedHashSet<Flat> collection) {
+		this.saveCollectionCSV(collection, "res/collections/temp.csv");
+	}
+	
+	
+	private List<String[]> getDataFromFlatCollection(LinkedHashSet<Flat> collection) {
 		List<String[]> data = new ArrayList<>();
 		data.add(Variable.headerRequired.getArray());
 		
-		for (Flat flat : context.collectionManager.getCollection()) {
+		for (Flat flat : collection) {
 			List<String> lineList = new ArrayList<>();
 			
 			lineList.add(String.valueOf(flat.getId()));
@@ -75,15 +57,5 @@ public class CommandSave extends CommandWithNotEmptyCollection {
 			data.add(lineArray);
 		}
 		return data;
-	}
-	
-	@Override
-	public String getName() {
-		return "save";
-	}
-	
-	@Override
-	public String getDescription() {
-		return "сохранить коллекцию в файл";
 	}
 }

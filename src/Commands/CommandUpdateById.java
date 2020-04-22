@@ -1,4 +1,4 @@
-package Commands.CommandsWithNotEmptyCollection;
+package Commands;
 
 import Expected.Argument;
 import Expected.ExpectedIdExist;
@@ -8,7 +8,7 @@ import Utils.Context;
 
 import java.util.List;
 
-public class CommandUpdateById extends CommandWithNotEmptyCollection {
+public class CommandUpdateById extends CommandWithNotEmptyCollectionSaveAfterExecute {
 	public CommandUpdateById(Context context) {
 		super(context);
 	}

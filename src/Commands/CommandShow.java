@@ -1,6 +1,5 @@
 package Commands;
 
-import Commands.CommandsWithNotEmptyCollection.CommandWithNotEmptyCollection;
 import Utils.Context;
 
 public class CommandShow extends CommandWithNotEmptyCollection {

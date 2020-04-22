@@ -1,7 +1,6 @@
 package Utils;
 
 import Commands.*;
-import Commands.CommandsWithNotEmptyCollection.*;
 
 import java.time.LocalDate;
 
@@ -15,6 +14,7 @@ public class Context {
 	public CollectionManager collectionManager;
 	public FlatCreator flatCreator;
 	public FlatRemover flatRemover;
+	public CSVSaver csvSaver;
 	
 	public Context() {
 		this.collectionManager = new CollectionManager();
@@ -23,6 +23,7 @@ public class Context {
 		this.commandsExecutor = new CommandsExecutor(commandsHolder);
 		this.flatCreator = new FlatCreator();
 		this.flatRemover = new FlatRemover(collectionManager);
+		this.csvSaver = new CSVSaver();
 		
 		setUpCommands();
 	}

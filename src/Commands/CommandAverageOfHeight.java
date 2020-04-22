@@ -1,6 +1,5 @@
 package Commands;
 
-import Commands.CommandsWithNotEmptyCollection.CommandWithNotEmptyCollection;
 import Input.Flat;
 import Utils.Context;
 

@@ -3,7 +3,7 @@ package Commands;
 import Input.Flat;
 import Utils.Context;
 
-public class CommandAddIfMax extends Command {
+public class CommandAddIfMax extends CommandSaveAfterExecute {
 	public CommandAddIfMax(Context context) {
 		super(context);
 	}

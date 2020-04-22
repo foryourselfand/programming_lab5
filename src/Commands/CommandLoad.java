@@ -11,7 +11,7 @@ import Utils.Context;
 
 import java.util.List;
 
-public class CommandLoad extends Command {
+public class CommandLoad extends CommandSaveAfterExecute {
 	private CSVLoader csvLoader;
 	
 	public CommandLoad(Context context) {

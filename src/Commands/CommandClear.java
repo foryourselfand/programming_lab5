@@ -1,8 +1,8 @@
-package Commands.CommandsWithNotEmptyCollection;
+package Commands;
 
 import Utils.Context;
 
-public class CommandClear extends CommandWithNotEmptyCollection {
+public class CommandClear extends CommandWithNotEmptyCollectionSaveAfterExecute {
 	public CommandClear(Context context) {
 		super(context);
 	}

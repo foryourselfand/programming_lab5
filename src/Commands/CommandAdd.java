@@ -3,7 +3,7 @@ package Commands;
 import Input.Flat;
 import Utils.Context;
 
-public class CommandAdd extends Command {
+public class CommandAdd extends CommandSaveAfterExecute {
 	public CommandAdd(Context context) {
 		super(context);
 	}

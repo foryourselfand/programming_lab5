@@ -1,4 +1,4 @@
-package Commands.CommandsWithNotEmptyCollection;
+package Commands;
 
 import Input.Flat;
 import Utils.Context;
