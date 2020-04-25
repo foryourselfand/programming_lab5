@@ -1,5 +1,8 @@
 package Expectations;
 
+/**
+ * Ожидается не null
+ */
 public class ExpectedNotNull implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

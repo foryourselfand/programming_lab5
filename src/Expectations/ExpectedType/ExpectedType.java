@@ -5,6 +5,9 @@ import Expectations.Expectation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * Ожидается тип
+ */
 public abstract class ExpectedType implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
@@ -23,6 +26,9 @@ public abstract class ExpectedType implements Expectation {
 		}
 	}
 	
+	/**
+	 * @return класс, наследник Numeric
+	 */
 	abstract public Class getNumberClass();
 	
 	@Override

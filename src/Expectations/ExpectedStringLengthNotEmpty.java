@@ -1,5 +1,8 @@
 package Expectations;
 
+/**
+ * Ожидается строка с ненулевой длинной
+ */
 public class ExpectedStringLengthNotEmpty implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

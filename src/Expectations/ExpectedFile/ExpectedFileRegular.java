@@ -5,6 +5,9 @@ import Expectations.Expectation;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Ожидается обычный файл (не дирректория)
+ */
 public class ExpectedFileRegular implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

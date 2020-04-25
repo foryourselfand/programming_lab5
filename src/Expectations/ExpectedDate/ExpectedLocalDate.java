@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Ожидается формат даты
+ */
 public class ExpectedLocalDate implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

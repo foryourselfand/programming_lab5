@@ -2,6 +2,9 @@ package Expectations;
 
 import Generators.IdGenerator;
 
+/**
+ * Ожидается существующий id
+ */
 public class ExpectedIdExist implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

@@ -2,7 +2,9 @@ package Expectations.ExpectedFile;
 
 import Expectations.Expectation;
 
-
+/**
+ * Ожидается расширение файла csv
+ */
 public class ExpectedFileExtensionCsv implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

@@ -2,6 +2,9 @@ package Expectations.ExpectedBorder;
 
 import java.math.BigDecimal;
 
+/**
+ * Ожидается больше
+ */
 public class ExpectedGreater extends ExpectedBorder {
 	public ExpectedGreater(int border) {
 		super(border);

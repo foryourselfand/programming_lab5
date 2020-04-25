@@ -4,6 +4,9 @@ import Input.Transport;
 
 import java.util.Arrays;
 
+/**
+ * Ожидается одно из перечисляемых значений транспорта
+ */
 public class ExpectedTransport implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {

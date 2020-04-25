@@ -2,7 +2,10 @@ package Expectations;
 
 import Generators.IdGenerator;
 
-public class ExpectedUnique implements Expectation {
+/**
+ * Ожидается уникальный id
+ */
+public class ExpectedIdUnique implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		long valueLong = Long.parseLong(valueRaw);

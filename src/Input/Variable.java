@@ -45,7 +45,7 @@ public enum Variable {
 		variableToArgument = new HashMap<>();
 		headerRequired = new Header(Variable.values());
 		
-		putArgumentToVariable(ID, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0), new ExpectedUnique());
+		putArgumentToVariable(ID, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0), new ExpectedIdUnique());
 		putArgumentToVariable(FLAT_NAME, new ExpectedNotNull(), new ExpectedStringLengthNotEmpty());
 		putArgumentToVariable(X, new ExpectedNotNull(), new ExpectedFloat(), new ExpectedGreater(- 292));
 		putArgumentToVariable(Y, new ExpectedNotNull(), new ExpectedDouble(), new ExpectedGreater(- 747));

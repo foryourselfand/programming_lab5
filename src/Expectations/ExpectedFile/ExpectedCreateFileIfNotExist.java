@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Не ожидается существование файла
+ * Если файла не существует, он будет создан
+ * Если существует - ничего
+ */
 public class ExpectedCreateFileIfNotExist implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
