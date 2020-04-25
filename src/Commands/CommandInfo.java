@@ -2,6 +2,9 @@ package Commands;
 
 import Utils.Context;
 
+/**
+ * Команда вывода в стандартный поток информации о коллекции (тип, дата инициализации, количество элементов и т.д.)
+ */
 public class CommandInfo extends Command {
 	public CommandInfo(Context context) {
 		super(context);

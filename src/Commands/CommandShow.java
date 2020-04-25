@@ -2,6 +2,9 @@ package Commands;
 
 import Utils.Context;
 
+/**
+ * Команда вывода в стандартный поток всех элементов коллекции в строковом представлении
+ */
 public class CommandShow extends CommandWithNotEmptyCollection {
 	public CommandShow(Context context) {
 		super(context);
@@ -19,6 +22,6 @@ public class CommandShow extends CommandWithNotEmptyCollection {
 	
 	@Override
 	public String getDescription() {
-		return "вывести в стандартный поток вывода все элементы коллекции в строковом представлении";
+		return "вывести в стандартный поток все элементы коллекции в строковом представлении";
 	}
 }

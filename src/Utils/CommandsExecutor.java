@@ -38,7 +38,7 @@ public class CommandsExecutor {
 		
 		try {
 			Command commandToExecute = commandsHolder.getCommandByName(commandName);
-			commandToExecute.executeWithValidation(commandArguments);
+			commandToExecute.executeWithArgumentsValidation(commandArguments);
 		} catch (InputError error) {
 			System.out.println(error.getMessage());
 		}

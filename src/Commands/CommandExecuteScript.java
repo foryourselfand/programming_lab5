@@ -10,6 +10,9 @@ import Utils.Context;
 
 import java.util.List;
 
+/**
+ * Команда исполнения скрипта
+ */
 public class CommandExecuteScript extends Command {
 	public CommandExecuteScript(Context context) {
 		super(context);

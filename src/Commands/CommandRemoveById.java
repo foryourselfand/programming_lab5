@@ -7,6 +7,9 @@ import Utils.Context;
 
 import java.util.List;
 
+/**
+ * Команда удаления элемента из коллекции по его id
+ */
 public class CommandRemoveById extends CommandWithNotEmptyCollectionSaveAfterExecute {
 	public CommandRemoveById(Context context) {
 		super(context);

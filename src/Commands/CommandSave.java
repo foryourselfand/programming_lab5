@@ -28,7 +28,7 @@ public class CommandSave extends CommandWithNotEmptyCollection {
 	public void execute(String[] commandArguments) {
 		String filePath = commandArguments[0];
 		
-		this.context.csvSaver.saveCollectionCSV(this.context.collectionManager.getCollection(), filePath);
+		this.context.csvSaver.saveCollectionToCSVFile(this.context.collectionManager.getCollection(), filePath);
 		System.out.println("Коллекция сохранена в файл");
 		
 		if (TempFileManager.isTempFileExist()) {

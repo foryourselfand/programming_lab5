@@ -22,7 +22,7 @@ public class CSVSaver {
 	 * @param collection коллекция
 	 * @param filePath   путь к csv файлу
 	 */
-	public void saveCollectionCSV(LinkedHashSet<Flat> collection, String filePath) {
+	public void saveCollectionToCSVFile(LinkedHashSet<Flat> collection, String filePath) {
 		try {
 			FileWriter fileWriter = new FileWriter(filePath);
 			CSVWriter csvWriter = new CSVWriter(fileWriter);
@@ -43,8 +43,8 @@ public class CSVSaver {
 	 *
 	 * @param collection коллекция
 	 */
-	public void saveCollectionCSV(LinkedHashSet<Flat> collection) {
-		this.saveCollectionCSV(collection, TempFileManager.getTempFilePath());
+	public void saveCollectionToTempCSVFile(LinkedHashSet<Flat> collection) {
+		this.saveCollectionToCSVFile(collection, TempFileManager.getTempFilePath());
 	}
 	
 	

@@ -11,8 +11,11 @@ import Utils.Context;
 
 import java.util.List;
 
+/**
+ * Команда загрузки коллекции из файла
+ */
 public class CommandLoad extends CommandSaveAfterExecute {
-	private CSVLoader csvLoader;
+	private final CSVLoader csvLoader;
 	
 	public CommandLoad(Context context) {
 		super(context);
@@ -30,6 +33,13 @@ public class CommandLoad extends CommandSaveAfterExecute {
 		));
 	}
 	
+	/**
+	 * Очищает коллекцию
+	 * Очищает id
+	 * Создает коллекцию из файла
+	 * Меняет дату инициализации
+	 * @param commandArguments аргументы
+	 */
 	@Override
 	public void execute(String[] commandArguments) {
 		this.context.collectionManager.clearCollection();

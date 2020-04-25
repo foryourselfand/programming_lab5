@@ -2,6 +2,9 @@ package Commands;
 
 import Utils.Context;
 
+/**
+ * Команда очищения коллекции
+ */
 public class CommandClear extends CommandWithNotEmptyCollectionSaveAfterExecute {
 	public CommandClear(Context context) {
 		super(context);

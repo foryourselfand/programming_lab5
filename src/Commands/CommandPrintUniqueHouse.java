@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Команда вывода уникальных значений поля дом
+ */
 public class CommandPrintUniqueHouse extends CommandWithNotEmptyCollection {
 	public CommandPrintUniqueHouse(Context context) {
 		super(context);
@@ -21,6 +24,11 @@ public class CommandPrintUniqueHouse extends CommandWithNotEmptyCollection {
 		printUniqueHouses(uniqueHouses);
 	}
 	
+	/**
+	 * Возвращает Словарь. Ключ: дом. Значение: Количество конкретного значения дома в коллекции
+	 *
+	 * @return Словарь. Ключ: дом. Значение: Количество конкретного значения дома в коллекции
+	 */
 	private Map<House, Integer> getHouseToCountMap() {
 		Map<House, Integer> houseToCountMap = new HashMap<>();
 		
@@ -38,6 +46,12 @@ public class CommandPrintUniqueHouse extends CommandWithNotEmptyCollection {
 		return houseToCountMap;
 	}
 	
+	/**
+	 * Возвращает лист уникальных домов
+	 *
+	 * @param houseToCountMap Словарь. Ключ: дом. Значение: Количество конкретного значения дома в коллекции
+	 * @return лист уникальных домов
+	 */
 	private List<House> getUniqueHouses(Map<House, Integer> houseToCountMap) {
 		List<House> uniqueHouses = new ArrayList<>();
 		for (Map.Entry<House, Integer> houseToCount : houseToCountMap.entrySet()) {
@@ -47,6 +61,11 @@ public class CommandPrintUniqueHouse extends CommandWithNotEmptyCollection {
 		return uniqueHouses;
 	}
 	
+	/**
+	 * Выводит уникальные значения дома
+	 *
+	 * @param uniqueHouses
+	 */
 	private void printUniqueHouses(List<House> uniqueHouses) {
 		if (uniqueHouses.isEmpty())
 			System.out.println("Уникальных значений поля house - нет");

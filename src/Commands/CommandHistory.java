@@ -4,6 +4,9 @@ import Utils.Context;
 
 import java.util.Iterator;
 
+/**
+ * Команда вывода последних 12 команд (без их аргументов)
+ */
 public class CommandHistory extends Command {
 	public CommandHistory(Context context) {
 		super(context);

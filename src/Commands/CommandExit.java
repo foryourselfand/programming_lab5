@@ -3,11 +3,18 @@ package Commands;
 import Utils.Context;
 import Utils.TempFileManager;
 
+/**
+ * Команда выхода
+ */
 public class CommandExit extends Command {
 	public CommandExit(Context context) {
 		super(context);
 	}
 	
+	/**
+	 * Если есть несохраненные данные, убеждается что точно нужно выйти
+	 * @param commandArguments аргументы
+	 */
 	@Override
 	public void execute(String[] commandArguments) {
 		if (TempFileManager.isTempFileExist()) {

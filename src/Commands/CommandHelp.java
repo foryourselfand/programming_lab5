@@ -4,20 +4,19 @@ import Utils.Context;
 
 import java.util.Iterator;
 
+/**
+ * Команда вывода справки по доступным коммандам
+ */
 public class CommandHelp extends Command {
-	
 	public CommandHelp(Context context) {
 		super(context);
 	}
 	
+	
 	@Override
 	public void execute(String[] commandArguments) {
 		Iterator<Command> commands = this.context.commandsHolder.getCommands();
-		
-		while (commands.hasNext()) {
-			Command command = commands.next();
-			System.out.println(command.getFullInformation());
-		}
+		commands.forEachRemaining(command->System.out.println(command.getFullInformation()));
 	}
 	
 	@Override
