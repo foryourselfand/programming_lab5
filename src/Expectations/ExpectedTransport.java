@@ -1,10 +1,10 @@
-package Expected;
+package Expectations;
 
 import Input.Transport;
 
 import java.util.Arrays;
 
-public class ExpectedTransport implements Expected {
+public class ExpectedTransport implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		try {

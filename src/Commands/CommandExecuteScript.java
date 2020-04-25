@@ -1,10 +1,10 @@
 package Commands;
 
-import Expected.Argument;
-import Expected.ExpectedFile.ExpectedFileExist;
-import Expected.ExpectedFile.ExpectedFileReadable;
-import Expected.ExpectedFile.ExpectedFileRegular;
-import Expected.ExpectedFile.ExpectedFileWritable;
+import Expectations.Argument;
+import Expectations.ExpectedFile.ExpectedFileExist;
+import Expectations.ExpectedFile.ExpectedFileReadable;
+import Expectations.ExpectedFile.ExpectedFileRegular;
+import Expectations.ExpectedFile.ExpectedFileWritable;
 import SourseReaders.SourceReaderFile;
 import Utils.Context;
 

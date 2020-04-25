@@ -1,8 +1,8 @@
-package Expected;
+package Expectations;
 
 import Errors.InputErrors.InputError;
 
-public interface Expected {
+public interface Expectation {
 	void checkValueCorrectness(String valueRaw);
 	
 	String getErrorMessage();

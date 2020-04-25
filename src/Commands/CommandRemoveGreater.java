@@ -2,6 +2,7 @@ package Commands;
 
 import Input.Flat;
 import Utils.Context;
+import Utils.FlatCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class CommandRemoveGreater extends CommandWithNotEmptyCollectionSaveAfter
 	}
 	
 	private Flat getCreatedFlat() {
-		Flat createdFlat = context.flatCreator.getCreatedFlatFromTerminal(context.lineReader);
+		Flat createdFlat = FlatCreator.getCreatedFlatFromTerminal(context.lineReader);
 		System.out.println("Созданный элемент для сравнения " + createdFlat.toString());
 		return createdFlat;
 	}

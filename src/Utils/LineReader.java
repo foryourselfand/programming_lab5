@@ -2,7 +2,7 @@ package Utils;
 
 import Errors.InputErrors.InputErrorFull;
 import Errors.ScriptAlreadyExecutedError;
-import Expected.Argument;
+import Expectations.Argument;
 import Input.Variable;
 import SourseReaders.SourceReader;
 import SourseReaders.SourceReaderTerminal;
@@ -11,22 +11,49 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
+/**
+ * Считыватель строк
+ */
 public class LineReader {
-	private Set<String> sourceReaderFilePaths;
+	/**
+	 * Сет строковых источников из источников ввода
+	 */
+	private final Set<String> sourceReaderSources;
+	
+	/**
+	 * Стэк источников ввода
+	 */
+	private final Stack<SourceReader> sourceReaderStack;
+	
+	/**
+	 * Текущий источник ввода
+	 */
 	private SourceReader sourceReaderActive;
-	private Stack<SourceReader> sourceReaderStack;
+	
+	/**
+	 * Нужно ли повторик ввод при исключении
+	 */
 	private boolean repeatOnException;
 	
+	/**
+	 * Создает сет строковых источников из источников ввода
+	 * Стэк источников ввода
+	 * Добавляет созданный из терминала источник ввода
+	 */
 	public LineReader() {
-		this.sourceReaderFilePaths = new HashSet<>();
+		this.sourceReaderSources = new HashSet<>();
 		this.sourceReaderStack = new Stack<>();
-		this.addSourceReader(new SourceReaderTerminal(System.in));
+		this.addSourceReader(new SourceReaderTerminal());
 	}
 	
-	public SourceReader getSourceReaderActive() {
-		return sourceReaderActive;
-	}
-	
+	/**
+	 * Возвращает считанную строку
+	 *
+	 * @param sourceReader источник ввода
+	 * @param prefix       префикс
+	 * @param argument     аргумент
+	 * @return считанную строку
+	 */
 	public String readLine(SourceReader sourceReader, String prefix, Argument argument) {
 		while (this.hasSomethingToRead()) {
 			if (! sourceReader.hasSomethingToRead())
@@ -49,14 +76,6 @@ public class LineReader {
 		return "";
 	}
 	
-	public void setRepeatOnException(boolean repeatOnException) {
-		this.repeatOnException = repeatOnException;
-	}
-	
-	public String readLine(String prefix, Argument argument) {
-		return readLine(this.sourceReaderActive, prefix, argument);
-	}
-	
 	public String readLine(String prefix) {
 		return readLine(this.sourceReaderActive, prefix, new Argument(""));
 	}
@@ -66,15 +85,17 @@ public class LineReader {
 		return this.readLine(sourceReader, variable.getVariableNameWithPrefix(argument), argument);
 	}
 	
-	public String readLine(Variable variable) {
-		return readLine(this.sourceReaderActive, variable);
-	}
-	
+	/**
+	 * Возвращает истину так как всегда найдется источник ввода способный считывать
+	 * Меняет источники ввода пока активному источнику сможет что то считывать
+	 *
+	 * @return истину так как всегда найдется источник ввода способный считывать
+	 */
 	public boolean hasSomethingToRead() {
 		while (! this.sourceReaderActive.hasSomethingToRead()) {
 			SourceReader sourceReader = this.sourceReaderStack.pop();
 			String sourceReaderFilePath = sourceReader.getSource();
-			this.sourceReaderFilePaths.remove(sourceReaderFilePath);
+			this.sourceReaderSources.remove(sourceReaderFilePath);
 			
 			this.sourceReaderActive = sourceReaderStack.peek();
 		}
@@ -82,15 +103,40 @@ public class LineReader {
 		return true;
 	}
 	
+	/**
+	 * Добавляет источник ввода
+	 * Устанавливает активный источник ввода на добавленный
+	 * Если источник ввода уже добавлялся, пробрасывает ошибку для предотвращения рекурсии
+	 *
+	 * @param sourceReaderToAdd источник ввода который нужно добавить
+	 */
 	public void addSourceReader(SourceReader sourceReaderToAdd) {
-		String sourceReaderFilePath = sourceReaderToAdd.getSource();
+		String sourceReaderSource = sourceReaderToAdd.getSource();
 		
-		if (this.sourceReaderFilePaths.contains(sourceReaderFilePath))
+		if (this.sourceReaderSources.contains(sourceReaderSource))
 			throw new ScriptAlreadyExecutedError();
-		this.sourceReaderFilePaths.add(sourceReaderFilePath);
+		this.sourceReaderSources.add(sourceReaderSource);
 		
 		this.sourceReaderStack.add(sourceReaderToAdd);
 		this.sourceReaderActive = sourceReaderStack.peek();
+	}
+	
+	/**
+	 * Возвращает активный источник ввода
+	 *
+	 * @return активный источник ввода
+	 */
+	public SourceReader getSourceReaderActive() {
+		return sourceReaderActive;
+	}
+	
+	/**
+	 * Устанавливает нужно ли повторик ввод при исключении
+	 *
+	 * @param repeatOnException Нужно ли повторик ввод при исключении
+	 */
+	public void setRepeatOnException(boolean repeatOnException) {
+		this.repeatOnException = repeatOnException;
 	}
 	
 }

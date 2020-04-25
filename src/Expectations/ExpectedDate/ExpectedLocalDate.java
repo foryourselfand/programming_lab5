@@ -1,12 +1,12 @@
-package Expected.ExpectedDate;
+package Expectations.ExpectedDate;
 
-import Expected.Expected;
+import Expectations.Expectation;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class ExpectedLocalDate implements Expected {
+public class ExpectedLocalDate implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		try {

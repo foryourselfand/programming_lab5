@@ -1,6 +1,6 @@
-package Expected;
+package Expectations;
 
-public class ExpectedNotNull implements Expected {
+public class ExpectedStringLengthNotEmpty implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		if (valueRaw.length() == 0) {
@@ -10,6 +10,6 @@ public class ExpectedNotNull implements Expected {
 	
 	@Override
 	public String getErrorMessage() {
-		return "Должно быть не null";
+		return "Строка должна быть не пустой";
 	}
 }

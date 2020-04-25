@@ -2,7 +2,7 @@ package Commands;
 
 import Errors.WrongArgumentErrors.WrongArgumentLengthError;
 import Errors.WrongArgumentErrors.WrongArgumentLengthFullError;
-import Expected.Argument;
+import Expectations.Argument;
 import Utils.Context;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public abstract class Command {
 			stringBuilder.append(" {");
 			stringBuilder.append(argument.getName());
 			stringBuilder.append(": ");
-			stringBuilder.append(argument.getExpectablesMessage());
+			stringBuilder.append(argument.getExpectationsMessage());
 			stringBuilder.append("}");
 			stringBuilder.append("; ");
 		}

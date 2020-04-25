@@ -1,6 +1,5 @@
 package Commands;
 
-import Commands.Command;
 import Errors.CollectionIsEmptyError;
 import Utils.Context;
 
@@ -18,7 +17,7 @@ public abstract class CommandWithNotEmptyCollection extends Command {
 	}
 	
 	public void validateCollectionSize() {
-		boolean collectionIsEmpty = this.context.collectionManager.getCollectionIsEmpty();
+		boolean collectionIsEmpty = this.context.collectionManager.getIsCollectionEmpty();
 		if (collectionIsEmpty) {
 			throw new CollectionIsEmptyError();
 		}

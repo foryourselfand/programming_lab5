@@ -4,8 +4,8 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class SourceReaderTerminal extends SourceReader {
-	public SourceReaderTerminal(InputStream inputStream) {
-		this.scanner = new Scanner(inputStream);
+	public SourceReaderTerminal() {
+		this.scanner = new Scanner(System.in);
 	}
 	
 	@Override

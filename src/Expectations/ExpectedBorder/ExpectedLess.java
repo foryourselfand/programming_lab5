@@ -1,4 +1,4 @@
-package Expected.ExpectedBorder;
+package Expectations.ExpectedBorder;
 
 import java.math.BigDecimal;
 

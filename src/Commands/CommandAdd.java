@@ -2,6 +2,7 @@ package Commands;
 
 import Input.Flat;
 import Utils.Context;
+import Utils.FlatCreator;
 
 public class CommandAdd extends CommandSaveAfterExecute {
 	public CommandAdd(Context context) {
@@ -10,7 +11,7 @@ public class CommandAdd extends CommandSaveAfterExecute {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		Flat flat = context.flatCreator.getCreatedFlatFromTerminal(this.context.lineReader);
+		Flat flat = FlatCreator.getCreatedFlatFromTerminal(this.context.lineReader);
 		this.context.collectionManager.addFlatToCollection(flat);
 	}
 	

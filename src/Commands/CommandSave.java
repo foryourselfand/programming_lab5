@@ -1,7 +1,7 @@
 package Commands;
 
-import Expected.Argument;
-import Expected.ExpectedFile.*;
+import Expectations.Argument;
+import Expectations.ExpectedFile.*;
 import Utils.Context;
 import Utils.TempFileManager;
 

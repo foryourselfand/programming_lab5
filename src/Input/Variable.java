@@ -1,11 +1,11 @@
 package Input;
 
-import Expected.*;
-import Expected.ExpectedBorder.ExpectedGreater;
-import Expected.ExpectedBorder.ExpectedLess;
-import Expected.ExpectedDate.ExpectedLocalDate;
-import Expected.ExpectedDate.ExpectedNoLaterThanNow;
-import Expected.ExpectedType.*;
+import Expectations.*;
+import Expectations.ExpectedBorder.ExpectedGreater;
+import Expectations.ExpectedBorder.ExpectedLess;
+import Expectations.ExpectedDate.ExpectedLocalDate;
+import Expectations.ExpectedDate.ExpectedNoLaterThanNow;
+import Expectations.ExpectedType.*;
 import Utils.Header;
 
 import java.util.HashMap;
@@ -53,8 +53,8 @@ public enum Variable {
 		this.variableName = variableName;
 	}
 	
-	public static void putArgumentToVariable(Variable variable, Expected... expecteds) {
-		variableToArgument.put(variable, new Argument(variable, expecteds));
+	public static void putArgumentToVariable(Variable variable, Expectation... expectations) {
+		variableToArgument.put(variable, new Argument(variable, expectations));
 	}
 	
 	public String getVariableName() {
@@ -62,6 +62,6 @@ public enum Variable {
 	}
 	
 	public String getVariableNameWithPrefix(Argument argument) {
-		return String.format("Введите %s (%s): ", argument.getName(), argument.getExpectablesMessage());
+		return String.format("Введите %s (%s): ", argument.getName(), argument.getExpectationsMessage());
 	}
 }

@@ -1,10 +1,10 @@
-package Expected.ExpectedBorder;
+package Expectations.ExpectedBorder;
 
-import Expected.Expected;
+import Expectations.Expectation;
 
 import java.math.BigDecimal;
 
-public abstract class ExpectedBorder implements Expected {
+public abstract class ExpectedBorder implements Expectation {
 	protected BigDecimal border;
 	
 	public ExpectedBorder(int border) {

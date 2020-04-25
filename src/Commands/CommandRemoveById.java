@@ -1,8 +1,8 @@
 package Commands;
 
-import Expected.Argument;
-import Expected.ExpectedIdExist;
-import Expected.ExpectedType.ExpectedLong;
+import Expectations.Argument;
+import Expectations.ExpectedIdExist;
+import Expectations.ExpectedType.ExpectedLong;
 import Utils.Context;
 
 import java.util.List;

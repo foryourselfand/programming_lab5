@@ -1,10 +1,11 @@
 package Commands;
 
-import Expected.Argument;
-import Expected.ExpectedIdExist;
-import Expected.ExpectedType.ExpectedLong;
+import Expectations.Argument;
+import Expectations.ExpectedIdExist;
+import Expectations.ExpectedType.ExpectedLong;
 import Input.Flat;
 import Utils.Context;
+import Utils.FlatCreator;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class CommandUpdateById extends CommandWithNotEmptyCollectionSaveAfterExe
 	}
 	
 	private Flat createFlatNew() {
-		return context.flatCreator.getCreatedFlatFromTerminal(this.context.lineReader);
+		return FlatCreator.getCreatedFlatFromTerminal(this.context.lineReader);
 	}
 	
 	private void removeFlatOld(long idToRemove) {

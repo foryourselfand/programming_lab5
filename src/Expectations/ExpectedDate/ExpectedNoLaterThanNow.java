@@ -1,11 +1,11 @@
-package Expected.ExpectedDate;
+package Expectations.ExpectedDate;
 
-import Expected.Expected;
+import Expectations.Expectation;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class ExpectedNoLaterThanNow implements Expected {
+public class ExpectedNoLaterThanNow implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		LocalDate dateNow = LocalDate.now();

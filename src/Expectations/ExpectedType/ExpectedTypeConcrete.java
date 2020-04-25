@@ -1,4 +1,4 @@
-package Expected.ExpectedType;
+package Expectations.ExpectedType;
 
 public class ExpectedTypeConcrete extends ExpectedType {
 	private Class numberClass;

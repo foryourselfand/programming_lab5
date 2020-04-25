@@ -1,14 +1,14 @@
-package Expected.ExpectedFile;
+package Expectations.ExpectedFile;
 
 import Errors.IOErrors.IOError;
-import Expected.Expected;
+import Expectations.Expectation;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ExpectedCreateFileIfNotExist implements Expected {
+public class ExpectedCreateFileIfNotExist implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		if (Files.notExists(Paths.get(valueRaw))) {

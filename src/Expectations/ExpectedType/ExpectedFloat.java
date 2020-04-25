@@ -1,4 +1,4 @@
-package Expected.ExpectedType;
+package Expectations.ExpectedType;
 
 public class ExpectedFloat extends ExpectedType {
 	@Override

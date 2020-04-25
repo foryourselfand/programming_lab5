@@ -1,11 +1,11 @@
-package Expected.ExpectedFile;
+package Expectations.ExpectedFile;
 
-import Expected.Expected;
+import Expectations.Expectation;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ExpectedFileExist implements Expected {
+public class ExpectedFileExist implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		if (Files.notExists(Paths.get(valueRaw))) {

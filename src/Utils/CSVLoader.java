@@ -10,26 +10,30 @@ import Errors.WrongHeaderErrors.WrongHeaderFieldsSingleError;
 import Errors.WrongLineElementsLengthError;
 import Input.Flat;
 import Input.Variable;
-import SourseReaders.SourceReaderString;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+/**
+ * Загрузчик коллекции из csv файда
+ */
 public class CSVLoader {
-	private String[] line;
-	private HashMap<String, Integer> fieldToIndex = new HashMap<>();
 	
-	private SourceReaderString createSourceReader(Variable variable) {
-		return new SourceReaderString(line[fieldToIndex.get(variable.getVariableName())]);
-	}
 	
+	/**
+	 * Создает коллекцию из csv файла
+	 * Если неправильный заголовок - кидает ошибку
+	 * Не важно в каком порядке идут имена переменных из заголовка в csv файле
+	 * Если возникает ошибка в проверке какого либо поля создаваемого элемента, элемент не добавляется
+	 *
+	 * @param filePath          путь к csv файлу
+	 * @param lineReader        источник ввода
+	 * @param collectionManager управленца коллекцией
+	 */
 	public void createCollectionFromFile(String filePath, LineReader lineReader, CollectionManager collectionManager) {
 		List<String[]> lines = getLines(filePath);
 		
@@ -37,35 +41,14 @@ public class CSVLoader {
 		
 		checkHeader(headerActual.getSet());
 		
-		fieldToIndex = getFieldToIndex(headerActual.getSet(), headerActual.getList());
+		Map<String, Integer> fieldToIndex = getFieldToIndex(headerActual.getSet(), headerActual.getList());
 		
 		for (int index = 1; index < lines.size(); index++) {
-			line = lines.get(index);
+			String[] line = lines.get(index);
 			checkForLineElementsLength(line);
 			
 			try {
-				Flat flat = new Flat();
-				
-				flat.setId(lineReader, createSourceReader(Variable.ID));
-				flat.setFlatName(lineReader, createSourceReader(Variable.FLAT_NAME));
-				
-				flat.createCoordinates();
-				flat.setX(lineReader, createSourceReader(Variable.X));
-				flat.setY(lineReader, createSourceReader(Variable.Y));
-				
-				flat.setCreationDate(lineReader, createSourceReader(Variable.CREATION_DATE));
-				flat.setArea(lineReader, createSourceReader(Variable.AREA));
-				flat.setNumberOfRooms(lineReader, createSourceReader(Variable.NUMBER_OF_ROOMS));
-				flat.setHeight(lineReader, createSourceReader(Variable.HEIGHT));
-				flat.setIsNew(lineReader, createSourceReader(Variable.IS_NEW));
-				flat.setTransport(lineReader, createSourceReader(Variable.TRANSPORT));
-				
-				flat.createHouse();
-				flat.setHouseName(lineReader, createSourceReader(Variable.HOUSE_NAME));
-				flat.setYear(lineReader, createSourceReader(Variable.YEAR));
-				flat.setNumberOfFloors(lineReader, createSourceReader(Variable.NUMBER_OF_FLOORS));
-				flat.setNumberOfLifts(lineReader, createSourceReader(Variable.NUMBER_OF_LIFTS));
-				
+				Flat flat = FlatCreator.getCreatedFlatFromFile(lineReader, line, fieldToIndex);
 				collectionManager.addFlatToCollection(flat);
 			} catch (InputErrorFull inputErrorFull) {
 				System.out.println(inputErrorFull.getMessage());
@@ -73,6 +56,13 @@ public class CSVLoader {
 		}
 	}
 	
+	/**
+	 * Возвращает считанные строки из csv файла
+	 * Если возникает какое то исключение, пробрасывает ошибку InputError
+	 *
+	 * @param filePath имя к csv файлу
+	 * @return Лист считанных и разбитых строк в csv файле
+	 */
 	private List<String[]> getLines(String filePath) {
 		try {
 			FileReader fileReader = new FileReader(filePath);
@@ -88,18 +78,13 @@ public class CSVLoader {
 		}
 	}
 	
-	private Set<String> getMissingFields(Set<String> headerActual) {
-		Set<String> missingFields = new HashSet<>(Variable.headerRequired.getSet());
-		missingFields.removeAll(headerActual);
-		return missingFields;
-	}
-	
-	private Set<String> getExtraFields(Set<String> headerActual) {
-		Set<String> extraFields = new HashSet<>(headerActual);
-		extraFields.removeAll(Variable.headerRequired.getSet());
-		return extraFields;
-	}
-	
+	/**
+	 * Проверяет заголовок csv файла
+	 * Не важно в каком порядке идут имена переменных из заголовка в csv файле
+	 * Если не хватает каких то полей, или какие то поля лишние, или и то и другое: пробрасывает исключение с информацией
+	 *
+	 * @param headerActualSet Сет имен переменных из заголовка в csv файле
+	 */
 	private void checkHeader(Set<String> headerActualSet) {
 		Set<String> missingFieldsSet = getMissingFields(headerActualSet);
 		int missingFieldsSize = missingFieldsSet.size();
@@ -115,16 +100,54 @@ public class CSVLoader {
 			throw new WrongHeaderFieldsSingleError(WrongHeaderError.MESSAGE_EXTRA, extraFieldsSet);
 	}
 	
-	private HashMap<String, Integer> getFieldToIndex(Set<String> headerSet, List<String> headerList) {
-		HashMap<String, Integer> fieldToIndex = new HashMap<>();
+	/**
+	 * Возвращает сет имен переменных которые отсутвуют
+	 *
+	 * @param headerActual Сет имен переменных из заголовка в csv файле
+	 * @return Сет имен переменных которые отсутвуют
+	 */
+	private Set<String> getMissingFields(Set<String> headerActual) {
+		Set<String> missingFields = new HashSet<>(Variable.headerRequired.getSet());
+		missingFields.removeAll(headerActual);
+		return missingFields;
+	}
+	
+	/**
+	 * Возвращает сет имен переменных которые лишние
+	 *
+	 * @param headerActual Сет имен переменных из заголовка в csv файле
+	 * @return Сет имен переменных которые лишние
+	 */
+	private Set<String> getExtraFields(Set<String> headerActual) {
+		Set<String> extraFields = new HashSet<>(headerActual);
+		extraFields.removeAll(Variable.headerRequired.getSet());
+		return extraFields;
+	}
+	
+	/**
+	 * Возвращает созданный Словарь. Ключ: имя переменной квартиры из csv файла. Значение: номер столбца со значением поля квартиры из csv файла
+	 *
+	 * @param headerSet  Сет имен переменных из заголовка в csv файле
+	 * @param headerList Лист имен переменных из заголовка в csv файле
+	 * @return созданный Словарь. Ключ: имя переменной квартиры из csv файла. Значение: номер столбца со значением поля квартиры из csv файла
+	 */
+	private Map<String, Integer> getFieldToIndex(Set<String> headerSet, List<String> headerList) {
+		Map<String, Integer> fieldToIndex = new HashMap<>();
 		for (String fieldActual : headerSet)
 			fieldToIndex.put(fieldActual, headerList.indexOf(fieldActual));
 		return fieldToIndex;
 	}
 	
+	/**
+	 * Проверяет длинну элементов считанной строки
+	 * Если не соответствует необходимой длинне строки, кидает ошибку с информацией
+	 *
+	 * @param line Считанная и разбитая линия csv файла
+	 */
 	private void checkForLineElementsLength(String[] line) {
+		int headerRequiredLength = Variable.headerRequired.getLength();
 		int headerActualLength = line.length;
-		if (Variable.headerRequired.getLength() != headerActualLength)
-			throw new WrongLineElementsLengthError(line, Variable.headerRequired.getLength(), headerActualLength);
+		if (headerRequiredLength != headerActualLength)
+			throw new WrongLineElementsLengthError(line, headerRequiredLength, headerActualLength);
 	}
 }

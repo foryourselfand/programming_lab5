@@ -1,8 +1,8 @@
-package Expected;
+package Expectations;
 
 import Generators.IdGenerator;
 
-public class ExpectedIdExist implements Expected {
+public class ExpectedIdExist implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		long id = Long.parseLong(valueRaw);

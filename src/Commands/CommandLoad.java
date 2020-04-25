@@ -1,10 +1,10 @@
 package Commands;
 
-import Expected.Argument;
-import Expected.ExpectedFile.ExpectedFileExist;
-import Expected.ExpectedFile.ExpectedFileExtensionCsv;
-import Expected.ExpectedFile.ExpectedFileReadable;
-import Expected.ExpectedFile.ExpectedFileRegular;
+import Expectations.Argument;
+import Expectations.ExpectedFile.ExpectedFileExist;
+import Expectations.ExpectedFile.ExpectedFileExtensionCsv;
+import Expectations.ExpectedFile.ExpectedFileReadable;
+import Expectations.ExpectedFile.ExpectedFileRegular;
 import Generators.IdGenerator;
 import Utils.CSVLoader;
 import Utils.Context;

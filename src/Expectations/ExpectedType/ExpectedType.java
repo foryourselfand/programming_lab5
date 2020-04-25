@@ -1,11 +1,11 @@
-package Expected.ExpectedType;
+package Expectations.ExpectedType;
 
-import Expected.Expected;
+import Expectations.Expectation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class ExpectedType implements Expected {
+public abstract class ExpectedType implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		if (valueRaw.equals(""))

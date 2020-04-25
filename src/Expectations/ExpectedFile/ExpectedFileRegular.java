@@ -1,11 +1,11 @@
-package Expected.ExpectedFile;
+package Expectations.ExpectedFile;
 
-import Expected.Expected;
+import Expectations.Expectation;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ExpectedFileRegular implements Expected {
+public class ExpectedFileRegular implements Expectation {
 	@Override
 	public void checkValueCorrectness(String valueRaw) {
 		if (! Files.isRegularFile(Paths.get(valueRaw))) {

@@ -2,6 +2,7 @@ package Commands;
 
 import Input.Flat;
 import Utils.Context;
+import Utils.FlatCreator;
 
 public class CommandAddIfMax extends CommandSaveAfterExecute {
 	public CommandAddIfMax(Context context) {
@@ -12,7 +13,7 @@ public class CommandAddIfMax extends CommandSaveAfterExecute {
 	public void execute(String[] commandArguments) {
 		Flat flatNew = getFlatNew();
 		
-		if (context.collectionManager.getCollectionIsEmpty()) {
+		if (context.collectionManager.getIsCollectionEmpty()) {
 			context.collectionManager.addFlatToCollection(flatNew);
 		} else {
 			Flat flatMax = getFlatMax();
@@ -21,7 +22,7 @@ public class CommandAddIfMax extends CommandSaveAfterExecute {
 	}
 	
 	private Flat getFlatNew() {
-		Flat flatNew = context.flatCreator.getCreatedFlatFromTerminal(this.context.lineReader);
+		Flat flatNew = FlatCreator.getCreatedFlatFromTerminal(this.context.lineReader);
 		System.out.println("Новый элемент " + flatNew.toString());
 		return flatNew;
 	}

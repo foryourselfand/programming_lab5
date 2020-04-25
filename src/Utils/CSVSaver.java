@@ -11,7 +11,17 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+/**
+ * Сохраняет коллекцию в csv файл
+ */
 public class CSVSaver {
+	/**
+	 * Сохраняет коллекцию в csv файл
+	 * Если возникает исключение связанное с файлом, пробрасывается ошибка ввода
+	 *
+	 * @param collection коллекция
+	 * @param filePath   путь к csv файлу
+	 */
 	public void saveCollectionCSV(LinkedHashSet<Flat> collection, String filePath) {
 		try {
 			FileWriter fileWriter = new FileWriter(filePath);
@@ -26,11 +36,24 @@ public class CSVSaver {
 		}
 	}
 	
+	/**
+	 * Сохраняет коллекцию в csv файл
+	 * Если возникает исключение связанное с файлом, пробрасывается ошибка ввода
+	 * Путь к файлу = путь к временному файлу
+	 *
+	 * @param collection коллекция
+	 */
 	public void saveCollectionCSV(LinkedHashSet<Flat> collection) {
 		this.saveCollectionCSV(collection, TempFileManager.getTempFilePath());
 	}
 	
 	
+	/**
+	 * Возвращает лист строк созданный из коллекции
+	 *
+	 * @param collection коллекция
+	 * @return лист строк созданный из коллекции
+	 */
 	private List<String[]> getDataFromFlatCollection(LinkedHashSet<Flat> collection) {
 		List<String[]> data = new ArrayList<>();
 		data.add(Variable.headerRequired.getArray());

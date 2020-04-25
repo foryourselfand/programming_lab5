@@ -1,6 +1,7 @@
 package Utils;
 
 import Commands.*;
+import Generators.CreationDateGenerator;
 
 import java.time.LocalDate;
 
@@ -11,7 +12,7 @@ public class Context {
 	/**
 	 * Дата инициализации
 	 */
-	public static final LocalDate INITIALIZATION_DATE = LocalDate.now();
+	public static final LocalDate INITIALIZATION_DATE = CreationDateGenerator.generateCreationDate();
 	
 	/**
 	 * Размер стека истории команд
@@ -22,7 +23,6 @@ public class Context {
 	public CommandsExecutor commandsExecutor;
 	public LineReader lineReader;
 	public CollectionManager collectionManager;
-	public FlatCreator flatCreator;
 	public FlatRemover flatRemover;
 	public CSVSaver csvSaver;
 	
@@ -31,7 +31,6 @@ public class Context {
 		this.lineReader = new LineReader();
 		this.commandsHolder = new CommandsHolder();
 		this.commandsExecutor = new CommandsExecutor(commandsHolder);
-		this.flatCreator = new FlatCreator();
 		this.flatRemover = new FlatRemover(collectionManager);
 		this.csvSaver = new CSVSaver();
 		
