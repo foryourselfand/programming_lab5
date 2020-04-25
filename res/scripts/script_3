@@ -1,14 +1,5 @@
-add
-10
-10
-10
-10
-10
-
-10
-SMTH
-NONE
-10
-
-10
-
+line_111
+execute_script res/scripts/script_1
+execute_script res/scripts/script_2
+execute_script res/scripts/script_3
+line_333

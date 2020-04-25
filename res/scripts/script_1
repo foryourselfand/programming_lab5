@@ -1,3 +1,4 @@
 line_1
 execute_script res/scripts/script_2
 line_3
+exit

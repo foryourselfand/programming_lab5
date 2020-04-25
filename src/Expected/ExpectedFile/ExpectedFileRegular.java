@@ -15,6 +15,6 @@ public class ExpectedFileRegular implements Expected {
 	
 	@Override
 	public String getErrorMessage() {
-		return "Файл должен быть обычным файлом (не директорией, не ссылкой)";
+		return "Файл должен быть обычным файлом (не директорией)";
 	}
 }

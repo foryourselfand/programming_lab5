@@ -2,7 +2,7 @@ package Commands;
 
 import Utils.Context;
 
-import java.util.List;
+import java.util.Iterator;
 
 public class CommandHelp extends Command {
 	
@@ -12,10 +12,12 @@ public class CommandHelp extends Command {
 	
 	@Override
 	public void execute(String[] commandArguments) {
-		List<Command> commands = this.context.commandsHolder.getCommands();
+		Iterator<Command> commands = this.context.commandsHolder.getCommands();
 		
-		for (Command command : commands)
+		while (commands.hasNext()) {
+			Command command = commands.next();
 			System.out.println(command.getFullInformation());
+		}
 	}
 	
 	@Override
