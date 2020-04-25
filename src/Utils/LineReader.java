@@ -56,7 +56,7 @@ public class LineReader {
 	 */
 	public String readLine(SourceReader sourceReader, String prefix, Argument argument) {
 		while (this.hasSomethingToRead()) {
-			if (! sourceReader.hasSomethingToRead())
+			if (sourceReader.notHasSomethingToRead())
 				sourceReader = getSourceReaderActive();
 			
 			System.out.print(prefix);
@@ -92,7 +92,7 @@ public class LineReader {
 	 * @return истину так как всегда найдется источник ввода способный считывать
 	 */
 	public boolean hasSomethingToRead() {
-		while (! this.sourceReaderActive.hasSomethingToRead()) {
+		while (this.sourceReaderActive.notHasSomethingToRead()) {
 			SourceReader sourceReader = this.sourceReaderStack.pop();
 			String sourceReaderFilePath = sourceReader.getSource();
 			this.sourceReaderSources.remove(sourceReaderFilePath);
