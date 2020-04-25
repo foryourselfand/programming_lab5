@@ -9,6 +9,10 @@ import Utils.ValueReader;
 import java.time.LocalDate;
 import java.util.Comparator;
 
+/**
+ * Элемент хранящийся в коллекции
+ * Содержит методы для создания, генерации, считывания (вместе с приведением к нужному типу), а так же геттеры
+ */
 public class Flat implements Comparable<Flat> {
 	private Long id; // Поле не может быть null, значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
 	private String flatName; //Поле не может быть null, Строка не может быть пустой
@@ -37,6 +41,12 @@ public class Flat implements Comparable<Flat> {
 				'}';
 	}
 	
+	/**
+	 * Возвращает результат сравнения на основании площади, потом количества комнат
+	 *
+	 * @param flat квартира для сравнения
+	 * @return результат сравнения на основании площади, потом количества комнат
+	 */
 	@Override
 	public int compareTo(Flat flat) {
 		return Comparator

@@ -82,7 +82,7 @@ public class LineReader {
 	
 	public String readLine(SourceReader sourceReader, Variable variable) {
 		Argument argument = Variable.variableToArgument.get(variable);
-		return this.readLine(sourceReader, variable.getVariableNameWithPrefix(argument), argument);
+		return this.readLine(sourceReader, variable.getVariableNameWithExpectationsMessage(argument), argument);
 	}
 	
 	/**

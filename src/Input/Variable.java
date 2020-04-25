@@ -9,7 +9,12 @@ import Expectations.ExpectedType.*;
 import Utils.Header;
 
 import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * Содержит имена переменных в виде перечисляемых значений
+ * К каждой переменной поставлены в соответствие ожидания
+ */
 public enum Variable {
 	ID("id"),
 	FLAT_NAME("flatName"),
@@ -26,10 +31,20 @@ public enum Variable {
 	NUMBER_OF_FLOORS("numberOfFloors"),
 	NUMBER_OF_LIFTS("numberOfLifts");
 	
-	public static HashMap<Variable, Argument> variableToArgument = new HashMap<>();
-	public static Header headerRequired = new Header(Variable.values());
+	/**
+	 * Словарь. Ключ: переменная. Значение: аргумент
+	 */
+	public static Map<Variable, Argument> variableToArgument;
+	
+	/**
+	 * Ожидаемый заголовок
+	 */
+	public static Header headerRequired;
 	
 	static {
+		variableToArgument = new HashMap<>();
+		headerRequired = new Header(Variable.values());
+		
 		putArgumentToVariable(ID, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0), new ExpectedUnique());
 		putArgumentToVariable(FLAT_NAME, new ExpectedNotNull(), new ExpectedStringLengthNotEmpty());
 		putArgumentToVariable(X, new ExpectedNotNull(), new ExpectedFloat(), new ExpectedGreater(- 292));
@@ -46,22 +61,46 @@ public enum Variable {
 		putArgumentToVariable(NUMBER_OF_LIFTS, new ExpectedNotNull(), new ExpectedLong(), new ExpectedGreater(0));
 	}
 	
-	private String variableName;
+	/**
+	 * Имя переменной
+	 */
+	private final String variableName;
 	
-	
+	/**
+	 * Создает элемент с именем переменной
+	 *
+	 * @param variableName имя переменной
+	 */
 	Variable(String variableName) {
 		this.variableName = variableName;
 	}
 	
+	/**
+	 * Ставит аргумент в соответствии с переменной
+	 *
+	 * @param variable     переменная
+	 * @param expectations аргумент
+	 */
 	public static void putArgumentToVariable(Variable variable, Expectation... expectations) {
 		variableToArgument.put(variable, new Argument(variable, expectations));
 	}
 	
+	/**
+	 * Возвращает имя переменной
+	 *
+	 * @return имя переменной
+	 */
 	public String getVariableName() {
 		return this.variableName;
 	}
 	
-	public String getVariableNameWithPrefix(Argument argument) {
+	/**
+	 * Возвращает имя переменной с сообщением об ожиданиях
+	 *
+	 * @param argument аргумент
+	 * @return имя переменной с сообщением об ожиданиях
+	 */
+	public String getVariableNameWithExpectationsMessage(Argument argument) {
 		return String.format("Введите %s (%s): ", argument.getName(), argument.getExpectationsMessage());
 	}
 }
